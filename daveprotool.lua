@@ -21,6 +21,7 @@ end
 local Config = {
     Aimbot = {
         Enabled = false,
+        TargetNPC = false,
         Key = Enum.KeyCode.J,
         Smoothness = 0,
         FOV = 150,
@@ -36,6 +37,7 @@ local Config = {
     },
     ESP = {
         Enabled = false,
+        TargetNPC = false,
         Boxes = true,
         Skeleton = true,
         Health = true,
@@ -322,32 +324,43 @@ local function getClosestPlayerInFOV()
     local Camera = getCamera()
     local center = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
 
-    for _, player in pairs(Players:GetPlayers()) do
-        if player == LocalPlayer then continue end
-        if Config.Aimbot.TeamCheck and player.Team == LocalPlayer.Team then continue end
-        
-        local char = player.Character
-        if not char then continue end
+    local function processTarget(entity, char, isPlayer)
+        if not char then return end
         local hum = char:FindFirstChildOfClass("Humanoid")
-        if not hum or hum.Health <= 0 then continue end
+        if not hum or hum.Health <= 0 then return end
         
         local part = char:FindFirstChild(Config.Aimbot.TargetPart) or char:FindFirstChild("Head")
-        if not part then continue end
+        if not part then return end
         
         local myChar = LocalPlayer.Character
-        if not myChar or not myChar:FindFirstChild("HumanoidRootPart") then continue end
+        if not myChar or not myChar:FindFirstChild("HumanoidRootPart") then return end
         
         local screenPos, onScreen = worldToScreen(part.Position)
-        if not onScreen then continue end
+        if not onScreen then return end
         
         local distFromCenter = (screenPos - center).Magnitude
         if distFromCenter <= Config.Aimbot.FOV and distFromCenter < minDist then
             if isVisible(part) then
                 minDist = distFromCenter
-                target = {Player = player, Part = part}
+                target = {Player = entity, Part = part}
             end
         end
     end
+
+    for _, player in pairs(Players:GetPlayers()) do
+        if player == LocalPlayer then continue end
+        if Config.Aimbot.TeamCheck and player.Team == LocalPlayer.Team then continue end
+        processTarget(player, player.Character, true)
+    end
+
+    if Config.Aimbot.TargetNPC then
+        for _, obj in pairs(workspace:GetChildren()) do
+            if obj:IsA("Model") and obj:FindFirstChildOfClass("Humanoid") and not Players:GetPlayerFromCharacter(obj) then
+                processTarget(obj, obj, false)
+            end
+        end
+    end
+
     return target
 end
 
@@ -561,9 +574,24 @@ local function removeESP(player)
 end
 
 local function updateESP()
+    if Config.ESP.TargetNPC then
+        for _, obj in pairs(workspace:GetChildren()) do
+            if obj:IsA("Model") and obj:FindFirstChildOfClass("Humanoid") and not Players:GetPlayerFromCharacter(obj) then
+                createESP(obj)
+            end
+        end
+    end
+
     for player, data in pairs(ESPObjects) do
-        local char = player.Character
-        if not char or not char.Parent or not Config.ESP.Enabled then
+        local isPlayer = player:IsA("Player")
+        local char = isPlayer and player.Character or player
+        
+        if not char or not char.Parent or (not isPlayer and not Config.ESP.TargetNPC) then
+            removeESP(player)
+            continue
+        end
+        
+        if not Config.ESP.Enabled then
             for _, v in pairs(data.Box) do v.Visible = false end
             for _, v in pairs(data.HealthBar) do v.Visible = false end
             for _, v in pairs(data.Skeleton) do v.Visible = false end
@@ -589,7 +617,7 @@ local function updateESP()
         local myHrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
         local distance = myHrp and (hrp.Position - myHrp.Position).Magnitude or 0
 
-        if Config.ESP.TeamCheck and not isPNJOrDie() and player.Team == LocalPlayer.Team then
+        if isPlayer and Config.ESP.TeamCheck and not isPNJOrDie() and player.Team == LocalPlayer.Team then
             for _, v in pairs(data.Box) do v.Visible = false end
             for _, v in pairs(data.HealthBar) do v.Visible = false end
             for _, v in pairs(data.Skeleton) do v.Visible = false end
@@ -730,7 +758,7 @@ local function updateESP()
                     data.Text.Position = headPos
                     local t = ""
                     if Config.ESP.Names then 
-                        local displayName = Config.Visuals.StreamerMode and "Joueur" or player.Name
+                        local displayName = isPlayer and (Config.Visuals.StreamerMode and "Joueur" or player.Name) or player.Name
                         t = t .. displayName .. "\n" 
                     end
                     if Config.ESP.Distance then t = t .. "[" .. math.floor(distance) .. "m]" end
@@ -1212,7 +1240,7 @@ function Library:CreateWindow()
     Version.Size = UDim2.new(1, 0, 0, 20)
     Version.Position = UDim2.new(0, 0, 1, -25)
     Version.BackgroundTransparency = 1
-    Version.Text = "VERSION B&W"
+    Version.Text = "VERSION V3.3B"
     Version.TextColor3 = Theme.TextDim
     Version.Font = Enum.Font.Gotham
     Version.TextSize = 10
@@ -1629,6 +1657,7 @@ function Library:CreateWindow()
         if not v then CurrentTarget = nil end
         if FOVCircle then FOVCircle.Visible = v and Config.Aimbot.ShowFOV end
     end)
+    addToggle(AimbotTab, "Viser NPC/Bot", Config.Aimbot.TargetNPC, function(v) Config.Aimbot.TargetNPC = v end)
     addKeybind(AimbotTab, "Touche Aimbot", Config.Aimbot.Key, function(v) Config.Aimbot.Key = v end)
     addSlider(AimbotTab, "Lissage (Smooth)", 0, 0.95, Config.Aimbot.Smoothness, function(v) Config.Aimbot.Smoothness = v end)
     addSlider(AimbotTab, "Rayon FOV", 10, 800, Config.Aimbot.FOV, function(v) Config.Aimbot.FOV = v end)
@@ -1644,6 +1673,7 @@ function Library:CreateWindow()
 
     -- ESP Content
     addToggle(ESPTab, "Activer ESP", Config.ESP.Enabled, function(v) Config.ESP.Enabled = v end)
+    addToggle(ESPTab, "Voir NPC/Bot", Config.ESP.TargetNPC, function(v) Config.ESP.TargetNPC = v end)
     addToggle(ESPTab, "Boxes", Config.ESP.Boxes, function(v) Config.ESP.Boxes = v end)
     addToggle(ESPTab, "Squelettes", Config.ESP.Skeleton, function(v) Config.ESP.Skeleton = v end)
     addToggle(ESPTab, "Barre de Vie", Config.ESP.Health, function(v) Config.ESP.Health = v end)
@@ -1837,6 +1867,7 @@ function Library:CreateWindow()
     addToggle(MiscTab, "Chat Spammer", Config.Misc.ChatSpammer.Enabled, function(v) Config.Misc.ChatSpammer.Enabled = v end)
     addInput(MiscTab, "Message Spammer", Config.Misc.ChatSpammer.Message, function(v) Config.Misc.ChatSpammer.Message = v end)
     addSlider(MiscTab, "Délai Spammer (s)", 1, 10, Config.Misc.ChatSpammer.Delay, function(v) Config.Misc.ChatSpammer.Delay = v end)
+    addButton(MiscTab, "Style B&W", function() updateMenuTheme(Color3.fromRGB(255,255,255)) end)
     -- retiré: Gravité
     -- retiré: Cap FPS
     
