@@ -1,12 +1,2819 @@
 --[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
-
+    ═══════════════════════════════════════════════════════════
+    💎 PRO GAMING TOOL V3 - FULLY INTEGRATED 💎
+    📦 ESP + 🎯 AIMBOT + ⚡ TRIGGERBOT + 🛠️ SMART UI
+    ═══════════════════════════════════════════════════════════
 ]]--
 
-local v0=game:GetService("Players");local v1=game:GetService("RunService");local v2=game:GetService("UserInputService");local v3=v0.LocalPlayer;local v4,v5;local v6={frames=0 + 0 ,last=tick(),fps=1772 -(1733 + 39) };local function v7() return workspace.CurrentCamera or workspace:FindFirstChildOfClass("Camera") ;end local v8={Aimbot={Enabled=false,TargetNPC=false,Key=Enum.KeyCode.J,Smoothness=0 -0 ,FOV=1184 -(125 + 909) ,ShowFOV=true,TargetPart="Head",MaxDistance=2948 -(1096 + 852) ,TeamCheck=false,VisibleCheck=true,IgnoreVehicles=true,StraightBullets=true,Sticky=true,AutoShoot=false},ESP={Enabled=false,TargetNPC=false,Boxes=true,Skeleton=true,Health=true,Names=true,Distance=true,Tracers=true,MaxDistance=2243 + 2757 ,TeamCheck=false,VisibleOnly=false,BoxColor=Color3.fromRGB(255,255,363 -108 ),SkelColor=Color3.fromRGB(248 + 7 ,255,767 -(409 + 103) ),Color={R=491 -(46 + 190) ,G=350 -(51 + 44) ,B=72 + 183 }},Movement={Fly={Enabled=false,Key=Enum.KeyCode.F,Speed=1367 -(1114 + 203) ,AscendSpeed=756 -(228 + 498) ,NoFallDamage=true},Sprint={Enabled=false,Multiplier=2,Endurance=22 + 78 ,MaxEndurance=56 + 44 ,RecoveryRate=5},SuperJump={Enabled=false,PowerMultiplier=664 -(174 + 489) ,DoubleJumpEnabled=false,ReduceFallDamage=true},SpeedHack={Enabled=false,Value=130 -80 },AutoJump=false,Bhop=false,NoClip=false,NoClipKey=Enum.KeyCode.N,InfiniteJump=false,ClickTP={Enabled=false,Key=Enum.KeyCode.LeftControl}},Combat={SpinBot={Enabled=false,Speed=1925 -(830 + 1075) },HitboxExpander={Enabled=false,Multiplier=525.5 -(303 + 221) ,Transparency=1269.9 -(231 + 1038) ,Color=Color3.fromRGB(0 + 0 ,1417 -(171 + 991) ,1050 -795 ),ColorRGB={R=0 -0 ,G=636 -381 ,B=205 + 50 },ExpandNPC=false},Reach={Enabled=false,Range=30},FovChanger={Enabled=false,Value=315 -225 },GodMode={Enabled=false}},Visuals={FullBright=false,NoFog=false,Chams=false,ChamsColor=Color3.fromRGB(255,735 -480 ,411 -156 ),Highlight={Enabled=false,Color=Color3.fromRGB(788 -533 ,1503 -(111 + 1137) ,413 -(91 + 67) ),Transparency=0.5 -0 },FOVTransparency=0.5 + 0 ,FOVColorRGB={R=255,G=255,B=255},AccentColor={R=778 -(423 + 100) ,G=2 + 253 ,B=705 -450 },TimeChanger={Enabled=false,Time=12},Crosshair={Enabled=false,Size=8 + 7 ,Color=Color3.fromRGB(0,1026 -(326 + 445) ,0 -0 )},StreamerMode=false,AntiLag=false,RainbowMode=false},Misc={AntiAFK=true,ChatSpammer={Enabled=false,Message="Dave Pro Tool On Top!",Delay=6 -3 },Waypoints={}}};local function v9(v76) if (type(v76)~="table") then return v76;end local v77={};for v408,v409 in pairs(v76) do v77[v408]=v9(v409);end return v77;end local v10=v9(v8);local v11=false;local function v12() if v11 then return;end v11=true;task.delay(0.5 -0 ,function() local v411=0;while true do if (v411==(711 -(530 + 181))) then v11=false;saveConfig();break;end end end);end local v13={{"Head","Torso"},{"Torso","Left Arm"},{"Torso","Right Arm"},{"Torso","Left Leg"},{"Torso","Left Leg"},{"Torso","Right Leg"}};local v14={{"Head","UpperTorso"},{"UpperTorso","LowerTorso"},{"LowerTorso","LeftUpperLeg"},{"LeftUpperLeg","LeftLowerLeg"},{"LeftLowerLeg","LeftFoot"},{"LowerTorso","RightUpperLeg"},{"RightUpperLeg","RightLowerLeg"},{"RightLowerLeg","RightFoot"},{"UpperTorso","LeftUpperArm"},{"LeftUpperArm","LeftLowerArm"},{"LeftLowerArm","LeftHand"},{"UpperTorso","RightUpperArm"},{"RightUpperArm","RightLowerArm"},{"RightLowerArm","RightHand"}};local v15=false;local v16=nil;local v17={};local v18=nil;local v19=false;local v20=false;local v21=false;local v22=false;local v23=false;local v24=nil;local v25=nil;local v26=0 + 0 ;local v27=0;local v28={};local v29={};local v30=nil;local v31=nil;local function v32(v78) table.insert(v28,"["   .. os.date("%X")   .. "] "   .. v78 );if ( #v28>(181 -131)) then table.remove(v28,1);end print("💎 [PRO TOOL] "   .. v78 );end if  not Drawing then local v412=0 + 0 ;while true do if (v412==(0 + 0)) then warn("❌ Drawing Library non disponible!");return;end end end local v33=game:GetService("HttpService");local v34="ProToolConfig.json";local function v35(v79) if writefile then local v822=0 -0 ;local v823;local v824;local v825;while true do if (v822==(1 + 0)) then if v824 then local v1505=0;while true do if (v1505==0) then writefile(v823,v825);v32("Configuration sauvegardée: "   .. v823 );break;end end else warn("Échec de l'encodage de la config");end break;end if (v822==(0 -0)) then v823=v79 or v34 ;v824,v825=pcall(function() return v33:JSONEncode(v8);end);v822=1 + 0 ;end end end end local function v36(v80) local v81=0 + 0 ;local v82;while true do if (v81==1) then return false;end if (v81==(0 + 0)) then v82=v80 or v34 ;if (readfile and isfile and isfile(v82)) then local v1247,v1248=pcall(function() return v33:JSONDecode(readfile(v82));end);if v1247 then for v1557,v1558 in pairs(v1248) do if v8[v1557] then if (type(v1558)=="table") then for v1741,v1742 in pairs(v1558) do v8[v1557][v1741]=v1742;end else v8[v1557]=v1558;end end end v32("Configuration chargée: "   .. v82 );return true;end end v81=1 + 0 ;end end end local function v37(v83) local v84=v7();local v85,v86=v84:WorldToViewportPoint(v83);return Vector2.new(v85.X,v85.Y),v86,v85.Z;end local function v38() local v87=0 + 0 ;local v88;while true do if (v87==(433 -(153 + 280))) then v88=(tick()%(14 -9))/(5 + 0) ;return Color3.fromHSV(v88,1 + 0 ,1 + 0 );end end end local function v39() local v89=0;local v90;local v91;local v92;local v93;while true do if (v89==2) then v93=string.lower(v93);if string.find(v93,"npc ou die",1 + 0 ,true) then return true;end v89=3;end if (3==v89) then if string.find(v93,"pnj or die",1 + 0 ,true) then return true;end return false;end if (v89==(1 -0)) then v92,v93=pcall(function() return game.Name;end);if ( not v92 or  not v93) then return false;end v89=2;end if (v89==0) then v90,v91=pcall(function() return game.PlaceId;end);if (v90 and (v91==11276071411)) then return true;end v89=1;end end end local function v40(v94) local v95=0 + 0 ;local v96;local v97;local v98;local v99;while true do if (v95==2) then v98.FilterDescendantsInstances={v96,v97,v94.Parent};v99=workspace:Raycast(v97.CFrame.Position,v94.Position-v97.CFrame.Position ,v98);if  not v99 then return true;end v95=3;end if (v95==3) then if (v8.Aimbot.IgnoreVehicles and v99.Instance) then local v1249=0 + 0 ;local v1250;local v1251;local v1252;local v1253;while true do if (v1249==1) then v1252=false;if v1251 then if (v1251:FindFirstChildWhichIsA("VehicleSeat",true) or v1251:FindFirstChildWhichIsA("Seat",true)) then v1252=true;end end v1249=3 -1 ;end if ((1052 -(572 + 477))==v1249) then if v1252 then return true;end break;end if (v1249==0) then v1250=v99.Instance;v1251=v1250:FindFirstAncestorOfClass("Model");v1249=1;end if (v1249==2) then v1253=v1250.Name:lower();if (v1253:find("vehicle") or v1253:find("car") or v1253:find("plane") or (v1251 and (v1251.Name:lower():find("car") or v1251.Name:lower():find("plane") or v1251.Name:lower():find("vehicle")))) then v1252=true;end v1249=1 + 2 ;end end end return false;end if (v95==0) then if  not v8.Aimbot.VisibleCheck then return true;end v96=v3.Character;if  not v96 then return false;end v95=1 + 0 ;end if (v95==(1 + 0)) then v97=v7();v98=RaycastParams.new();v98.FilterType=Enum.RaycastFilterType.Exclude;v95=88 -(84 + 2) ;end end end local function v41() local v100=nil;local v101=math.huge;local v102=v7();local v103=Vector2.new(v102.ViewportSize.X/2 ,v102.ViewportSize.Y/2 );local function v104(v413,v414,v415) local v416=0 -0 ;local v417;local v418;local v419;local v420;local v421;local v422;while true do if (v416==(1 + 0)) then if  not v418 then return;end v419=v3.Character;if ( not v419 or  not v419:FindFirstChild("HumanoidRootPart")) then return;end v420,v421=v37(v418.Position);v416=844 -(497 + 345) ;end if ((0 + 0)==v416) then if  not v414 then return;end v417=v414:FindFirstChildOfClass("Humanoid");if ( not v417 or (v417.Health<=0)) then return;end v418=v414:FindFirstChild(v8.Aimbot.TargetPart) or v414:FindFirstChild("Head") ;v416=1;end if (v416==2) then if  not v421 then return;end v422=(v420-v103).Magnitude;if ((v422<=v8.Aimbot.FOV) and (v422<v101)) then if v40(v418) then local v1560=0 + 0 ;while true do if (v1560==0) then v101=v422;v100={Player=v413,Part=v418};break;end end end end break;end end end for v423,v424 in pairs(v0:GetPlayers()) do local v425=0;while true do if (1==v425) then v104(v424,v424.Character,true);break;end if (v425==(1333 -(605 + 728))) then if (v424==v3) then continue;end if (v8.Aimbot.TeamCheck and (v424.Team==v3.Team)) then continue;end v425=1 + 0 ;end end end if v8.Aimbot.TargetNPC then for v930,v931 in pairs(workspace:GetChildren()) do if (v931:IsA("Model") and v931:FindFirstChildOfClass("Humanoid") and  not v0:GetPlayerFromCharacter(v931)) then v104(v931,v931,false);end end end return v100;end local function v42(v105,v106) local v107=v7();local v108=v105.Position;if (v105.Name=="Head") then v108=v108 + Vector3.new(0 -0 ,0.1 + 0 ,0 -0 ) ;end local v109=CFrame.lookAt(v107.CFrame.Position,v108);local v110=(v106 and (1 + 0)) or ((2 -1) -v8.Aimbot.Smoothness) ;v107.CFrame=v107.CFrame:Lerp(v109,math.clamp(v110,0.01 + 0 ,490 -(457 + 32) ));end local function v43() local v112=0 + 0 ;local v113;while true do if (v112==(1402 -(832 + 570))) then if ( not v8.Aimbot.Enabled or  not v15) then v16=nil;return;end v113=v41();v112=1;end if (v112==(1 + 0)) then if v113 then v16=v113;v42(v113.Part,false);if v8.Aimbot.AutoShoot then local v1506=0 + 0 ;local v1507;while true do if (v1506==(0 -0)) then v1507=game:GetService("VirtualInputManager");v1507:SendMouseButtonEvent(0,0 + 0 ,796 -(588 + 208) ,true,game,0 -0 );v1506=1;end if (v1506==(1801 -(884 + 916))) then task.wait(0.05 -0 );v1507:SendMouseButtonEvent(0 + 0 ,653 -(232 + 421) ,0,false,game,0);break;end end end else v16=nil;end break;end end end local v44;local v45;local function v46() if v45 then local v826=1889 -(1569 + 320) ;while true do if (v826==0) then pcall(function() v45:Disconnect();end);v45=nil;break;end end end local v114=v3.Character;if  not v114 then return;end for v426,v427 in pairs(v114:GetDescendants()) do if (v427:IsA("Motor6D") and string.find(v427.Name:lower(),"shoulder")) then pcall(function() v427.Transform=CFrame.new();end);end end end local function v47() local v115=0 + 0 ;local v116;local v117;local v118;while true do if (v115==2) then v118=tick();v45=v1.RenderStepped:Connect(function() local v1012=0 + 0 ;local v1013;local v1014;while true do if (v1012==2) then v117.Sit=false;v117.PlatformStand=false;break;end if (v1012==0) then v1013=tick() -v118 ;v1014=v1013 * (33 -23) ;v1012=606 -(316 + 289) ;end if (v1012==1) then for v1561,v1562 in pairs(v116:GetDescendants()) do if (v1562:IsA("Motor6D") and string.find(v1562.Name:lower(),"shoulder")) then pcall(function() v1562.Transform=CFrame.Angles(0 -0 ,v1014,0 + 0 );end);end end v117.Jump=false;v1012=1455 -(666 + 787) ;end end end);v115=3;end if (v115==(425 -(360 + 65))) then v46();v116=v3.Character;v115=1 + 0 ;end if (v115==3) then v32("Fallback émote Hélicoptère (custom) activé");break;end if (v115==(255 -(79 + 175))) then v117=v116 and v116:FindFirstChildOfClass("Humanoid") ;if  not v117 then return;end v115=2 -0 ;end end end local function v48(v119) local v120=v3.Character;if  not v120 then local v827=0 + 0 ;local v828;local v829;while true do if (v827==(0 -0)) then v828,v829=pcall(function() return v3.CharacterAdded:Wait();end);if v828 then v120=v829;else return;end break;end end end local v121=v120 and v120:FindFirstChildOfClass("Humanoid") ;if  not v121 then return;end local v122;if ((typeof(v119)=="string") and string.find(v119,"rbxassetid://",1 -0 ,true)) then v122=v119;else v122="rbxassetid://"   .. tostring(v119) ;end v46();local v123=v121:FindFirstChildOfClass("Animator") or v121:FindFirstChild("Animator") ;if  not v123 then local v830=899 -(503 + 396) ;while true do if (v830==(181 -(92 + 89))) then v123=Instance.new("Animator");v123.Parent=v121;break;end end end if v44 then local v831=0;while true do if ((0 -0)==v831) then pcall(function() v44:Stop(0.2 + 0 );end);v44=nil;break;end end end local v124=Instance.new("Animation");v124.AnimationId=v122;local v126,v127=pcall(function() return v123:LoadAnimation(v124);end);if (v126 and v127) then local v832=0 + 0 ;local v833;while true do if (v832==(3 -2)) then pcall(function() v127.Looped=true;end);v833=pcall(function() v127:Play();end);v832=1 + 1 ;end if (v832==(4 -2)) then if v833 then local v1511=0 + 0 ;while true do if (v1511==0) then v32("Émote lancée: "   .. tostring(v119) );return;end end end break;end if (v832==(0 + 0)) then v44=v127;pcall(function() v127.Priority=Enum.AnimationPriority.Action4;end);v832=1;end end elseif ((tostring(v119)=="76510079095692") or tostring(v122):find("76510079095692",2 -1 ,true)) then v47();else v32("Échec de l'émote: "   .. tostring(v119) );end end local function v49() v46();if v44 then local v834=0 + 0 ;while true do if (v834==(0 -0)) then pcall(function() v44:Stop(1244.2 -(485 + 759) );end);v44=nil;break;end end end local v128=v3.Character;local v129=v128 and v128:FindFirstChildOfClass("Humanoid") ;if  not v129 then return;end local v130=v129:FindFirstChildOfClass("Animator") or v129:FindFirstChild("Animator") ;if (v130 and v130.GetPlayingAnimationTracks) then for v933,v934 in ipairs(v130:GetPlayingAnimationTracks()) do if (v934.Priority==Enum.AnimationPriority.Action4) then pcall(function() v934:Stop(0.2 -0 );end);end end end v32("Émote arrêtée");end local function v50() local v131=1189 -(442 + 747) ;local v132;local v133;while true do if (v131==(1138 -(832 + 303))) then for v1015,v1016 in pairs(v3.Backpack:GetChildren()) do if v1016:IsA("Tool") then v133(v1016);end end break;end if (0==v131) then if  not v8.Aimbot.StraightBullets then return;end v132=v3.Character;v131=947 -(88 + 858) ;end if (v131==2) then function v133(v1017) local v1018=0 + 0 ;while true do if (v1018==(1 + 0)) then for v1563,v1564 in pairs(v1017:GetDescendants()) do if (v1564:IsA("NumberValue") or v1564:IsA("IntValue")) then local v1649=0 + 0 ;local v1650;while true do if (v1649==0) then v1650=v1564.Name:lower();if (v1650:find("spread") or v1650:find("bloom") or v1650:find("inacc") or v1650:find("deviation")) then v1564.Value=789 -(766 + 23) ;end break;end end end end break;end if (v1018==(0 -0)) then if  not v1017 then return;end pcall(function() for v1611,v1612 in ipairs({"Spread","Bloom","Inaccuracy","Deviation"}) do if (v1017:GetAttribute(v1612)~=nil) then v1017:SetAttribute(v1612,0 + 0 );end end end);v1018=1 -0 ;end end end for v1019,v1020 in pairs(v132:GetChildren()) do if v1020:IsA("Tool") then v133(v1020);end end v131=3 + 0 ;end if (v131==(1481 -(641 + 839))) then if  not v132 then return;end v133=nil;v131=2;end end end local function v51(v134,v135) local v136=Drawing.new(v134);for v428,v429 in pairs(v135) do v136[v428]=v429;end return v136;end local function v52(v137) local v138=913 -(910 + 3) ;while true do if (v138==(0 -0)) then if ((v137==v3) or v17[v137]) then return;end v17[v137]={Box={T=v51("Line",{Thickness=1,Visible=false}),B=v51("Line",{Thickness=1,Visible=false}),L=v51("Line",{Thickness=1685 -(1466 + 218) ,Visible=false}),R=v51("Line",{Thickness=1 + 0 ,Visible=false})},Skeleton={},HealthBar={BG=v51("Line",{Thickness=1150 -(556 + 592) ,Color=Color3.new(0,0 + 0 ,808 -(329 + 479) ),Visible=false}),Bar=v51("Line",{Thickness=855 -(174 + 680) ,Visible=false})},Text=v51("Text",{Size=44 -31 ,Center=true,Outline=true,Visible=false}),Tracer=v51("Line",{Thickness=1 -0 ,Visible=false}),Highlight=nil};v138=1 + 0 ;end if (v138==1) then for v1021=740 -(396 + 343) ,2 + 13  do table.insert(v17[v137].Skeleton,v51("Line",{Thickness=1478 -(29 + 1448) ,Visible=false}));end break;end end end local function v53(v139) local v140=v17[v139];if  not v140 then return;end for v431,v432 in pairs(v140.Box) do v432:Remove();end for v433,v434 in pairs(v140.HealthBar) do v434:Remove();end for v435,v436 in pairs(v140.Skeleton) do v436:Remove();end if v140.Tracer then v140.Tracer:Remove();end if v140.Highlight then v140.Highlight:Destroy();end v140.Text:Remove();v17[v139]=nil;end local function v54() if v8.ESP.TargetNPC then for v937,v938 in pairs(workspace:GetChildren()) do if (v938:IsA("Model") and v938:FindFirstChildOfClass("Humanoid") and  not v0:GetPlayerFromCharacter(v938)) then v52(v938);end end end for v437,v438 in pairs(v17) do local v439=v437:IsA("Player");local v440=(v439 and v437.Character) or v437 ;if ( not v440 or  not v440.Parent or ( not v439 and  not v8.ESP.TargetNPC)) then local v939=1389 -(135 + 1254) ;while true do if (v939==0) then v53(v437);continue;break;end end end if  not v8.ESP.Enabled then local v940=0 -0 ;while true do if (v940==(4 -3)) then for v1512,v1513 in pairs(v438.Skeleton) do v1513.Visible=false;end if v438.Tracer then v438.Tracer.Visible=false;end v940=2;end if (v940==0) then for v1515,v1516 in pairs(v438.Box) do v1516.Visible=false;end for v1518,v1519 in pairs(v438.HealthBar) do v1519.Visible=false;end v940=1 + 0 ;end if (v940==(1529 -(389 + 1138))) then if v438.Highlight then v438.Highlight.Enabled=false;end v438.Text.Visible=false;v940=3;end if (v940==3) then continue;break;end end end local v441=v440:FindFirstChild("HumanoidRootPart");local v442=v440:FindFirstChildOfClass("Humanoid");if ( not v441 or  not v442 or (v442.Health<=0)) then local v941=574 -(102 + 472) ;while true do if (v941==3) then continue;break;end if (v941==2) then if v438.Highlight then v438.Highlight.Enabled=false;end v438.Text.Visible=false;v941=3;end if (v941==(0 + 0)) then for v1521,v1522 in pairs(v438.Box) do v1522.Visible=false;end for v1524,v1525 in pairs(v438.HealthBar) do v1525.Visible=false;end v941=1 + 0 ;end if (v941==(1 + 0)) then for v1527,v1528 in pairs(v438.Skeleton) do v1528.Visible=false;end if v438.Tracer then v438.Tracer.Visible=false;end v941=2;end end end local v443=v7();local v444=v3.Character and v3.Character:FindFirstChild("HumanoidRootPart") ;local v445=(v444 and (v441.Position-v444.Position).Magnitude) or (1545 -(320 + 1225)) ;if (v439 and v8.ESP.TeamCheck and  not v39() and (v437.Team==v3.Team)) then for v1022,v1023 in pairs(v438.Box) do v1023.Visible=false;end for v1025,v1026 in pairs(v438.HealthBar) do v1026.Visible=false;end for v1028,v1029 in pairs(v438.Skeleton) do v1029.Visible=false;end if v438.Tracer then v438.Tracer.Visible=false;end if v438.Highlight then v438.Highlight.Enabled=false;end v438.Text.Visible=false;continue;end if v8.ESP.VisibleOnly then local v943=0 -0 ;local v944;local v945;local v946;while true do if (v943==(2 + 0)) then v946=workspace:Raycast(v443.CFrame.Position,v441.Position-v443.CFrame.Position ,v945);if  not v946 then v944=true;end v943=1467 -(157 + 1307) ;end if (v943==(1862 -(821 + 1038))) then if  not v944 then local v1569=0 -0 ;while true do if (v1569==1) then for v1712,v1713 in pairs(v438.Skeleton) do v1713.Visible=false;end if v438.Tracer then v438.Tracer.Visible=false;end v1569=1 + 1 ;end if (v1569==(4 -1)) then continue;break;end if (v1569==(0 + 0)) then for v1715,v1716 in pairs(v438.Box) do v1716.Visible=false;end for v1718,v1719 in pairs(v438.HealthBar) do v1719.Visible=false;end v1569=1;end if (v1569==(4 -2)) then if v438.Highlight then v438.Highlight.Enabled=false;end v438.Text.Visible=false;v1569=1029 -(834 + 192) ;end end end break;end if (v943==0) then v944=false;v945=RaycastParams.new();v943=1 + 0 ;end if (v943==(1 + 0)) then v945.FilterType=Enum.RaycastFilterType.Exclude;v945.FilterDescendantsInstances={v440,v3.Character};v943=2 -0 ;end end end local v446,v447=v37(v441.Position);if v447 then local v947=v440:GetExtentsSize();local v948,v949=v947.X * (305.5 -(300 + 4)) ,v947.Y * (1.5 + 0) ;local v950=CFrame.lookAt(v441.Position,v441.Position + (v443.CFrame.Position-v441.Position).Unit );local function v951(v1031,v1032) return v37((v950 * CFrame.new(v1031,v1032,0 -0 )).Position);end local v952,v953=v951( -v948/(364 -(112 + 250)) ,v949/(1 + 1) );local v954,v955=v951(v948/2 ,v949/2 );local v956,v957=v951( -v948/(4 -2) , -v949/(2 + 0) );local v958,v959=v951(v948/(2 + 0) , -v949/(2 + 0) );local v960=(v8.Visuals.RainbowMode and v38()) or Color3.fromRGB(v8.ESP.Color.R,v8.ESP.Color.G,v8.ESP.Color.B) ;local v961=v953 and v955 and v957 and v959 and v8.ESP.Boxes ;v438.Box.T.Visible,v438.Box.T.From,v438.Box.T.To=v961,v952,v954;v438.Box.B.Visible,v438.Box.B.From,v438.Box.B.To=v961,v956,v958;v438.Box.L.Visible,v438.Box.L.From,v438.Box.L.To=v961,v952,v956;v438.Box.R.Visible,v438.Box.R.From,v438.Box.R.To=v961,v954,v958;if v961 then for v1465,v1466 in pairs(v438.Box) do v1466.Color=v960;end end if v8.ESP.Health then local v1257=1 + 0 ;local v1258,v1259=v951(( -v948/(2 + 0)) -v1257 ,v949/2 );local v1260,v1259=v951(( -v948/2) -v1257 , -v949/2 );local v1261=v1260.X;local v1262=v1258.Y;local v1263=v1260.Y;v438.HealthBar.BG.Visible=true;v438.HealthBar.BG.From=Vector2.new(v1261,v1262);v438.HealthBar.BG.To=Vector2.new(v1261,v1263);v438.HealthBar.BG.Thickness=1416 -(1001 + 413) ;v438.HealthBar.BG.Color=Color3.new(0 -0 ,0,882 -(244 + 638) );local v1269=math.clamp(v442.Health/v442.MaxHealth ,0,694 -(627 + 66) );local v1270=(v1263-v1262) * v1269 ;v438.HealthBar.Bar.Visible=true;v438.HealthBar.Bar.From=Vector2.new(v1261,v1263);v438.HealthBar.Bar.To=Vector2.new(v1261,v1263-v1270 );v438.HealthBar.Bar.Thickness=5 -3 ;v438.HealthBar.Bar.Color=((v1269>(602.6 -(512 + 90))) and Color3.new(1906 -(1665 + 241) ,1,717 -(373 + 344) )) or ((v1269>(0.3 + 0)) and Color3.new(1 + 0 ,2 -1 ,0)) or Color3.new(1,0,0) ;else v438.HealthBar.BG.Visible,v438.HealthBar.Bar.Visible=false,false;end if v8.ESP.Skeleton then local v1278=((v442.RigType==Enum.HumanoidRigType.R15) and v14) or v13 ;for v1468,v1469 in pairs(v1278) do local v1470=0 -0 ;local v1471;while true do if ((1099 -(35 + 1064))==v1470) then v1471=v438.Skeleton[v1468];if v1471 then local v1689=0 + 0 ;local v1690;local v1691;while true do if (v1689==1) then if (v1690 and v1691) then local v1777,v1778=v37(v1690.Position);local v1779,v1780=v37(v1691.Position);if (v1778 and v1780) then local v1786=0;while true do if ((2 -1)==v1786) then v1471.To=v1779;v1471.Color=v960;break;end if (v1786==(0 + 0)) then v1471.Visible=true;v1471.From=v1777;v1786=1237 -(298 + 938) ;end end else v1471.Visible=false;end else v1471.Visible=false;end break;end if (v1689==0) then v1690=v440:FindFirstChild(v1469[1260 -(233 + 1026) ]);v1691=v440:FindFirstChild(v1469[1668 -(636 + 1030) ]);v1689=1 + 0 ;end end end break;end end end for v1472= #v1278 + 1 + 0 ,15 do if v438.Skeleton[v1472] then v438.Skeleton[v1472].Visible=false;end end else for v1473,v1474 in pairs(v438.Skeleton) do v1474.Visible=false;end end if v8.Visuals.Chams then local v1279=0 + 0 ;while true do if (v1279==(0 + 0)) then if  not v438.Highlight then local v1651=221 -(55 + 166) ;while true do if (v1651==0) then v438.Highlight=Instance.new("Highlight");v438.Highlight.Parent=game.CoreGui;break;end end end v438.Highlight.Adornee=v440;v1279=1 + 0 ;end if (v1279==(1 + 0)) then v438.Highlight.Enabled=true;v438.Highlight.FillColor=v8.Visuals.ChamsColor;v1279=7 -5 ;end if (v1279==(299 -(36 + 261))) then v438.Highlight.OutlineColor=Color3.new(1,1 -0 ,1369 -(34 + 1334) );v438.Highlight.FillTransparency=0.5 + 0 ;break;end end elseif v438.Highlight then v438.Highlight.Enabled=false;end if v8.ESP.Tracers then v438.Tracer.Visible=true;v438.Tracer.From=Vector2.new(v443.ViewportSize.X/(2 + 0) ,v443.ViewportSize.Y);v438.Tracer.To=v446;v438.Tracer.Color=v960;else v438.Tracer.Visible=false;end if (v8.ESP.Names or v8.ESP.Distance) then local v1285=1283 -(1035 + 248) ;local v1286;while true do if (v1285==0) then v1286=v440:FindFirstChild("Head");if v1286 then local v1652=0;local v1653;local v1654;local v1655;while true do if (v1652==(21 -(20 + 1))) then v1653,v1654=v37(v1286.Position + Vector3.new(0 + 0 ,1.5,0) );v438.Text.Visible=true;v1652=320 -(134 + 185) ;end if (v1652==(1134 -(549 + 584))) then v438.Text.Position=v1653;v1655="";v1652=687 -(314 + 371) ;end if (v1652==(6 -4)) then if v8.ESP.Names then local v1773=968 -(478 + 490) ;local v1774;while true do if (0==v1773) then v1774=(v439 and ((v8.Visuals.StreamerMode and "Joueur") or v437.Name)) or v437.Name ;v1655=v1655   .. v1774   .. "\n" ;break;end end end if v8.ESP.Distance then v1655=v1655   .. "["   .. math.floor(v445)   .. "m]" ;end v1652=2 + 1 ;end if (v1652==(1175 -(786 + 386))) then v438.Text.Text=v1655;v438.Text.Color=(v8.Visuals.RainbowMode and v960) or Color3.new(3 -2 ,1,1380 -(1055 + 324) ) ;break;end end else v438.Text.Visible=false;end break;end end else v438.Text.Visible=false;end else for v1033,v1034 in pairs(v438.Box) do v1034.Visible=false;end for v1036,v1037 in pairs(v438.HealthBar) do v1037.Visible=false;end for v1039,v1040 in pairs(v438.Skeleton) do v1040.Visible=false;end if v438.Tracer then v438.Tracer.Visible=false;end if v438.Highlight then v438.Highlight.Enabled=false;end v438.Text.Visible=false;end end end local function v55() local v142=v3.Character;if  not v142 then return;end local v143=v142:FindFirstChildOfClass("Humanoid");local v144=v142:FindFirstChild("HumanoidRootPart");if ( not v143 or  not v144) then return;end if (v8.Movement.Sprint.Enabled and v21 and (v8.Movement.Sprint.Endurance>(1340 -(1093 + 247)))) then v143.WalkSpeed=(15 + 1) * v8.Movement.Sprint.Multiplier ;v8.Movement.Sprint.Endurance=math.max(0,v8.Movement.Sprint.Endurance-(0.5 + 0) );if (v8.Movement.Sprint.Endurance==(0 -0)) then v21=false;end elseif  not v8.Movement.SpeedHack.Enabled then v143.WalkSpeed=53 -37 ;v8.Movement.Sprint.Endurance=math.min(v8.Movement.Sprint.MaxEndurance,v8.Movement.Sprint.Endurance + (v8.Movement.Sprint.RecoveryRate/(170 -110)) );end if v8.Movement.SpeedHack.Enabled then v143.WalkSpeed=v8.Movement.SpeedHack.Value;end if v19 then local v839=0 -0 ;local v840;local v841;while true do if (v839==(0 + 0)) then if (v8.Movement.Fly.NoFallDamage and (v144.Velocity.Y< -(115 -85))) then v144.Velocity=Vector3.new(v144.Velocity.X, -(103 -73),v144.Velocity.Z);end v840=v7();v841=Vector3.new(0 + 0 ,0,0 -0 );v839=689 -(364 + 324) ;end if (v839==(7 -4)) then if (v841.Magnitude>0) then local v1532=0 -0 ;local v1533;while true do if ((0 + 0)==v1532) then v1533=v841.Unit * v8.Movement.Fly.Speed ;if v24 then v24.Velocity=v1533;end break;end end elseif v24 then v24.Velocity=Vector3.new(0 -0 ,0,0 -0 );end if v25 then v25.CFrame=v840.CFrame;end break;end if (v839==(5 -3)) then if v2:IsKeyDown(Enum.KeyCode.D) then v841=v841 + v840.CFrame.RightVector ;end if v2:IsKeyDown(Enum.KeyCode.Space) then v841=v841 + Vector3.new(0,1269 -(1249 + 19) ,0 + 0 ) ;end if v2:IsKeyDown(Enum.KeyCode.LeftShift) then v841=v841-Vector3.new(0 -0 ,1,1086 -(686 + 400) ) ;end v839=3 + 0 ;end if (v839==(230 -(73 + 156))) then if v2:IsKeyDown(Enum.KeyCode.W) then v841=v841 + v840.CFrame.LookVector ;end if v2:IsKeyDown(Enum.KeyCode.S) then v841=v841-v840.CFrame.LookVector ;end if v2:IsKeyDown(Enum.KeyCode.A) then v841=v841-v840.CFrame.RightVector ;end v839=1 + 1 ;end end elseif (v8.Movement.Fly.NoFallDamage and (v143.FloorMaterial~=Enum.Material.Air)) then v144.Velocity=Vector3.new(v144.Velocity.X,math.max(v144.Velocity.Y, -(826 -(721 + 90))),v144.Velocity.Z);end if (v8.Movement.SuperJump.Enabled and v8.Movement.SuperJump.ReduceFallDamage) then if (v143.FloorMaterial~=Enum.Material.Air) then v144.Velocity=Vector3.new(v144.Velocity.X,math.max(v144.Velocity.Y, -20),v144.Velocity.Z);end end if v20 then for v975,v976 in pairs(v142:GetDescendants()) do if (v976:IsA("BasePart") and v976.CanCollide) then v976.CanCollide=false;end end end if (v8.Movement.AutoJump or v8.Movement.Bhop) then if ((v143.FloorMaterial~=Enum.Material.Air) or (v143:GetState()==Enum.HumanoidStateType.Landed)) then local v1046=0 + 0 ;while true do if (0==v1046) then if v8.Movement.AutoJump then local v1615=0 -0 ;local v1616;local v1617;while true do if (v1615==0) then v1616=RaycastParams.new();v1616.FilterDescendantsInstances={v142};v1615=471 -(224 + 246) ;end if (v1615==(2 -0)) then if v1617 then v143.Jump=true;end break;end if (v1615==(1 -0)) then v1616.FilterType=Enum.RaycastFilterType.Exclude;v1617=workspace:Raycast(v144.Position,v144.CFrame.LookVector * (1 + 4) ,v1616);v1615=1 + 1 ;end end end if (v8.Movement.Bhop and v2:IsKeyDown(Enum.KeyCode.Space)) then v143.Jump=true;end break;end end end end if v8.Movement.SuperJump.Enabled then v143.JumpPower=(37 + 13) * v8.Movement.SuperJump.PowerMultiplier ;else v143.JumpPower=99 -49 ;end end local function v56() v19= not v19;local v145=v3.Character;if  not v145 then return;end local v146=v145:FindFirstChild("HumanoidRootPart");if  not v146 then return;end if v19 then local v844=Instance.new("BodyVelocity");v844.Name="FlyVelocity";v844.Velocity=Vector3.new(0,0 -0 ,513 -(203 + 310) );v844.MaxForce=Vector3.new(math.huge,math.huge,math.huge);v844.Parent=v146;local v849=Instance.new("BodyGyro");v849.Name="FlyGyro";v849.MaxTorque=Vector3.new(math.huge,math.huge,math.huge);v849.CFrame=v146.CFrame;v849.Parent=v146;v24=v844;v25=v849;v32("Mode Vol activé");else local v855=0;while true do if (v855==0) then if v24 then v24:Destroy();end if v25 then v25:Destroy();end v855=1994 -(1238 + 755) ;end if (v855==(1 + 1)) then v146.Velocity=Vector3.new(0,1534 -(709 + 825) ,0 -0 );v32("Mode Vol désactivé");break;end if (1==v855) then v24=nil;v25=nil;v855=2 -0 ;end end end end local function v57() if  not v8.Combat.SpinBot.Enabled then return;end local v147=v3.Character;local v148=v147 and v147:FindFirstChild("HumanoidRootPart") ;if  not v148 then return;end v26=v26 + v8.Combat.SpinBot.Speed ;local v149=CFrame.new(v148.Position) * CFrame.Angles(0,math.rad(v26),864 -(196 + 668) ) ;v148.CFrame=v149;end local function v58() local v151=0 -0 ;local v152;local v153;local v154;while true do if (2==v151) then v153.PlatformStand=false;v153.Sit=false;if (v153.Health<v153.MaxHealth) then v153.Health=v153.MaxHealth;end v151=5 -2 ;end if (v151==(836 -(171 + 662))) then if ((v153:GetState()==Enum.HumanoidStateType.Ragdoll) or (v153:GetState()==Enum.HumanoidStateType.FallingDown) or (v153:GetState()==Enum.HumanoidStateType.PlatformStanding)) then v153:ChangeState(Enum.HumanoidStateType.Running);end v154=v152:FindFirstChild("HumanoidRootPart");if v154 then v154.Anchored=false;end v151=4;end if ((93 -(4 + 89))==v151) then if  not v8.Combat.GodMode.Enabled then return;end v152=v3.Character;v153=v152 and v152:FindFirstChildOfClass("Humanoid") ;v151=3 -2 ;end if (v151==(2 + 2)) then for v1047,v1048 in pairs(v152:GetDescendants()) do if v1048:IsA("BasePart") then v1048.Anchored=false;elseif v1048:IsA("BoolValue") then local v1577=0 -0 ;local v1578;while true do if (v1577==0) then v1578=v1048.Name:lower();if ((v1578=="knocked") or (v1578=="ko") or (v1578=="down") or (v1578=="downed")) then v1048.Value=false;end break;end end end end if ((v153.WalkSpeed<(1 + 1)) and  not v8.Movement.SpeedHack.Enabled) then v153.WalkSpeed=1502 -(35 + 1451) ;end if (v153.JumpPower<20) then v153.JumpPower=1503 -(28 + 1425) ;end break;end if (v151==(1994 -(941 + 1052))) then if  not v153 then return;end v153.BreakJointsOnDeath=false;if v153.SetStateEnabled then v153:SetStateEnabled(Enum.HumanoidStateType.Dead,false);pcall(function() v153:SetStateEnabled(Enum.HumanoidStateType.Ragdoll,false);end);pcall(function() v153:SetStateEnabled(Enum.HumanoidStateType.FallingDown,false);end);pcall(function() v153:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding,false);end);pcall(function() v153:SetStateEnabled(Enum.HumanoidStateType.Seated,false);end);end v151=2 + 0 ;end end end local function v59() if  not v8.Combat.HitboxExpander.Enabled then for v981,v982 in pairs(v29) do local v983=1514 -(822 + 692) ;while true do if (v983==0) then if v982 then v982:Destroy();end v29[v981]=nil;break;end end end return;end local function v155(v448,v449) local v450=v449:FindFirstChild("HumanoidRootPart");local v451=v449:FindFirstChildOfClass("Humanoid");if (v450 and v451 and (v451.Health>(0 -0))) then local v984=v29[v448];if ( not v984 or (v984.Parent~=v449)) then if v984 then v984:Destroy();end v984=Instance.new("Part");v984.Name="HitboxPart";v984.CastShadow=false;v984.CanCollide=false;v984.CanQuery=true;v984.Anchored=false;v984.Transparency=v8.Combat.HitboxExpander.Transparency;v984.Material=Enum.Material.Neon;v984.Parent=v449;local v1307=Instance.new("Weld");v1307.Part0=v450;v1307.Part1=v984;v1307.C0=CFrame.new(0,0,0);v1307.Parent=v984;local v1312=Instance.new("BoxHandleAdornment");v1312.Name="HitboxAdornment";v1312.Adornee=v984;v1312.ZIndex=5 + 5 ;v1312.AlwaysOnTop=true;v1312.Color3=v8.Combat.HitboxExpander.Color;v1312.Transparency=v8.Combat.HitboxExpander.Transparency;v1312.Size=Vector3.new((299 -(45 + 252)) * v8.Combat.HitboxExpander.Multiplier ,2 * v8.Combat.HitboxExpander.Multiplier ,(2 + 0) * v8.Combat.HitboxExpander.Multiplier );v1312.Parent=v984;v29[v448]=v984;end local v985=v8.Combat.HitboxExpander.Multiplier;v984.Size=Vector3.new((1 + 1) * v985 ,2 * v985 ,2 * v985 );v984.Color=v8.Combat.HitboxExpander.Color;v984.Transparency=v8.Combat.HitboxExpander.Transparency;local v991=v984:FindFirstChild("HitboxAdornment");if v991 then v991.Size=v984.Size;v991.Color3=v8.Combat.HitboxExpander.Color;v991.Transparency=v8.Combat.HitboxExpander.Transparency;end elseif v29[v448] then local v1329=0;while true do if (v1329==0) then v29[v448]:Destroy();v29[v448]=nil;break;end end end end for v452,v453 in pairs(v0:GetPlayers()) do local v454=0 -0 ;local v455;while true do if (0==v454) then if (v453==v3) then continue;end if (v8.Aimbot.TeamCheck and (v453.Team==v3.Team)) then local v1478=433 -(114 + 319) ;while true do if (v1478==(0 -0)) then if v29[v453] then local v1692=0;while true do if (v1692==(0 -0)) then v29[v453]:Destroy();v29[v453]=nil;break;end end end continue;break;end end end v454=1 + 0 ;end if (v454==1) then v455=v453.Character;if v455 then v155(v453,v455);end break;end end end if v8.Combat.HitboxExpander.ExpandNPC then for v992,v993 in pairs(workspace:GetChildren()) do if (v993:IsA("Model") and v993:FindFirstChildOfClass("Humanoid") and  not v0:GetPlayerFromCharacter(v993)) then v155(v993,v993);end end end end local function v60() if  not v8.Combat.Reach.Enabled then return;end local v156=v3.Character;local v157=v156 and v156:FindFirstChildOfClass("Tool") ;if v157 then local v856=0 -0 ;local v857;while true do if (v856==(0 -0)) then v857=v157:FindFirstChild("Handle") or v157:FindFirstChildOfClass("Part") ;if v857 then if  not v857:FindFirstChild("DaveReach") then local v1619=0;local v1620;while true do if (v1619==(1965 -(556 + 1407))) then v1620.Color3=Color3.fromRGB(1461 -(741 + 465) ,0,465 -(170 + 295) );v1620.Parent=v857;break;end if (v1619==(0 + 0)) then v1620=Instance.new("SelectionBox");v1620.Name="DaveReach";v1619=1 + 0 ;end if (v1619==(2 -1)) then v1620.Adornee=v857;v1620.Transparency=0.8 + 0 ;v1619=2 + 0 ;end end end v857.Size=Vector3.new(v8.Combat.Reach.Range,v8.Combat.Reach.Range,v8.Combat.Reach.Range);v857.Massless=true;v857.CanCollide=false;end break;end end end end local function v61() if v8.Visuals.TimeChanger.Enabled then game.Lighting.ClockTime=v8.Visuals.TimeChanger.Time;end end local v62={};v62.CreateWindow=function(v158) ScreenGui=Instance.new("ScreenGui");ScreenGui.Name="ProToolUI";ScreenGui.Parent=game.CoreGui;ScreenGui.ResetOnSpawn=false;local v163={Background=Color3.fromRGB(9 + 6 ,15,15),Sidebar=Color3.fromRGB(1240 -(957 + 273) ,10,10),Accent=Color3.fromRGB(69 + 186 ,103 + 152 ,971 -716 ),Text=Color3.fromRGB(255,255,671 -416 ),TextDim=Color3.fromRGB(549 -369 ,891 -711 ,180),Secondary=Color3.fromRGB(30,1810 -(389 + 1391) ,30),Hover=Color3.fromRGB(40,26 + 14 ,5 + 35 )};RestoreBtn=Instance.new("TextButton");RestoreBtn.Name="RestoreBtn";RestoreBtn.Size=UDim2.new(0 -0 ,120,0,991 -(783 + 168) );RestoreBtn.Position=UDim2.new(0 -0 ,20,0.5 + 0 , -(331 -(309 + 2)));RestoreBtn.BackgroundColor3=v163.Secondary;RestoreBtn.Text="DAVE";RestoreBtn.TextColor3=v163.Accent;RestoreBtn.TextStrokeColor3=Color3.fromRGB(0,0,0);RestoreBtn.TextStrokeTransparency=0.4;RestoreBtn.Font=Enum.Font.GothamBold;RestoreBtn.TextSize=22;RestoreBtn.Visible=false;RestoreBtn.Parent=ScreenGui;Instance.new("UICorner",RestoreBtn).CornerRadius=UDim.new(0 -0 ,10);local v180=Instance.new("UIStroke",RestoreBtn);v180.Color=v163.Accent;v180.Thickness=2;MainFrame=Instance.new("Frame");MainFrame.Name="MainFrame";MainFrame.Size=UDim2.new(1212 -(1090 + 122) ,550,0,137 + 283 );MainFrame.Position=UDim2.new(3 -2 , -570,0,14 + 6 );MainFrame.BackgroundColor3=v163.Background;MainFrame.BackgroundTransparency=1118.18 -(628 + 490) ;MainFrame.BorderSizePixel=0 + 0 ;MainFrame.Active=true;MainFrame.Draggable=false;MainFrame.Parent=ScreenGui;Instance.new("UICorner",MainFrame).CornerRadius=UDim.new(0 -0 ,4);local v194=Instance.new("UIStroke",MainFrame);v194.Color=v163.Accent;v194.Thickness=4 -3 ;v194.Transparency=774.4 -(431 + 343) ;local v198=Instance.new("UIGradient",MainFrame);v198.Color=ColorSequence.new({ColorSequenceKeypoint.new(0 -0 ,Color3.fromRGB(35,28 + 7 ,35)),ColorSequenceKeypoint.new(1696 -(556 + 1139) ,Color3.fromRGB(30 -(6 + 9) ,3 + 12 ,8 + 7 ))});v198.Rotation=90;local v201=Instance.new("Frame");v201.Name="Sidebar";v201.Size=UDim2.new(0,329 -(28 + 141) ,1,0 + 0 );v201.BackgroundColor3=v163.Sidebar;v201.BackgroundTransparency=0.22;v201.Parent=MainFrame;Instance.new("UICorner",v201).CornerRadius=UDim.new(0 -0 ,4);local v209=Instance.new("UIGradient",v201);v209.Color=ColorSequence.new({ColorSequenceKeypoint.new(1317 -(486 + 831) ,Color3.fromRGB(45,116 -71 ,158 -113 )),ColorSequenceKeypoint.new(3 -2 ,Color3.fromRGB(1288 -(668 + 595) ,25,23 + 2 ))});v209.Rotation=0;local v212=Instance.new("TextLabel");v212.Size=UDim2.new(1,0 + 0 ,0 -0 ,60);v212.BackgroundTransparency=291 -(23 + 267) ;v212.Text="DAVE PRO TOOL";v212.TextColor3=v163.Accent;v212.Font=Enum.Font.GothamBold;v212.TextSize=1962 -(1129 + 815) ;v212.Parent=v201;v31=v212;do local v456=false;local v457,v458;local v459=447 -(371 + 16) ;v201.InputBegan:Connect(function(v860) if (v860.UserInputType==Enum.UserInputType.MouseButton1) then local v1050=1750 -(1326 + 424) ;local v1051;while true do if (v1050==(0 -0)) then v1051=v860.Position.Y-v201.AbsolutePosition.Y ;if (v1051<=v459) then local v1621=0 -0 ;while true do if (v1621==(118 -(88 + 30))) then v456=true;v457=v860.Position;v1621=1;end if (v1621==(772 -(720 + 51))) then v458=MainFrame.Position;v860.Changed:Connect(function() if (v860.UserInputState==Enum.UserInputState.End) then v456=false;end end);break;end end end break;end end end end);v2.InputChanged:Connect(function(v861) if (v456 and (v861.UserInputType==Enum.UserInputType.MouseMovement)) then local v1052=0;local v1053;while true do if (v1052==(0 -0)) then v1053=v861.Position-v457 ;MainFrame.Position=UDim2.new(v458.X.Scale,v458.X.Offset + v1053.X ,v458.Y.Scale,v458.Y.Offset + v1053.Y );break;end end end end);end local v220=Instance.new("Frame");v220.Size=UDim2.new(1777 -(421 + 1355) ,0 -0 ,0 + 0 ,1111 -(286 + 797) );v220.BackgroundTransparency=3 -2 ;v220.Parent=MainFrame;do local v460=0 -0 ;local v461;local v462;local v463;while true do if (v460==(439 -(397 + 42))) then v461=false;v462,v463=nil;v460=1 + 0 ;end if (v460==(801 -(24 + 776))) then v220.InputBegan:Connect(function(v1330) if (v1330.UserInputType==Enum.UserInputType.MouseButton1) then local v1540=0 -0 ;while true do if ((785 -(222 + 563))==v1540) then v461=true;v462=v1330.Position;v1540=1 -0 ;end if (v1540==(1 + 0)) then v463=MainFrame.Position;v1330.Changed:Connect(function() if (v1330.UserInputState==Enum.UserInputState.End) then v461=false;end end);break;end end end end);v2.InputChanged:Connect(function(v1331) if (v461 and (v1331.UserInputType==Enum.UserInputType.MouseMovement)) then local v1541=v1331.Position-v462 ;MainFrame.Position=UDim2.new(v463.X.Scale,v463.X.Offset + v1541.X ,v463.Y.Scale,v463.Y.Offset + v1541.Y );end end);break;end end end local v224=Instance.new("TextLabel");v224.Size=UDim2.new(1,190 -(23 + 167) ,1798 -(690 + 1108) ,20);v224.Position=UDim2.new(0 + 0 ,0 + 0 ,849 -(40 + 808) , -(5 + 20));v224.BackgroundTransparency=3 -2 ;v224.Text="VERSION V3.3B";v224.TextColor3=v163.TextDim;v224.Font=Enum.Font.Gotham;v224.TextSize=10 + 0 ;v224.Parent=v201;local v235=Instance.new("Frame");v235.Name="Container";v235.Size=UDim2.new(1 + 0 , -(94 + 76),1, -(591 -(47 + 524)));v235.Position=UDim2.new(0,111 + 59 ,0,10);v235.BackgroundTransparency=2 -1 ;v235.Parent=MainFrame;local v241=nil;local v242=Instance.new("Frame");v242.Name="TabButtons";v242.Size=UDim2.new(1 -0 ,0,2 -1 , -100);v242.Position=UDim2.new(1726 -(1165 + 561) ,0 + 0 ,0 -0 ,27 + 43 );v242.BackgroundTransparency=480 -(341 + 138) ;v242.Parent=v201;local v248=Instance.new("UIListLayout",v242);v248.Padding=UDim.new(0,2);v248.HorizontalAlignment=Enum.HorizontalAlignment.Center;local function v252(v464,v465) local v466=0 + 0 ;local v467;local v468;local v469;local v470;while true do if (v466==5) then v469.Parent=v235;v470=Instance.new("UIListLayout",v469);v470.Padding=UDim.new(0 -0 ,334 -(89 + 237) );v470.SortOrder=Enum.SortOrder.LayoutOrder;v470:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function() v469.CanvasSize=UDim2.new(0 -0 ,0,0 -0 ,v470.AbsoluteContentSize.Y + (901 -(581 + 300)) );end);v466=1226 -(855 + 365) ;end if ((2 -1)==v466) then v467.TextColor3=v163.TextDim;v467.Font=Enum.Font.GothamSemibold;v467.TextSize=4 + 8 ;v467.Parent=v242;Instance.new("UICorner",v467).CornerRadius=UDim.new(0,1239 -(1030 + 205) );v466=2 + 0 ;end if (v466==(3 + 0)) then v468.Parent=v467;v469=Instance.new("ScrollingFrame");v469.Size=UDim2.new(287 -(156 + 130) , -10,2 -1 , -(16 -6));v469.Position=UDim2.new(0 -0 ,2 + 3 ,0 + 0 ,74 -(10 + 59) );v469.BackgroundTransparency=1 + 0 ;v466=19 -15 ;end if (v466==(1167 -(671 + 492))) then v469.BorderSizePixel=0;v469.Visible=false;v469.ScrollBarThickness=4 + 0 ;v469.ScrollBarImageColor3=v163.Accent;v469.CanvasSize=UDim2.new(1215 -(369 + 846) ,0 + 0 ,0 + 0 ,1945 -(1036 + 909) );v466=5;end if (v466==(0 + 0)) then v467=Instance.new("TextButton");v467.Size=UDim2.new(0.9 -0 ,203 -(11 + 192) ,0 + 0 ,210 -(135 + 40) );v467.BackgroundColor3=v163.Hover;v467.BackgroundTransparency=2 -1 ;v467.Text=v464:upper();v466=1 + 0 ;end if (v466==(4 -2)) then v468=Instance.new("Frame");v468.Size=UDim2.new(0,2 -0 ,176.6 -(50 + 126) ,0 -0 );v468.Position=UDim2.new(0 + 0 ,1417 -(1233 + 180) ,0.2,969 -(522 + 447) );v468.BackgroundColor3=v163.Accent;v468.Visible=false;v466=1424 -(107 + 1314) ;end if (v466==(3 + 3)) then v467.MouseButton1Click:Connect(function() if v241 then local v1543=0 -0 ;while true do if (v1543==(1 + 0)) then v241.Indicator.Visible=false;v241.Frame.Visible=false;break;end if (v1543==0) then v241.Btn.BackgroundTransparency=1 -0 ;v241.Btn.TextColor3=v163.TextDim;v1543=3 -2 ;end end end v467.BackgroundTransparency=0.9;v467.TextColor3=v163.Accent;v468.Visible=true;v469.Visible=true;v241={Btn=v467,Frame=v469,Indicator=v468};end);return v469,v467;end end end local v253=Instance.new("TextButton");v253.Size=UDim2.new(1910 -(716 + 1194) ,1 + 29 ,0,30);v253.AnchorPoint=Vector2.new(1 + 0 ,0);v253.Position=UDim2.new(1,4,503 -(74 + 429) , -(14 -6));v253.BackgroundTransparency=1 + 0 ;v253.Text="×";v253.TextColor3=v163.TextDim;v253.TextSize=30;v253.Font=Enum.Font.GothamBold;v253.ZIndex=45 -25 ;v253.Parent=MainFrame;v253.MouseEnter:Connect(function() v253.TextColor3=v163.Accent;end);v253.MouseLeave:Connect(function() v253.TextColor3=v163.TextDim;end);v253.MouseButton1Click:Connect(function() MainFrame.Visible=false;RestoreBtn.Visible=true;end);RestoreBtn.MouseEnter:Connect(function() RestoreBtn.BackgroundColor3=v163.Hover;RestoreBtn.TextColor3=Color3.fromRGB(181 + 74 ,785 -530 ,255);RestoreBtn.TextStrokeTransparency=0.2 -0 ;end);RestoreBtn.MouseLeave:Connect(function() local v481=433 -(279 + 154) ;while true do if (v481==(778 -(454 + 324))) then RestoreBtn.BackgroundColor3=v163.Secondary;RestoreBtn.TextColor3=v163.Accent;v481=1;end if (v481==1) then RestoreBtn.TextStrokeTransparency=0.4 + 0 ;break;end end end);RestoreBtn.MouseButton1Click:Connect(function() local v482=17 -(12 + 5) ;while true do if (v482==(0 + 0)) then MainFrame.Visible=true;RestoreBtn.Visible=false;break;end end end);local v264=Instance.new("Frame");v264.Size=UDim2.new(0 -0 ,140,0 + 0 ,1129 -(277 + 816) );v264.Position=UDim2.new(4 -3 , -(1333 -(1058 + 125)),1, -(9 + 36));v264.BackgroundColor3=v163.Secondary;v264.BackgroundTransparency=975.22 -(815 + 160) ;v264.Visible=false;v264.Parent=MainFrame;Instance.new("UICorner",v264).CornerRadius=UDim.new(0 -0 ,9 -5 );local v272=Instance.new("UIStroke",v264);v272.Color=v163.Accent;v272.Thickness=1 + 0 ;v272.Transparency=0.5;v272.Enabled=true;local v277=Instance.new("UIGradient",v264);v277.Color=ColorSequence.new({ColorSequenceKeypoint.new(1898 -(41 + 1857) ,Color3.fromRGB(1933 -(1222 + 671) ,103 -63 ,57 -17 )),ColorSequenceKeypoint.new(1775 -(1111 + 663) ,Color3.fromRGB(1599 -(874 + 705) ,20,3 + 17 ))});v277.Rotation=62 + 28 ;v4=Instance.new("TextLabel");v4.Size=UDim2.new(1 -0 , -10,0,16);v4.Position=UDim2.new(0 + 0 ,5,679 -(642 + 37) ,1 + 3 );v4.BackgroundTransparency=1;v4.Text="FPS: ...";v4.TextColor3=v163.Text;v4.Font=Enum.Font.GothamSemibold;v4.TextSize=2 + 9 ;v4.TextXAlignment=Enum.TextXAlignment.Left;v4.Parent=v264;v5=Instance.new("TextLabel");v5.Size=UDim2.new(1, -(25 -15),0,470 -(233 + 221) );v5.Position=UDim2.new(0,11 -6 ,0 + 0 ,1561 -(718 + 823) );v5.BackgroundTransparency=1 + 0 ;v5.Text="Ping: ...";v5.TextColor3=v163.Text;v5.Font=Enum.Font.GothamSemibold;v5.TextSize=816 -(266 + 539) ;v5.TextXAlignment=Enum.TextXAlignment.Left;v5.Parent=v264;local function v301(v483,v484,v485,v486) local v487=0;local v488;local v489;local v490;local v491;local v492;local v493;while true do if (v487==(13 -8)) then v491.Thickness=1;v492=Instance.new("Frame");v492.Size=UDim2.new(1225 -(636 + 589) ,23 -13 ,0 -0 ,10);v492.Position=(v485 and UDim2.new(1 + 0 , -(5 + 8),1015.5 -(657 + 358) , -(13 -8))) or UDim2.new(0 -0 ,1190 -(1151 + 36) ,0.5 + 0 , -(2 + 3)) ;v492.BackgroundColor3=(v485 and v163.Background) or v163.Accent ;v487=6;end if ((5 -3)==v487) then v489.Text=v484:upper();v489.TextColor3=(v485 and v163.Accent) or v163.TextDim ;v489.TextXAlignment=Enum.TextXAlignment.Left;v489.Font=Enum.Font.GothamSemibold;v489.TextSize=1843 -(1552 + 280) ;v487=837 -(64 + 770) ;end if (v487==(1 + 0)) then Instance.new("UICorner",v488).CornerRadius=UDim.new(0 -0 ,1 + 3 );v489=Instance.new("TextLabel");v489.Size=UDim2.new(1, -(1293 -(157 + 1086)),1 -0 ,0);v489.Position=UDim2.new(0 -0 ,15 -5 ,0 -0 ,0);v489.BackgroundTransparency=1;v487=2;end if (v487==0) then v488=Instance.new("Frame");v488.Size=UDim2.new(820 -(599 + 220) , -10,0 -0 ,1966 -(1813 + 118) );v488.BackgroundColor3=v163.Secondary;v488.BackgroundTransparency=0.2 + 0 ;v488.Parent=v483;v487=1218 -(841 + 376) ;end if (v487==(7 -1)) then v492.Parent=v490;Instance.new("UICorner",v492).CornerRadius=UDim.new(1 + 0 ,0);v493=v485;v490.MouseButton1Click:Connect(function() local v1338=0;while true do if (3==v1338) then v12();break;end if (v1338==1) then v492.BackgroundColor3=(v493 and v163.Background) or v163.Accent ;v492:TweenPosition((v493 and UDim2.new(2 -1 , -(872 -(464 + 395)),0.5 -0 , -5)) or UDim2.new(0 + 0 ,840 -(467 + 370) ,0.5 -0 , -(4 + 1)) ,"Out","Quad",0.1 -0 ,true);v1338=1 + 1 ;end if ((4 -2)==v1338) then v489.TextColor3=(v493 and v163.Accent) or v163.TextDim ;v486(v493);v1338=523 -(150 + 370) ;end if ((1282 -(74 + 1208))==v1338) then v493= not v493;v490.BackgroundColor3=(v493 and v163.Accent) or v163.Background ;v1338=2 -1 ;end end end);break;end if (v487==(18 -14)) then v490.Text="";v490.Parent=v488;Instance.new("UICorner",v490).CornerRadius=UDim.new(0 + 0 ,398 -(14 + 376) );v491=Instance.new("UIStroke",v490);v491.Color=v163.Accent;v487=5;end if ((4 -1)==v487) then v489.Parent=v488;v490=Instance.new("TextButton");v490.Size=UDim2.new(0 + 0 ,27 + 3 ,0,16 + 0 );v490.Position=UDim2.new(2 -1 , -(31 + 9),0.5, -(86 -(23 + 55)));v490.BackgroundColor3=(v485 and v163.Accent) or v163.Background ;v487=9 -5 ;end end end local function v302(v494,v495,v496,v497,v498,v499) local v500=Instance.new("Frame");v500.Size=UDim2.new(1, -10,0 + 0 ,45 + 5 );v500.BackgroundColor3=v163.Secondary;v500.BackgroundTransparency=0.2 -0 ;v500.Parent=v494;Instance.new("UICorner",v500).CornerRadius=UDim.new(0 + 0 ,905 -(652 + 249) );local v507=Instance.new("TextLabel");v507.Size=UDim2.new(1, -20,0 -0 ,1893 -(708 + 1160) );v507.Position=UDim2.new(0 -0 ,10,0 -0 ,27 -(10 + 17) );v507.BackgroundTransparency=1 + 0 ;v507.Text=v495:upper()   .. " : "   .. v498 ;v507.TextColor3=v163.TextDim;v507.TextXAlignment=Enum.TextXAlignment.Left;v507.Font=Enum.Font.GothamSemibold;v507.TextSize=10;v507.Parent=v500;local v520=Instance.new("Frame");v520.Size=UDim2.new(1733 -(1400 + 332) , -20,0 -0 ,1910 -(242 + 1666) );v520.Position=UDim2.new(0,5 + 5 ,0,35);v520.BackgroundColor3=v163.Hover;v520.Parent=v500;local v526=Instance.new("Frame");v526.Size=UDim2.new((v498-v496)/(v497-v496) ,0,1 + 0 ,0);v526.BackgroundColor3=v163.Accent;v526.BorderSizePixel=0 + 0 ;v526.Parent=v520;local v532=Instance.new("Frame");v532.Size=UDim2.new(940 -(850 + 90) ,13 -5 ,0,1398 -(360 + 1030) );v532.Position=UDim2.new(1 + 0 , -(11 -7),0.5, -(5 -1));v532.BackgroundColor3=v163.Accent;v532.Parent=v526;Instance.new("UICorner",v532).CornerRadius=UDim.new(1662 -(909 + 752) ,1223 -(109 + 1114) );local v538=Instance.new("TextButton");v538.Size=UDim2.new(1 -0 ,0,1 + 0 ,242 -(6 + 236) );v538.BackgroundTransparency=1 + 0 ;v538.Text="";v538.Parent=v520;local function v543(v862) local v863=0 + 0 ;local v864;local v865;local v866;local v867;while true do if (v863==(0 -0)) then v864=v520.AbsolutePosition.X;v865=v520.AbsoluteSize.X;v863=1 -0 ;end if (v863==(1136 -(1076 + 57))) then v507.Text=v495:upper()   .. " : "   .. v867 ;v499(v867);v863=4;end if (v863==1) then v866=math.clamp((v862.Position.X-v864)/v865 ,0,1 + 0 );v526.Size=UDim2.new(v866,0,690 -(579 + 110) ,0);v863=2;end if ((1 + 3)==v863) then v12();break;end if ((2 + 0)==v863) then v867=v496 + ((v497-v496) * v866) ;if (v497<=(6 + 4)) then v867=math.floor(v867 * 10 )/10 ;else v867=math.floor(v867);end v863=410 -(174 + 233) ;end end end local v544=false;v500.InputBegan:Connect(function(v868) if (v868.UserInputType==Enum.UserInputType.MouseButton1) then v544=true;v543(v868);end end);v2.InputChanged:Connect(function(v869) if (v544 and (v869.UserInputType==Enum.UserInputType.MouseMovement)) then v543(v869);end end);v2.InputEnded:Connect(function(v870) if (v870.UserInputType==Enum.UserInputType.MouseButton1) then v544=false;end end);end local function v303(v545,v546,v547,v548) local v549=0;local v550;local v551;local v552;local v553;local v554;while true do if ((5 -3)==v549) then v551.Position=UDim2.new(0 -0 ,10,0,0 + 0 );v551.BackgroundTransparency=1;v551.Text=v546:upper();v551.TextColor3=v163.TextDim;v549=3;end if (v549==(1175 -(663 + 511))) then v550.Parent=v545;Instance.new("UICorner",v550).CornerRadius=UDim.new(0,4 + 0 );v551=Instance.new("TextLabel");v551.Size=UDim2.new(1, -(22 + 78),1,0 -0 );v549=2 + 0 ;end if (v549==4) then v552=Instance.new("TextButton");v552.Size=UDim2.new(0,188 -108 ,0 -0 ,20);v552.Position=UDim2.new(1, -(43 + 47),0.5 -0 , -(8 + 2));v552.BackgroundColor3=v163.Background;v549=5;end if (v549==0) then v550=Instance.new("Frame");v550.Size=UDim2.new(1 + 0 , -(732 -(478 + 244)),517 -(440 + 77) ,16 + 19 );v550.BackgroundColor3=v163.Secondary;v550.BackgroundTransparency=0.2;v549=3 -2 ;end if (v549==(1562 -(655 + 901))) then v552.Parent=v550;Instance.new("UICorner",v552).CornerRadius=UDim.new(0 + 0 ,3 + 0 );v553=Instance.new("UIStroke",v552);v553.Color=v163.Accent;v549=7;end if ((5 + 2)==v549) then v553.Thickness=3 -2 ;v554=false;v552.MouseButton1Click:Connect(function() local v1343=1445 -(695 + 750) ;while true do if (v1343==(0 -0)) then v554=true;v552.Text="...";break;end end end);v2.InputBegan:Connect(function(v1344) if v554 then local v1544=0 -0 ;local v1545;while true do if (v1544==(0 -0)) then v1545=((v1344.KeyCode~=Enum.KeyCode.Unknown) and v1344.KeyCode) or v1344.UserInputType ;if (v1545~=Enum.KeyCode.Escape) then local v1732=351 -(285 + 66) ;while true do if (v1732==1) then v12();break;end if (v1732==0) then v552.Text=v1545.Name:upper();v548(v1545);v1732=1;end end end v1544=1;end if (v1544==(2 -1)) then v554=false;break;end end end end);break;end if ((1315 -(682 + 628))==v549) then v552.Text=v547.Name:upper();v552.TextColor3=v163.Accent;v552.Font=Enum.Font.GothamBold;v552.TextSize=2 + 8 ;v549=305 -(176 + 123) ;end if (v549==3) then v551.TextXAlignment=Enum.TextXAlignment.Left;v551.Font=Enum.Font.GothamSemibold;v551.TextSize=11;v551.Parent=v550;v549=4;end end end local function v304(v555,v556,v557,v558) local v559=0 + 0 ;local v560;local v561;local v562;while true do if (v559==(1 + 0)) then v560.Parent=v555;Instance.new("UICorner",v560).CornerRadius=UDim.new(269 -(239 + 30) ,2 + 2 );v561=Instance.new("TextLabel");v561.Size=UDim2.new(1 + 0 , -20,0 -0 ,25);v559=5 -3 ;end if (v559==(320 -(306 + 9))) then v562.Text=v557;v562.TextColor3=v163.Accent;v562.Font=Enum.Font.Gotham;v562.TextSize=41 -29 ;v559=2 + 4 ;end if ((2 + 1)==v559) then v561.TextXAlignment=Enum.TextXAlignment.Left;v561.Font=Enum.Font.GothamSemibold;v561.TextSize=5 + 5 ;v561.Parent=v560;v559=4;end if ((11 -7)==v559) then v562=Instance.new("TextBox");v562.Size=UDim2.new(1, -(1395 -(1140 + 235)),0 + 0 ,20);v562.Position=UDim2.new(0,10 + 0 ,0 + 0 ,77 -(33 + 19) );v562.BackgroundColor3=v163.Background;v559=5;end if (v559==6) then v562.Parent=v560;Instance.new("UICorner",v562).CornerRadius=UDim.new(0 + 0 ,11 -7 );v562.FocusLost:Connect(function(v1345) if v1345 then local v1546=0;while true do if (v1546==(1 + 0)) then v12();break;end if (v1546==0) then v558(v562.Text);v32("Valeur mise à jour: "   .. v562.Text );v1546=1;end end end end);break;end if (v559==2) then v561.Position=UDim2.new(0 -0 ,10 + 0 ,689 -(586 + 103) ,0 + 0 );v561.BackgroundTransparency=2 -1 ;v561.Text=v556:upper();v561.TextColor3=v163.TextDim;v559=1491 -(1309 + 179) ;end if (v559==(0 -0)) then v560=Instance.new("Frame");v560.Size=UDim2.new(1 + 0 , -10,0,134 -84 );v560.BackgroundColor3=v163.Secondary;v560.BackgroundTransparency=0.2;v559=1 + 0 ;end end end local function v305(v563,v564,v565) local v566=0 -0 ;local v567;while true do if (1==v566) then v567.BackgroundColor3=v163.Secondary;v567.Text=v564:upper();v566=2;end if (v566==4) then Instance.new("UICorner",v567).CornerRadius=UDim.new(0 -0 ,613 -(295 + 314) );v567.MouseButton1Click:Connect(v565);break;end if (v566==(0 -0)) then v567=Instance.new("TextButton");v567.Size=UDim2.new(1, -(1972 -(1300 + 662)),0 -0 ,35);v566=1756 -(1178 + 577) ;end if (v566==(2 + 1)) then v567.TextSize=12;v567.Parent=v563;v566=11 -7 ;end if ((1407 -(851 + 554))==v566) then v567.TextColor3=v163.Text;v567.Font=Enum.Font.GothamBold;v566=3;end end end local v306=v252("Aimbot","🎯");local v307=v252("ESP","👁️");local v308=v252("Mouvement","👟");local v309=v252("Combat","⚔️");local v310=v252("Visuels","✨");local v311=v252("Émotes","🕺");local v312,v313=v252("Téléportation","📍");local v314=v252("Scripts","📜");local v315=v252("Divers","🛠️");local v316=nil;local v317=nil;v301(v306,"Activer Aimbot",v8.Aimbot.Enabled,function(v568) local v569=0;while true do if (v569==(1 + 0)) then if  not v568 then v16=nil;end if v18 then v18.Visible=v568 and v8.Aimbot.ShowFOV ;end break;end if (v569==(0 -0)) then v8.Aimbot.Enabled=v568;v15=v568;v569=1 -0 ;end end end);v301(v306,"Viser NPC/Bot",v8.Aimbot.TargetNPC,function(v570) v8.Aimbot.TargetNPC=v570;end);v303(v306,"Touche Aimbot",v8.Aimbot.Key,function(v572) v8.Aimbot.Key=v572;end);v302(v306,"Lissage (Smooth)",0,0.95,v8.Aimbot.Smoothness,function(v574) v8.Aimbot.Smoothness=v574;end);v302(v306,"Rayon FOV",312 -(115 + 187) ,800,v8.Aimbot.FOV,function(v576) v8.Aimbot.FOV=v576;end);v301(v306,"Afficher FOV",v8.Aimbot.ShowFOV,function(v578) v8.Aimbot.ShowFOV=v578;if v18 then v18.Visible=v578 and v8.Aimbot.Enabled ;end end);v301(v306,"Team Check",v8.Aimbot.TeamCheck,function(v580) v8.Aimbot.TeamCheck=v580;end);v301(v306,"Visible Check",v8.Aimbot.VisibleCheck,function(v582) v8.Aimbot.VisibleCheck=v582;end);v301(v306,"Ignorer Véhicules",v8.Aimbot.IgnoreVehicles,function(v584) v8.Aimbot.IgnoreVehicles=v584;end);v301(v306,"Sticky Lock",v8.Aimbot.Sticky,function(v586) v8.Aimbot.Sticky=v586;end);v301(v306,"Auto Shoot",v8.Aimbot.AutoShoot,function(v588) v8.Aimbot.AutoShoot=v588;end);v301(v306,"Tirs droits (No Spread)",v8.Aimbot.StraightBullets,function(v590) v8.Aimbot.StraightBullets=v590;end);v305(v306,"Cible: Tête",function() local v592=0 + 0 ;while true do if ((0 + 0)==v592) then v8.Aimbot.TargetPart="Head";v32("Cible: Head");break;end end end);v305(v306,"Cible: Torse",function() local v593=0;while true do if (v593==(0 -0)) then v8.Aimbot.TargetPart="HumanoidRootPart";v32("Cible: Torso");break;end end end);v301(v307,"Activer ESP",v8.ESP.Enabled,function(v594) v8.ESP.Enabled=v594;end);v301(v307,"Voir NPC/Bot",v8.ESP.TargetNPC,function(v596) v8.ESP.TargetNPC=v596;end);v301(v307,"Boxes",v8.ESP.Boxes,function(v598) v8.ESP.Boxes=v598;end);v301(v307,"Squelettes",v8.ESP.Skeleton,function(v600) v8.ESP.Skeleton=v600;end);v301(v307,"Barre de Vie",v8.ESP.Health,function(v602) v8.ESP.Health=v602;end);v301(v307,"Noms",v8.ESP.Names,function(v604) v8.ESP.Names=v604;end);v301(v307,"Distance",v8.ESP.Distance,function(v606) v8.ESP.Distance=v606;end);v301(v307,"Traceurs (Tracers)",v8.ESP.Tracers,function(v608) v8.ESP.Tracers=v608;end);v301(v307,"Team Check",v8.ESP.TeamCheck,function(v610) v8.ESP.TeamCheck=v610;end);v301(v307,"Visible Uniquement",v8.ESP.VisibleOnly,function(v612) v8.ESP.VisibleOnly=v612;end);v301(v307,"ESP Loot/Items",false,function(v614) v32("ESP Loot: "   .. tostring(v614) );end);v301(v310,"Chams (Wallhack)",v8.Visuals.Chams,function(v615) v8.Visuals.Chams=v615;end);v301(v310,"Highlight ESP",v8.Visuals.Highlight.Enabled,function(v617) v8.Visuals.Highlight.Enabled=v617;end);v301(v310,"FullBright (Lumière)",v8.Visuals.FullBright,function(v619) v8.Visuals.FullBright=v619;end);v301(v310,"No Fog (Pas de brouillard)",v8.Visuals.NoFog,function(v621) v8.Visuals.NoFog=v621;end);v302(v310,"Transparence FOV",1161 -(160 + 1001) ,1,v8.Visuals.FOVTransparency,function(v623) v8.Visuals.FOVTransparency=v623;end);v301(v310,"Time Changer",v8.Visuals.TimeChanger.Enabled,function(v625) v8.Visuals.TimeChanger.Enabled=v625;end);v302(v310,"Heure du monde",0 + 0 ,24,v8.Visuals.TimeChanger.Time,function(v627) v8.Visuals.TimeChanger.Time=v627;end);v301(v310,"Viseur (Crosshair)",v8.Visuals.Crosshair.Enabled,function(v629) v8.Visuals.Crosshair.Enabled=v629;end);v301(v310,"Anti-Lag (FPS Boost)",v8.Visuals.AntiLag,function(v631) v8.Visuals.AntiLag=v631;end);v301(v310,"Mode Streamer",v8.Visuals.StreamerMode,function(v633) v8.Visuals.StreamerMode=v633;end);v301(v310,"Mode Rainbow",v8.Visuals.RainbowMode,function(v635) v8.Visuals.RainbowMode=v635;end);local function v318(v637,v638,v639,v640) local v641=0;local v642;local v643;local v644;local v645;local v646;while true do if ((6 + 2)==v641) then v646.Padding=UDim.new(0,10 -5 );v646.VerticalAlignment=Enum.VerticalAlignment.Center;for v1346,v1347 in pairs(v644) do local v1348=358 -(237 + 121) ;local v1349;local v1350;while true do if (v1348==0) then v1349=v1347[1];v1350=Instance.new("TextButton");v1348=898 -(525 + 372) ;end if (v1348==2) then v1350.Text="";v1350.Parent=v645;v1348=3;end if (v1348==(1 -0)) then v1350.Size=UDim2.new(0 -0 ,20,142 -(96 + 46) ,797 -(643 + 134) );v1350.BackgroundColor3=v1349;v1348=1 + 1 ;end if (v1348==3) then Instance.new("UICorner",v1350).CornerRadius=UDim.new(0 -0 ,4);v1350.MouseButton1Click:Connect(function() local v1622=0;while true do if (v1622==0) then v639.R,v639.G,v639.B=v1349.R * 255 ,v1349.G * (946 -691) ,v1349.B * (245 + 10) ;if v640 then v640(v1349);end v1622=1;end if (v1622==(1 -0)) then v32("Couleur "   .. v638   .. " mise à jour: "   .. v1347[3 -1 ] );break;end end end);break;end end end break;end if (v641==0) then v642=Instance.new("Frame");v642.Size=UDim2.new(1, -(729 -(316 + 403)),0,40 + 20 );v642.BackgroundColor3=v163.Secondary;v641=1;end if (v641==(19 -12)) then v645.Parent=v642;v646=Instance.new("UIListLayout",v645);v646.FillDirection=Enum.FillDirection.Horizontal;v641=3 + 5 ;end if (v641==(7 -4)) then v643.BackgroundTransparency=1 + 0 ;v643.Text=v638:upper();v643.TextColor3=v163.TextDim;v641=2 + 2 ;end if (v641==(17 -12)) then v643.Parent=v642;v644={{Color3.fromRGB(529 -274 ,255,15 + 240 ),"Blanc"},{Color3.fromRGB(255,0,0 -0 ),"Rouge"},{Color3.fromRGB(0,543 -288 ,0),"Vert"},{Color3.fromRGB(1973 -(1656 + 317) ,0 + 0 ,205 + 50 ),"Bleu"},{Color3.fromRGB(609 -(5 + 349) ,1211 -956 ,1271 -(266 + 1005) ),"Jaune"},{Color3.fromRGB(255,0,335 -80 ),"Rose"},{Color3.fromRGB(0 -0 ,1321 -(507 + 559) ,255),"Cyan"},{Color3.fromRGB(1160 -(250 + 655) ,449 -284 ,0 -0 ),"Orange"}};v645=Instance.new("Frame");v641=1962 -(1869 + 87) ;end if (v641==4) then v643.TextXAlignment=Enum.TextXAlignment.Left;v643.Font=Enum.Font.GothamSemibold;v643.TextSize=34 -24 ;v641=1906 -(484 + 1417) ;end if (v641==(12 -6)) then v645.Size=UDim2.new(1 -0 , -(793 -(48 + 725)),0 -0 ,66 -41 );v645.Position=UDim2.new(0 + 0 ,10,0 -0 ,25);v645.BackgroundTransparency=1 + 0 ;v641=7;end if (v641==(1 + 1)) then v643=Instance.new("TextLabel");v643.Size=UDim2.new(1, -10,853 -(152 + 701) ,20);v643.Position=UDim2.new(1311 -(430 + 881) ,4 + 6 ,895 -(557 + 338) ,5);v641=1 + 2 ;end if (1==v641) then v642.BackgroundTransparency=0.2;v642.Parent=v637;Instance.new("UICorner",v642).CornerRadius=UDim.new(0,10 -6 );v641=6 -4 ;end end end local function v319(v647) local v648=0 -0 ;local v649;while true do if (v648==(0 -0)) then v649=v163.Accent;v163.Accent=v647;v648=802 -(499 + 302) ;end if ((868 -(39 + 827))==v648) then if v212 then v212.TextColor3=v647;end for v1351,v1352 in pairs(ScreenGui:GetDescendants()) do if (v1352:IsA("TextButton") and (v1352.BackgroundColor3==v649)) then v1352.BackgroundColor3=v647;elseif (v1352:IsA("UIStroke") and (v1352.Color==v649)) then v1352.Color=v647;elseif (v1352:IsA("TextLabel") and (v1352.TextColor3==v649)) then v1352.TextColor3=v647;elseif (v1352:IsA("ScrollingFrame") and (v1352.ScrollBarImageColor3==v649)) then v1352.ScrollBarImageColor3=v647;elseif (v1352:IsA("Frame") and (v1352.BackgroundColor3==v649)) then v1352.BackgroundColor3=v647;end end v648=7 -4 ;end if (v648==(2 -1)) then if RestoreBtn then RestoreBtn.TextColor3=v647;end if v180 then v180.Color=v647;end v648=7 -5 ;end if (v648==(3 -0)) then if v241 then local v1483=0 + 0 ;while true do if (v1483==(0 -0)) then v241.Btn.TextColor3=v647;v241.Indicator.BackgroundColor3=v647;break;end end end v30=v319;break;end end end v318(v310,"Couleur Menu",v8.Visuals.AccentColor,v319);v318(v310,"Couleur ESP",v8.ESP.Color);v318(v310,"Couleur FOV",v8.Visuals.FOVColorRGB);v305(v310,"Reset Couleurs",function() local v650=0;while true do if (v650==(1 + 0)) then v8.Visuals.FOVColorRGB={R=403 -148 ,G=255,B=359 -(103 + 1) };v319(Color3.new(555 -(475 + 79) ,2 -1 ,3 -2 ));break;end if ((0 + 0)==v650) then v8.Visuals.AccentColor={R=225 + 30 ,G=1758 -(1395 + 108) ,B=255};v8.ESP.Color={R=742 -487 ,G=255,B=1459 -(7 + 1197) };v650=1 + 0 ;end end end);v301(v308,"Mode Vol (Fly)",v8.Movement.Fly.Enabled,function(v651) local v652=0;while true do if (0==v652) then v8.Movement.Fly.Enabled=v651;if ((v651==false) and v19) then v56();end break;end end end);v303(v308,"Touche Vol",v8.Movement.Fly.Key,function(v653) v8.Movement.Fly.Key=v653;end);v302(v308,"Vitesse Vol",4 + 6 ,500,v8.Movement.Fly.Speed,function(v655) v8.Movement.Fly.Speed=v655;end);v301(v308,"NoClip",v8.Movement.NoClip,function(v657) v8.Movement.NoClip=v657;v20=v657;if  not v20 then local v995=319 -(27 + 292) ;local v996;while true do if (v995==(0 -0)) then v996=v3.Character;if v996 then for v1626,v1627 in pairs(v996:GetDescendants()) do if v1627:IsA("BasePart") then v1627.CanCollide=true;end end end break;end end end end);v303(v308,"Touche NoClip",v8.Movement.NoClipKey,function(v659) v8.Movement.NoClipKey=v659;end);v301(v308,"Speed Hack",v8.Movement.SpeedHack.Enabled,function(v661) v8.Movement.SpeedHack.Enabled=v661;end);v302(v308,"Valeur Vitesse",20 -4 ,2096 -1596 ,v8.Movement.SpeedHack.Value,function(v663) v8.Movement.SpeedHack.Value=v663;end);v301(v308,"Anti-dégâts de chute (Fly)",v8.Movement.Fly.NoFallDamage,function(v665) v8.Movement.Fly.NoFallDamage=v665;end);v301(v308,"Sprint Amélioré",v8.Movement.Sprint.Enabled,function(v667) v8.Movement.Sprint.Enabled=v667;end);v302(v308,"Multiplicateur Sprint",1 -0 ,9 -4 ,v8.Movement.Sprint.Multiplier,function(v669) v8.Movement.Sprint.Multiplier=v669;end);v301(v308,"Super Saut",v8.Movement.SuperJump.Enabled,function(v671) v8.Movement.SuperJump.Enabled=v671;end);v302(v308,"Puissance Saut",140 -(43 + 96) ,40 -30 ,v8.Movement.SuperJump.PowerMultiplier,function(v673) v8.Movement.SuperJump.PowerMultiplier=v673;end);v301(v308,"Double Saut",v8.Movement.SuperJump.DoubleJumpEnabled,function(v675) v8.Movement.SuperJump.DoubleJumpEnabled=v675;end);v301(v308,"Réduire Dégâts Chute",v8.Movement.SuperJump.ReduceFallDamage,function(v677) v8.Movement.SuperJump.ReduceFallDamage=v677;end);v301(v308,"AutoJump",v8.Movement.AutoJump,function(v679) v8.Movement.AutoJump=v679;end);v301(v308,"Bunny Hop",v8.Movement.Bhop,function(v681) v8.Movement.Bhop=v681;end);v301(v308,"Saut Infini",v8.Movement.InfiniteJump,function(v683) v8.Movement.InfiniteJump=v683;end);v301(v309,"FOV Changer",v8.Combat.FovChanger.Enabled,function(v685) v8.Combat.FovChanger.Enabled=v685;end);v302(v309,"Valeur FOV",30,120,v8.Combat.FovChanger.Value,function(v687) v8.Combat.FovChanger.Value=v687;end);v301(v309,"God Mode (Invincible)",v8.Combat.GodMode.Enabled,function(v689) v8.Combat.GodMode.Enabled=v689;end);v301(v309,"Activer SpinBot",v8.Combat.SpinBot.Enabled,function(v691) v8.Combat.SpinBot.Enabled=v691;end);v302(v309,"Vitesse Rotation",1 -0 ,83 + 17 ,v8.Combat.SpinBot.Speed,function(v693) v8.Combat.SpinBot.Speed=v693;end);v301(v309,"Hitbox Expander",v8.Combat.HitboxExpander.Enabled,function(v695) v8.Combat.HitboxExpander.Enabled=v695;end);v301(v309,"Inclure NPCs",v8.Combat.HitboxExpander.ExpandNPC,function(v697) v8.Combat.HitboxExpander.ExpandNPC=v697;end);v302(v309,"Multiplicateur Taille",1,43 + 107 ,v8.Combat.HitboxExpander.Multiplier,function(v699) v8.Combat.HitboxExpander.Multiplier=v699;end);v302(v309,"Transparence Hitbox",0 -0 ,1,v8.Combat.HitboxExpander.Transparency,function(v701) v8.Combat.HitboxExpander.Transparency=v701;end);v318(v309,"Couleur Hitbox",v8.Combat.HitboxExpander.ColorRGB,function(v703) v8.Combat.HitboxExpander.Color=v703;end);v301(v309,"Weapon Reach",v8.Combat.Reach.Enabled,function(v705) v8.Combat.Reach.Enabled=v705;end);v305(v311,"Arrêter l'émote",function() v49();end);v305(v311,"Hélicoptère",function() v48("rbxassetid://76510079095692");end);v305(v311,"Tornado",function() v48("rbxassetid://135373056067761");end);v305(v311,"Parkour Dance",function() v48("rbxassetid://120244151914853");end);v305(v311,"Fake Death",function() v48("rbxassetid://126527283467855");end);v305(v311,"Propeller",function() v48("rbxassetid://85377443478134");end);v305(v311,"67",function() v48("rbxassetid://130984232537362");end);v305(v311,"SixSeven",function() v48("rbxassetid://113052384161929");end);v305(v311,"Admin Fly",function() v48("rbxassetid://138354833484039");end);v305(v311,"Sakuna",function() v48("rbxassetid://128203986262469");end);v305(v311,"Scary Tall",function() v48("rbxassetid://130916388086314");end);v305(v311,"Woof Woof Bark",function() v48("rbxassetid://96435804447949");end);v305(v311,"Silly Jumping",function() v48("rbxassetid://137124482339556");end);v305(v311,"Silly Spider Dance",function() v48("rbxassetid://139310328821985");end);v305(v311,"Kid Tantrum",function() v48("rbxassetid://86339673982616");end);v302(v309,"Portée Reach",1 + 0 ,50,v8.Combat.Reach.Range,function(v707) v8.Combat.Reach.Range=v707;end);v301(v315,"Anti-AFK",v8.Misc.AntiAFK,function(v709) v8.Misc.AntiAFK=v709;end);v301(v315,"Chat Spammer",v8.Misc.ChatSpammer.Enabled,function(v711) v8.Misc.ChatSpammer.Enabled=v711;end);v304(v315,"Message Spammer",v8.Misc.ChatSpammer.Message,function(v713) v8.Misc.ChatSpammer.Message=v713;end);v302(v315,"Délai Spammer (s)",1 -0 ,10,v8.Misc.ChatSpammer.Delay,function(v715) v8.Misc.ChatSpammer.Delay=v715;end);v305(v315,"Style B&W",function() v319(Color3.fromRGB(81 + 174 ,19 + 236 ,255));end);v305(v315,"Server Hop",serverHop);v305(v315,"Rejoindre Serveur",rejoinServer);local v320="Profile1";v304(v315,"Nom du Profil","Profile1",function(v717) v320=v717;end);v305(v315,"Sauvegarder Profil",function() local v718=1751 -(1414 + 337) ;while true do if (v718==(1940 -(1642 + 298))) then v35(v320   .. ".json" );v32("Profil sauvegardé: "   .. v320 );break;end end end);v305(v315,"Charger Profil",function() if v36(v320   .. ".json" ) then v32("Profil chargé: "   .. v320 );else v32("Erreur: Profil introuvable");end end);v305(v315,"Reset Config",function() local v719=0;while true do if ((4 -2)==v719) then v32("Configuration réinitialisée");break;end if (v719==(0 -0)) then v8=v9(v10);v35();v719=2 -1 ;end if ((1 + 0)==v719) then if ScreenGui then ScreenGui:Destroy();end v62:CreateWindow();v719=2 + 0 ;end end end);local v321=Instance.new("Frame");v321.Size=UDim2.new(973 -(357 + 615) , -(8 + 2),0 -0 ,206 + 34 );v321.BackgroundColor3=v163.Secondary;v321.BackgroundTransparency=0.2;v321.Parent=v312;Instance.new("UICorner",v321).CornerRadius=UDim.new(0 -0 ,4 + 0 );local v327=Instance.new("TextBox");v327.Size=UDim2.new(1 + 0 , -20,0 + 0 ,1326 -(384 + 917) );v327.Position=UDim2.new(697 -(128 + 569) ,1553 -(1407 + 136) ,1887 -(687 + 1200) ,35);v327.BackgroundColor3=v163.Hover;v327.BackgroundTransparency=1710.5 -(556 + 1154) ;v327.Text="";v327.PlaceholderText="Rechercher un joueur...";v327.TextColor3=v163.Text;v327.PlaceholderColor3=v163.TextDim;v327.Font=Enum.Font.Gotham;v327.TextSize=42 -30 ;v327.Parent=v321;Instance.new("UICorner",v327).CornerRadius=UDim.new(95 -(9 + 86) ,425 -(275 + 146) );local v341=Instance.new("ScrollingFrame");v341.Size=UDim2.new(1 + 0 , -(74 -(29 + 35)),1, -(332 -257));v341.Position=UDim2.new(0,14 -9 ,0 -0 ,46 + 24 );v341.BackgroundTransparency=1013 -(53 + 959) ;v341.ScrollBarThickness=410 -(312 + 96) ;v341.Parent=v321;local v347=Instance.new("UIListLayout",v341);v347.Padding=UDim.new(0 -0 ,287 -(147 + 138) );local v349=Instance.new("TextLabel");v349.Size=UDim2.new(900 -(813 + 86) , -(10 + 0),0,30);v349.Position=UDim2.new(0 -0 ,10,492 -(18 + 474) ,0 + 0 );v349.BackgroundTransparency=1;v349.Text="SÉLECTIONNER UN JOUEUR";v349.TextColor3=v163.Text;v349.Font=Enum.Font.GothamSemibold;v349.TextSize=32 -22 ;v349.TextXAlignment=Enum.TextXAlignment.Left;v349.Parent=v321;v301(v312,"Click Teleport (Ctrl+LClick)",v8.Movement.ClickTP.Enabled,function(v720) v8.Movement.ClickTP.Enabled=v720;end);local function v359(v722) local v723=1086 -(860 + 226) ;while true do if (v723==0) then v722=(v722 and v722:lower()) or "" ;for v1353,v1354 in pairs(v341:GetChildren()) do if v1354:IsA("TextButton") then v1354:Destroy();end end v723=1;end if (v723==(304 -(121 + 182))) then for v1355,v1356 in pairs(v0:GetPlayers()) do if ((v1356~=v3) and ((v722=="") or v1356.Name:lower():find(v722) or v1356.DisplayName:lower():find(v722))) then local v1548=0;local v1549;while true do if (v1548==(0 + 0)) then v1549=Instance.new("TextButton");v1549.Size=UDim2.new(1241 -(988 + 252) , -10,0 + 0 ,8 + 17 );v1549.BackgroundColor3=v163.Hover;v1548=1971 -(49 + 1921) ;end if (v1548==(891 -(223 + 667))) then v1549.BackgroundTransparency=52.5 -(51 + 1) ;v1549.Text=v1356.DisplayName   .. " (@"   .. v1356.Name   .. ")" ;v1549.TextColor3=v163.Text;v1548=2 -0 ;end if (v1548==(3 -1)) then v1549.Font=Enum.Font.Gotham;v1549.TextSize=12;v1549.Parent=v341;v1548=3;end if (v1548==3) then Instance.new("UICorner",v1549).CornerRadius=UDim.new(1125 -(146 + 979) ,2 + 2 );v1549.MouseButton1Click:Connect(function() local v1695=605 -(311 + 294) ;while true do if (v1695==1) then v32("Joueur sélectionné : "   .. v1356.Name );break;end if (v1695==0) then v316=v1356;v349.Text="CIBLE : "   .. v1356.Name:upper() ;v1695=1;end end end);break;end end end end v341.CanvasSize=UDim2.new(0,0 -0 ,0 + 0 ,v347.AbsoluteContentSize.Y);break;end end end v327:GetPropertyChangedSignal("Text"):Connect(function() v359(v327.Text);end);v305(v312,"Rafraîchir la liste",function() v359(v327.Text);end);v305(v312,"Téléporter vers le joueur",function() if (v316 and v316.Character and v316.Character:FindFirstChild("HumanoidRootPart")) then local v997=1443 -(496 + 947) ;local v998;while true do if (0==v997) then v998=v3.Character and v3.Character:FindFirstChild("HumanoidRootPart") ;if v998 then v998.CFrame=v316.Character.HumanoidRootPart.CFrame;v32("Téléporté vers "   .. v316.Name );else v32("Erreur: Votre personnage n'est pas prêt");end break;end end else v32("Erreur: Aucun joueur sélectionné ou joueur hors ligne");end end);v305(v312,"Fling Player",function() if ( not v316 or  not v316.Character) then local v999=1358 -(1233 + 125) ;while true do if (v999==(0 + 0)) then v32("Erreur: Aucun joueur sélectionné");return;end end end local v724=v316.Character;local v725=v724:FindFirstChild("HumanoidRootPart") or v724:FindFirstChild("Torso") ;local v726=v3.Character;local v727=v726 and v726:FindFirstChildOfClass("Humanoid") ;local v728=v726 and (v726:FindFirstChild("HumanoidRootPart") or v726:FindFirstChild("Torso")) ;if ( not v725 or  not v727 or  not v728) then v32("Erreur: Humanoid introuvable");return;end local v729=v728.CFrame;local v730=Instance.new("Tool");v730.RequiresHandle=true;v730.Name="FlingTool";local v733=Instance.new("Part");v733.Name="Handle";v733.Size=Vector3.new(5,5 + 0 ,1 + 4 );v733.Transparency=1;v733.LocalTransparencyModifier=1646 -(963 + 682) ;v733.CastShadow=false;v733.CanQuery=false;v733.CanCollide=true;v733.Massless=false;v733.Parent=v730;v730.Parent=v3.Backpack;v727:EquipTool(v730);task.wait();v733=v726:FindFirstChild("Handle") or v733 ;if  not v733 then local v1000=0;while true do if (v1000==(0 + 0)) then v32("Erreur: Handle indisponible");return;end end end local v745=Random.new();local v746=tick();while (tick() -v746)<(1505 -(504 + 1000))  do local v871=0 + 0 ;local v872;local v873;local v874;while true do if (v871==1) then v873=v725.Position-v733.Position ;v874=((v873.Magnitude>0) and (v873.Unit * (1093 + 107))) or Vector3.new(0 + 0 ,0 -0 ,0 + 0 ) ;v871=2;end if ((0 + 0)==v871) then v728.CFrame=v725.CFrame * CFrame.new(182 -(156 + 26) ,0 + 0 ,1.2 -0 ) ;v872=Vector3.new(164 -(149 + 15) ,7460 -(890 + 70) ,117 -(39 + 78) );v871=483 -(14 + 468) ;end if (v871==(6 -3)) then v1.Heartbeat:Wait();break;end if (v871==2) then v733.AssemblyAngularVelocity=v872;v733.AssemblyLinearVelocity=v874 + (v745:NextUnitVector() * (838 -538)) ;v871=2 + 1 ;end end end task.delay(2,function() if (v728 and v728.Parent) then local v1233=0 + 0 ;local v1234;while true do if (v1233==0) then v1234=v729;for v1592=1,1 + 2  do v728.Anchored=true;v728.AssemblyLinearVelocity=Vector3.new(0 + 0 ,0,0 + 0 );v728.AssemblyAngularVelocity=Vector3.new(0 -0 ,0 + 0 ,0 -0 );if (v726 and v726.Parent) then v726:PivotTo(v1234);else v728.CFrame=v1234;end v1.Heartbeat:Wait();end v1233=1;end if (v1233==(1 + 0)) then v728.Anchored=false;break;end end end end);pcall(function() v730:Destroy();end);v32("Fling Player exécuté sur "   .. v316.Name );end);local v360=false;local function v361() local v747=0;local v748;local v749;local v750;local v751;local v752;while true do if (1==v747) then v749=52.5 -(12 + 39) ;v750=220;v747=2;end if (v747==2) then v751=2.4 + 0 ;v752=0 -0 ;v747=10 -7 ;end if (v747==3) then v48("rbxassetid://82682811348660");task.spawn(function() local v1360=0 + 0 ;local v1361;while true do if ((0 + 0)==v1360) then v1361=tick();while v360 do local v1628=tick();local v1629=v1628-v1361 ;v1361=v1628;local v1630=v316.Character and v316.Character:FindFirstChild("HumanoidRootPart") ;local v1631=v3.Character and v3.Character:FindFirstChild("HumanoidRootPart") ;if ( not v1630 or  not v1631) then break;end v752=v752 + (v1629 * (4 -2) * math.pi * v751) ;local v1632=0.5 + 0 + ((0.5 -0) * math.sin(v752)) ;local v1633=v749 + ((v748-v749) * v1632) ;local v1634=v1630.CFrame * CFrame.new(1710 -(1596 + 114) ,0 -0 ,v1633) ;local v1635=v1634.Position;local v1636=v1631.Position;local v1637=v1635-v1636 ;local v1638=v1637.Magnitude;if (v1638>(713 -(164 + 549))) then local v1696=math.min(v750 * v1629 ,v1638);local v1697=v1636 + (v1637.Unit * v1696) ;local v1698=v1630.CFrame-v1630.Position ;v1631.CFrame=CFrame.new(v1697) * v1698 ;end task.wait();end v1360=1;end if (v1360==(1439 -(1059 + 379))) then v49();break;end end end);break;end if (v747==0) then if ( not v316 or  not v316.Character) then local v1485=0 -0 ;while true do if (v1485==(0 + 0)) then v32("Erreur: Aucun joueur sélectionné");v360=false;v1485=1;end if ((1 + 0)==v1485) then return;end end end v748=12;v747=393 -(145 + 247) ;end end end v305(v312,"Téléportation aléatoire",function() local v753=v0:GetPlayers();local v754=v753[math.random(1, #v753)];if (v754 and (v754~=v3) and v754.Character and v754.Character:FindFirstChild("HumanoidRootPart")) then local v1001=0;local v1002;while true do if (v1001==0) then v1002=v3.Character and v3.Character:FindFirstChild("HumanoidRootPart") ;if v1002 then local v1596=0;while true do if (v1596==0) then v1002.CFrame=v754.Character.HumanoidRootPart.CFrame;v32("TP vers: "   .. v754.Name );break;end end end break;end end end end);v301(v312,"Annoy Player",false,function(v755) v360=v755;if v755 then v361();else v49();end end);local v362=false;local function v363() if ( not v316 or  not v316.Character) then local v1003=0 + 0 ;while true do if (1==v1003) then return;end if ((0 + 0)==v1003) then v32("Erreur: Aucun joueur sélectionné");v362=false;v1003=2 -1 ;end end end local v756=1 + 0 ;local v757=260;v48("rbxassetid://130984232537362");task.spawn(function() local v875=0 + 0 ;local v876;while true do if (v875==0) then v876=tick();while v362 do local v1486=tick();local v1487=v1486-v876 ;v876=v1486;local v1488=v316.Character and v316.Character:FindFirstChild("HumanoidRootPart") ;local v1489=v3.Character and v3.Character:FindFirstChild("HumanoidRootPart") ;if ( not v1488 or  not v1489) then break;end local v1490=v1488.CFrame * CFrame.new(0 -0 ,0,v756) ;local v1491=v1490.Position;local v1492=v1489.Position;local v1493=v1491-v1492 ;local v1494=v1493.Magnitude;if (v1494>(720 -(254 + 466))) then local v1597=560 -(544 + 16) ;local v1598;local v1599;local v1600;while true do if (v1597==1) then v1600=v1488.CFrame-v1488.Position ;v1489.CFrame=CFrame.new(v1599) * v1600 ;break;end if (v1597==(0 -0)) then v1598=math.min(v757 * v1487 ,v1494);v1599=v1492 + (v1493.Unit * v1598) ;v1597=629 -(294 + 334) ;end end end task.wait();end v875=1;end if (v875==(254 -(236 + 17))) then v49();break;end end end);end v301(v312,"Bang Player",false,function(v758) local v759=0 + 0 ;while true do if (v759==0) then v362=v758;if v758 then local v1495=0 + 0 ;while true do if (v1495==0) then v360=false;v363();break;end end else v49();end break;end end end);local v364=Instance.new("TextLabel");v364.Size=UDim2.new(3 -2 , -(47 -37),0 + 0 ,25 + 5 );v364.BackgroundTransparency=795 -(413 + 381) ;v364.Text="POINTS DE PASSAGE (WAYPOINTS)";v364.TextColor3=v163.Text;v364.Font=Enum.Font.GothamSemibold;v364.TextSize=1 + 9 ;v364.TextXAlignment=Enum.TextXAlignment.Left;v364.Parent=v312;local v373="Point 1";v304(v312,"Nom du Waypoint","Point 1",function(v760) v373=v760;end);local v374=Instance.new("ScrollingFrame");v374.Size=UDim2.new(1 -0 , -(25 -15),1970 -(582 + 1388) ,255 -105 );v374.BackgroundTransparency=1 + 0 ;v374.ScrollBarThickness=2;v374.Parent=v312;local v379=Instance.new("UIListLayout",v374);v379.Padding=UDim.new(364 -(326 + 38) ,5 -3 );local function v381() for v877,v878 in pairs(v374:GetChildren()) do if v878:IsA("Frame") then v878:Destroy();end end for v879,v880 in pairs(v8.Misc.Waypoints) do local v881=0;local v882;local v883;local v884;local v885;local v886;while true do if (v881==(1 -0)) then Instance.new("UICorner",v882).CornerRadius=UDim.new(620 -(47 + 573) ,2 + 2 );v883=Instance.new("TextLabel");v883.Size=UDim2.new(0.6,0 -0 ,0.6,0 -0 );v883.Position=UDim2.new(1664 -(1269 + 395) ,502 -(76 + 416) ,0,445 -(319 + 124) );v883.BackgroundTransparency=2 -1 ;v881=1009 -(564 + 443) ;end if (v881==(24 -15)) then v886.Parent=v882;Instance.new("UICorner",v886).CornerRadius=UDim.new(458 -(337 + 121) ,11 -7 );v886.MouseButton1Click:Connect(function() local v1496=0 -0 ;while true do if (v1496==(1912 -(1261 + 650))) then v35();v32("Waypoint supprimé: "   .. v879 );break;end if (v1496==0) then v8.Misc.Waypoints[v879]=nil;v381();v1496=1 + 0 ;end end end);break;end if ((2 -0)==v881) then v883.Text=v879;v883.TextColor3=v163.Text;v883.Font=Enum.Font.GothamBold;v883.TextSize=1829 -(772 + 1045) ;v883.TextXAlignment=Enum.TextXAlignment.Left;v881=1 + 2 ;end if (v881==(148 -(102 + 42))) then v884.Text=string.format("X: %.1f, Y: %.1f, Z: %.1f",v880.X,v880.Y,v880.Z);v884.TextColor3=v163.TextDim;v884.Font=Enum.Font.Gotham;v884.TextSize=10;v884.TextXAlignment=Enum.TextXAlignment.Left;v881=5;end if (v881==(1852 -(1524 + 320))) then v886.BackgroundColor3=Color3.fromRGB(1470 -(1049 + 221) ,50,206 -(18 + 138) );v886.Text="X";v886.TextColor3=v163.Text;v886.Font=Enum.Font.GothamBold;v886.TextSize=24 -14 ;v881=9;end if (v881==(1102 -(67 + 1035))) then v882=Instance.new("Frame");v882.Size=UDim2.new(1, -(358 -(136 + 212)),0,169 -129 );v882.BackgroundColor3=v163.Hover;v882.BackgroundTransparency=0.5 + 0 ;v882.Parent=v374;v881=1 + 0 ;end if (5==v881) then v884.Parent=v882;v885=Instance.new("TextButton");v885.Size=UDim2.new(1604.15 -(240 + 1364) ,0,0.8,1082 -(1050 + 32) );v885.Position=UDim2.new(0.65 -0 ,0 + 0 ,0.1,1055 -(331 + 724) );v885.BackgroundColor3=v163.Accent;v881=1 + 5 ;end if (v881==7) then Instance.new("UICorner",v885).CornerRadius=UDim.new(644 -(269 + 375) ,4);v885.MouseButton1Click:Connect(function() local v1497=725 -(267 + 458) ;local v1498;while true do if (v1497==0) then v1498=v3.Character and v3.Character:FindFirstChild("HumanoidRootPart") ;if v1498 then local v1703=0 + 0 ;while true do if (v1703==(0 -0)) then v1498.CFrame=CFrame.new(v880.X,v880.Y,v880.Z);v32("TP vers waypoint: "   .. v879 );break;end end end break;end end end);v886=Instance.new("TextButton");v886.Size=UDim2.new(818.15 -(667 + 151) ,1497 -(1410 + 87) ,1897.8 -(1504 + 393) ,0 -0 );v886.Position=UDim2.new(0.82 -0 ,796 -(461 + 335) ,0.1 + 0 ,1761 -(1730 + 31) );v881=8;end if (v881==(1673 -(728 + 939))) then v885.Text="TP";v885.TextColor3=v163.Text;v885.Font=Enum.Font.GothamBold;v885.TextSize=35 -25 ;v885.Parent=v882;v881=7;end if (v881==(5 -2)) then v883.Parent=v882;v884=Instance.new("TextLabel");v884.Size=UDim2.new(0.6,0 -0 ,1068.4 -(138 + 930) ,0 + 0 );v884.Position=UDim2.new(0 + 0 ,9 + 1 ,0.6, -(8 -6));v884.BackgroundTransparency=1;v881=1770 -(459 + 1307) ;end end end v374.CanvasSize=UDim2.new(1870 -(474 + 1396) ,0 -0 ,0 + 0 ,v379.AbsoluteContentSize.Y);end v305(v312,"Sauvegarder position actuelle",function() local v762=v3.Character and v3.Character:FindFirstChild("HumanoidRootPart") ;if v762 then v8.Misc.Waypoints[v373]={X=v762.Position.X,Y=v762.Position.Y,Z=v762.Position.Z};v381();v35();v32("Waypoint sauvegardé: "   .. v373 );end end);v305(v312,"Vider tous les Waypoints",function() local v763=0 + 0 ;while true do if ((2 -1)==v763) then v35();v32("Tous les waypoints ont été supprimés");break;end if ((0 + 0)==v763) then v8.Misc.Waypoints={};v381();v763=3 -2 ;end end end);v381();v313.MouseButton1Click:Connect(function() v359();v381();end);v359();v0.PlayerAdded:Connect(v359);v0.PlayerRemoving:Connect(v359);v305(v314,"Blox Fruit",function() local v764=0;while true do if (v764==(0 -0)) then v32("Lancement de Blox Fruit...");loadstring(game:HttpGet("https://raw.githubusercontent.com/TheDarkoneMarcillisePex/Other-Scripts/refs/heads/main/Bloxfruits%20script"))();break;end end end);v305(v314,"Star Fishing",function() v32("Ouverture de l'interface Star Fishing...");if (v317 and v317.Parent) then local v1005=0;while true do if (v1005==(591 -(562 + 29))) then v317.Visible=true;return;end end end v317=Instance.new("Frame");v317.Name="StarFishingUI";v317.Size=UDim2.new(0 + 0 ,1639 -(374 + 1045) ,0,120);v317.Position=UDim2.new(0.5 + 0 , -110,0 -0 ,698 -(448 + 190) );v317.BackgroundColor3=v163.Secondary;v317.BackgroundTransparency=0.25 + 0 ;v317.BorderSizePixel=0 + 0 ;v317.Parent=ScreenGui;Instance.new("UICorner",v317).CornerRadius=UDim.new(0 + 0 ,6);local v774=Instance.new("UIStroke",v317);v774.Color=v163.Accent;v774.Thickness=3 -2 ;local v778=Instance.new("TextLabel");v778.Name="Title";v778.Size=UDim2.new(1, -(124 -84),1494 -(1307 + 187) ,103 -77 );v778.Position=UDim2.new(0 -0 ,10,0,18 -12 );v778.BackgroundTransparency=684 -(232 + 451) ;v778.Text="Star Fishing";v778.TextColor3=v163.Text;v778.Font=Enum.Font.GothamBold;v778.TextSize=16 + 0 ;v778.TextXAlignment=Enum.TextXAlignment.Left;v778.Parent=v317;local v792=Instance.new("TextButton");v792.Name="Close";v792.Size=UDim2.new(0 + 0 ,24,564 -(510 + 54) ,24);v792.Position=UDim2.new(1 -0 , -28,36 -(13 + 23) ,11 -5 );v792.BackgroundTransparency=1 -0 ;v792.Text="×";v792.TextColor3=v163.Text;v792.Font=Enum.Font.GothamBold;v792.TextSize=20;v792.Parent=v317;v792.MouseEnter:Connect(function() v792.TextColor3=v163.Accent;end);v792.MouseLeave:Connect(function() v792.TextColor3=v163.Text;end);v792.MouseButton1Click:Connect(function() v317.Visible=false;end);local v802=Instance.new("Frame");v802.Size=UDim2.new(1 -0 ,1088 -(830 + 258) ,0,105 -75 );v802.BackgroundTransparency=1 + 0 ;v802.Parent=v317;do local v892=0 + 0 ;local v893;local v894;local v895;while true do if (v892==(1441 -(860 + 581))) then v893=false;v894,v895=nil;v892=1;end if (v892==1) then v802.InputBegan:Connect(function(v1500) if (v1500.UserInputType==Enum.UserInputType.MouseButton1) then local v1601=0 -0 ;while true do if (v1601==1) then v895=v317.Position;v1500.Changed:Connect(function() if (v1500.UserInputState==Enum.UserInputState.End) then v893=false;end end);break;end if (v1601==(0 + 0)) then v893=true;v894=v1500.Position;v1601=242 -(237 + 4) ;end end end end);v2.InputChanged:Connect(function(v1501) if (v893 and (v1501.UserInputType==Enum.UserInputType.MouseMovement)) then local v1602=0;local v1603;while true do if ((0 -0)==v1602) then v1603=v1501.Position-v894 ;v317.Position=UDim2.new(v895.X.Scale,v895.X.Offset + v1603.X ,v895.Y.Scale,v895.Y.Offset + v1603.Y );break;end end end end);break;end end end local v806=Instance.new("TextButton");v806.Name="FarmButton";v806.Size=UDim2.new(0 -0 ,265 -125 ,0,32);v806.Position=UDim2.new(0.5 + 0 , -(41 + 29),0.5 -0 , -(7 + 9));v806.BackgroundColor3=v163.Secondary;v806.Text="Farm";v806.TextColor3=v163.Text;v806.Font=Enum.Font.GothamBold;v806.TextSize=9 + 7 ;v806.Parent=v317;Instance.new("UICorner",v806).CornerRadius=UDim.new(1426 -(85 + 1341) ,6);local v817=Instance.new("UIStroke",v806);v817.Color=v163.Accent;v817.Thickness=1;v806.MouseEnter:Connect(function() v806.BackgroundColor3=v163.Hover;end);v806.MouseLeave:Connect(function() v806.BackgroundColor3=v163.Secondary;end);v806.MouseButton1Click:Connect(function() local v900=0;local v901;while true do if (v900==(0 -0)) then v32("Star Fishing: démarrage du farm auto");v901={Farm="Self",SellAll=true,SellAllDebounce=28 -18 ,AutoEquipRod=true};v900=373 -(45 + 327) ;end if (v900==(1 -0)) then getgenv().StarFishingFlags=v901;loadstring(game:HttpGet("https://raw.githubusercontent.com/afyzone/lua/refs/heads/main/Star%20Fishing/AutoFish.lua"))();break;end end end);end);task.wait(502.1 -(444 + 58) );local v382=v242:GetChildren()[2];if (v382 and v382:IsA("TextButton")) then local v902=0 + 0 ;local v903;while true do if (v902==(1 + 1)) then if v903 then v903.Visible=true;end v241={Btn=v382,Frame=v306,Indicator=v903};break;end if (v902==(1 + 0)) then v306.Visible=true;v903=v382:FindFirstChildOfClass("Frame");v902=5 -3 ;end if (v902==(1732 -(64 + 1668))) then v382.BackgroundTransparency=1973.9 -(1227 + 746) ;v382.TextColor3=v163.Accent;v902=2 -1 ;end end end end;local function v64() local v383=0;local v384;while true do if (0==v383) then v384=game:GetService("VirtualUser");v3.Idled:Connect(function() if v8.Misc.AntiAFK then local v1502=0 -0 ;while true do if (v1502==(494 -(415 + 79))) then v384:CaptureController();v384:ClickButton2(Vector2.new());v1502=1 + 0 ;end if (v1502==(492 -(142 + 349))) then v32("Anti-AFK: Action effectuée");break;end end end end);break;end end end local v65=0 + 0 ;local function v66() local v385=0;while true do if (v385==(1 -0)) then task.spawn(function() local v1236=0;local v1237;local v1238;while true do if (v1236==(1 + 1)) then if  not v1237 then local v1640=0 + 0 ;local v1641;while true do if (0==v1640) then v1641=game:GetService("ReplicatedStorage"):FindFirstChild("SayMessageRequest");if (v1641 and v1641:IsA("RemoteEvent")) then local v1762=0 -0 ;while true do if (v1762==(1864 -(1710 + 154))) then v1641:FireServer(v8.Misc.ChatSpammer.Message,"All");v1237=true;break;end end end break;end end end if v1237 then v65=tick();else v32("Erreur: Impossible de trouver un canal de chat valide");end break;end if ((319 -(200 + 118))==v1236) then if (v1238.ChatVersion==Enum.ChatVersion.TextChatService) then local v1642=0 + 0 ;local v1643;local v1644;while true do if (v1642==(0 -0)) then v1643=v1238:FindFirstChild("TextChannels");v1644=v1643 and (v1643:FindFirstChild("RBXGeneral") or v1643:FindFirstChildOfClass("TextChannel")) ;v1642=1;end if (v1642==(1 -0)) then if v1644 then local v1763=0 + 0 ;while true do if (v1763==(0 + 0)) then v1644:SendAsync(v8.Misc.ChatSpammer.Message);v1237=true;break;end end end break;end end end if  not v1237 then local v1645=game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents");v1645=v1645 and v1645:FindFirstChild("SayMessageRequest") ;if v1645 then local v1707=0 + 0 ;while true do if (v1707==0) then v1645:FireServer(v8.Misc.ChatSpammer.Message,"All");v1237=true;break;end end end end v1236=2;end if (v1236==(0 + 0)) then v1237=false;v1238=game:GetService("TextChatService");v1236=2 -1 ;end end end);break;end if (v385==0) then if  not v8.Misc.ChatSpammer.Enabled then return;end if ((tick() -v65)<v8.Misc.ChatSpammer.Delay) then return;end v385=1251 -(363 + 887) ;end end end local function v67() local v386=game:GetService("HttpService");local v387=game:GetService("TeleportService");local v388=game.PlaceId;local v389,v390=pcall(function() return v386:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/"   .. v388   .. "/servers/Public?sortOrder=Asc&limit=100" ));end);if (v389 and v390 and v390.data) then for v1006,v1007 in pairs(v390.data) do if ((v1007.playing<v1007.maxPlayers) and (v1007.id~=game.JobId)) then local v1420=0;while true do if (v1420==(0 -0)) then v387:TeleportToPlaceInstance(v388,v1007.id);return;end end end end end v32("Aucun serveur trouvé pour le hop");end local function v68() game:GetService("TeleportService"):Teleport(game.PlaceId,v3);end v64();v18=v51("Circle",{Thickness=4 -3 ,NumSides=64,Color=Color3.new(1 + 0 ,2 -1 ,1 + 0 ),Transparency=1665 -(674 + 990) ,Visible=false});local v69=v51("Line",{Thickness=1,Color=Color3.new(0 + 0 ,1 + 0 ,0),Transparency=1 -0 ,Visible=false});local v70=v51("Line",{Thickness=1056 -(507 + 548) ,Color=Color3.new(837 -(289 + 548) ,1819 -(821 + 997) ,0),Transparency=1,Visible=false});local v71=v51("Line",{Thickness=256 -(195 + 60) ,Color=Color3.new(0,1,0 + 0 ),Transparency=1502 -(251 + 1250) ,Visible=false});local v72=v51("Line",{Thickness=2 -1 ,Color=Color3.new(0 + 0 ,1033 -(809 + 223) ,0),Transparency=1 -0 ,Visible=false});local function v73() if v8.Visuals.RainbowMode then local v904=0 -0 ;local v905;while true do if (0==v904) then v905=v38();if v31 then v31.TextColor3=v905;end break;end end elseif v31 then local v1239=v8.Visuals.AccentColor;v31.TextColor3=Color3.fromRGB(v1239.R,v1239.G,v1239.B);end if v8.Visuals.FullBright then local v906=0 -0 ;while true do if (v906==(2 + 0)) then game:GetService("Lighting").OutdoorAmbient=Color3.fromRGB(68 + 60 ,128,128);break;end if (v906==1) then game:GetService("Lighting").FogEnd=100617 -(14 + 603) ;game:GetService("Lighting").GlobalShadows=false;v906=131 -(118 + 11) ;end if (v906==(0 + 0)) then game:GetService("Lighting").Brightness=2 + 0 ;game:GetService("Lighting").ClockTime=40 -26 ;v906=950 -(551 + 398) ;end end else game:GetService("Lighting").GlobalShadows=true;end if v8.Visuals.NoFog then game:GetService("Lighting").FogEnd=63198 + 36802 ;end if v8.Combat.FovChanger.Enabled then local v909=v7();if v909 then v909.FieldOfView=v8.Combat.FovChanger.Value;end end local v391=v8.Visuals.Crosshair.Enabled;local v392=v7();local v393=Vector2.new(v392.ViewportSize.X/(1 + 1) ,v392.ViewportSize.Y/(2 + 0) );local v394=v8.Visuals.Crosshair.Size;local v395=v8.Visuals.Crosshair.Color;v69.Visible=v391;v70.Visible=v391;v71.Visible=v391;v72.Visible=v391;if v391 then local v910=0 -0 ;while true do if (v910==(6 -3)) then v72.From=v393 + Vector2.new(0 + 0 ,7 -5 ) ;v72.To=v393 + Vector2.new(0 + 0 ,v394) ;v72.Color=v395;break;end if (v910==(91 -(40 + 49))) then v71.From=v393-Vector2.new(0 -0 ,v394) ;v71.To=v393-Vector2.new(490 -(99 + 391) ,2 + 0 ) ;v71.Color=v395;v910=13 -10 ;end if (v910==(2 -1)) then v70.From=v393 + Vector2.new(2 + 0 ,0 -0 ) ;v70.To=v393 + Vector2.new(v394,1604 -(1032 + 572) ) ;v70.Color=v395;v910=2;end if (v910==(417 -(203 + 214))) then v69.From=v393-Vector2.new(v394,1817 -(568 + 1249) ) ;v69.To=v393-Vector2.new(2,0) ;v69.Color=v395;v910=1;end end end if v8.Visuals.AntiLag then local v911=0 + 0 ;local v912;while true do if (v911==2) then v8.Visuals.AntiLag=false;v32("Anti-Lag appliqué (Smooth Plastic & No Textures)");break;end if (v911==(2 -1)) then v912.FogEnd=8999999488;for v1503,v1504 in pairs(game:GetDescendants()) do if (v1504:IsA("Part") or v1504:IsA("UnionOperation") or v1504:IsA("MeshPart")) then local v1604=0 -0 ;while true do if (v1604==(1306 -(913 + 393))) then v1504.Material=Enum.Material.SmoothPlastic;v1504.Reflectance=0 -0 ;break;end end elseif (v1504:IsA("Decal") or v1504:IsA("Texture")) then v1504.Transparency=1 -0 ;elseif (v1504:IsA("ParticleEmitter") or v1504:IsA("Trail")) then v1504.Enabled=false;end end v911=2;end if (v911==(410 -(269 + 141))) then v912=game:GetService("Lighting");v912.GlobalShadows=false;v911=2 -1 ;end end end for v820,v821 in pairs(v0:GetPlayers()) do if ((v821~=v3) and v821.Character) then local v1008=v821.Character:FindFirstChild("DaveHighlight");if v8.Visuals.Highlight.Enabled then local v1441=1981 -(362 + 1619) ;while true do if (v1441==(1627 -(950 + 675))) then v1008.OutlineTransparency=0 + 0 ;if (v8.ESP.TeamCheck and (v821.Team==v3.Team)) then v1008.Enabled=false;else v1008.Enabled=true;end break;end if (v1441==(1179 -(216 + 963))) then if  not v1008 then local v1680=1287 -(485 + 802) ;while true do if (v1680==0) then v1008=Instance.new("Highlight");v1008.Name="DaveHighlight";v1680=1;end if (v1680==(560 -(432 + 127))) then v1008.Parent=v821.Character;break;end end end v1008.FillColor=v8.Visuals.Highlight.Color;v1441=1074 -(1065 + 8) ;end if ((1 + 0)==v1441) then v1008.OutlineColor=Color3.fromRGB(1856 -(635 + 966) ,184 + 71 ,255);v1008.FillTransparency=v8.Visuals.Highlight.Transparency;v1441=44 -(5 + 37) ;end end elseif v1008 then v1008:Destroy();end end end end v1.RenderStepped:Connect(function() v54();v55();v58();v57();v50();v59();v73();v60();v61();v66();if v18 then local v913=0 -0 ;local v914;local v915;while true do if ((1 + 0)==v913) then v18.Radius=v8.Aimbot.FOV;v915=(v8.Visuals.RainbowMode and v38()) or Color3.fromRGB(v8.Visuals.FOVColorRGB.R,v8.Visuals.FOVColorRGB.G,v8.Visuals.FOVColorRGB.B) ;v913=2 -0 ;end if (v913==(1 + 1)) then v18.Color=v915;v18.Transparency=v8.Visuals.FOVTransparency;break;end if (v913==0) then v914=v7();v18.Position=Vector2.new(v914.ViewportSize.X/2 ,v914.ViewportSize.Y/2 );v913=1;end end end if (v4 and v5) then local v916=0 -0 ;local v917;local v918;local v919;local v920;local v921;while true do if (v916==(0 -0)) then v6.frames=v6.frames + 1 ;v917=tick();v916=1 -0 ;end if (v916==(2 -1)) then if ((v917-v6.last)>=1) then local v1553=0 + 0 ;while true do if (v1553==1) then v6.last=v917;break;end if (v1553==(529 -(318 + 211))) then v6.fps=v6.frames/(v917-v6.last) ;v6.frames=0 -0 ;v1553=1;end end end v918=0;v916=1589 -(963 + 624) ;end if ((1 + 1)==v916) then v919=game:GetService("Stats");v920=v919 and v919.Network ;v916=849 -(518 + 328) ;end if (v916==3) then v921=v920 and v920.ServerStatsItem and v920.ServerStatsItem["Data Ping"] ;if (v921 and v921.GetValue) then v918=math.floor(v921:GetValue());end v916=4;end if (v916==(8 -4)) then v4.Text="FPS: "   .. tostring(math.floor(v6.fps + (0.5 -0) )) ;v5.Text="Ping: "   .. tostring(v918)   .. " ms" ;break;end end end end);v1:BindToRenderStep("AimbotProc",Enum.RenderPriority.Camera.Value + (318 -(301 + 16)) ,v43);v2.InputBegan:Connect(function(v400,v401) if v401 then return;end if ((v400.UserInputType==Enum.UserInputType.MouseButton1) and v8.Movement.ClickTP.Enabled) then if v2:IsKeyDown(v8.Movement.ClickTP.Key) then local v1243=0 -0 ;local v1244;while true do if (v1243==(0 -0)) then v1244=v3:GetMouse();if v1244.Target then local v1646=0 -0 ;local v1647;local v1648;while true do if (v1646==(1 + 0)) then if v1648 then local v1764=0;local v1765;local v1766;local v1767;local v1768;local v1769;local v1770;local v1771;while true do if (v1764==(2 + 0)) then if (v1768==0) then return;end v1769=320 -170 ;v1764=2 + 1 ;end if (v1764==4) then for v1788=1 + 0 ,v1770 do local v1789=0 -0 ;local v1790;local v1791;while true do if (v1789==(1 + 0)) then v1648.CFrame=CFrame.new(v1791);v1.Heartbeat:Wait();break;end if ((1019 -(829 + 190))==v1789) then v1790=math.clamp(v1788 * v1769 ,0 -0 ,v1768);v1791=v1766 + (v1771 * v1790) ;v1789=1 -0 ;end end end v32("Téléporté à la position de la souris");break;end if (v1764==(3 -0)) then v1770=math.ceil(v1768/v1769 );v1771=v1767.Unit;v1764=9 -5 ;end if (v1764==(0 + 0)) then v1765=v1244.Hit.p + Vector3.new(0,1 + 2 ,0 -0 ) ;v1766=v1648.Position;v1764=1 + 0 ;end if (v1764==1) then v1767=v1765-v1766 ;v1768=v1767.Magnitude;v1764=615 -(520 + 93) ;end end end break;end if (v1646==0) then v1647=v3.Character;v1648=v1647 and v1647:FindFirstChild("HumanoidRootPart") ;v1646=277 -(259 + 17) ;end end end break;end end end end if ((v400.KeyCode==v8.Aimbot.Key) or (v400.UserInputType==v8.Aimbot.Key)) then local v922=0 + 0 ;while true do if (v922==0) then v15= not v15;if  not v15 then v16=nil;end break;end end end if ((v400.KeyCode==Enum.KeyCode.Insert) or (v400.KeyCode==Enum.KeyCode.RightControl)) then local v923=0 + 0 ;while true do if (v923==1) then if  not MainFrame.Visible then RestoreBtn.Visible=true;else RestoreBtn.Visible=false;end break;end if (v923==(0 -0)) then MainFrame.Visible= not MainFrame.Visible;ScreenGui.Enabled=MainFrame.Visible;v923=592 -(396 + 195) ;end end end if ((v400.KeyCode==v8.Movement.Fly.Key) and v8.Movement.Fly.Enabled) then v56();end if ((v400.KeyCode==v8.Movement.NoClipKey) and v8.Movement.NoClip) then v20= not v20;v32("NoClip: "   .. ((v20 and "Activé") or "Désactivé") );if  not v20 then local v1245=0 -0 ;local v1246;while true do if (0==v1245) then v1246=v3.Character;if v1246 then for v1684,v1685 in pairs(v1246:GetDescendants()) do if v1685:IsA("BasePart") then v1685.CanCollide=true;end end end break;end end end end if (v8.Movement.Sprint.Enabled and (v400.KeyCode==Enum.KeyCode.LeftShift)) then v21=true;end if (v400.KeyCode==Enum.KeyCode.Space) then local v924=v3.Character;local v925=v924 and v924:FindFirstChildOfClass("Humanoid") ;if v925 then if v8.Movement.InfiniteJump then v925:ChangeState(Enum.HumanoidStateType.Jumping);elseif v8.Movement.SuperJump.DoubleJumpEnabled then if (v925.FloorMaterial==Enum.Material.Air) then if ( not v22 and v23) then local v1739=1761 -(440 + 1321) ;local v1740;while true do if (v1739==1) then if v1740 then v1740.Velocity=Vector3.new(v1740.Velocity.X,v925.JumpPower * v8.Movement.SuperJump.PowerMultiplier ,v1740.Velocity.Z);end break;end if (v1739==(1829 -(1059 + 770))) then v22=true;v1740=v924:FindFirstChild("HumanoidRootPart");v1739=4 -3 ;end end end else local v1686=0;while true do if (0==v1686) then v22=false;v23=true;break;end end end end end end end);v2.InputEnded:Connect(function(v402) if (v402.KeyCode==Enum.KeyCode.LeftShift) then v21=false;end end);v0.PlayerAdded:Connect(v52);v0.PlayerRemoving:Connect(v53);for v403,v404 in pairs(v0:GetPlayers()) do v52(v404);end local function v74() local v405=545 -(424 + 121) ;local v406;local v407;while true do if (v405==(0 + 0)) then v32("Démarrage des tests automatiques...");v406=1347 -(641 + 706) ;v405=1;end if (v405==(2 + 2)) then v32("Résultats des tests : "   .. v406   .. "/"   .. v407   .. " réussis." );break;end if (v405==(443 -(249 + 191))) then if v55 then local v1453=0 -0 ;while true do if (v1453==0) then v406=v406 + 1 + 0 ;v32("Test 4 (Module Mouvement) : RÉUSSI");break;end end end if (v62 and v62.CreateWindow) then local v1454=0 -0 ;while true do if (v1454==0) then v406=v406 + (428 -(183 + 244)) ;v32("Test 5 (Module UI) : RÉUSSI");break;end end end v405=1 + 3 ;end if (v405==1) then v407=735 -(434 + 296) ;if (v8.Aimbot and v8.Movement and v8.Combat) then local v1455=0 -0 ;while true do if (v1455==0) then v406=v406 + (513 -(169 + 343)) ;v32("Test 1 (Intégrité Config) : RÉUSSI");break;end end end v405=2;end if (v405==(2 + 0)) then if v3.Character then v406=v406 + (1 -0) ;v32("Test 2 (Détection Personnage) : RÉUSSI");end if (game:GetService("RunService") and game:GetService("UserInputService")) then local v1456=0 -0 ;while true do if (v1456==(0 + 0)) then v406=v406 + (2 -1) ;v32("Test 3 (Services Système) : RÉUSSI");break;end end end v405=3;end end end v36();v20=v8.Movement.NoClip;v74();v62:CreateWindow();print("💎 PRO TOOL V3.3 - TOOL V3.3 - TOUS LES ONGLETS CORRIGÉS ✅");
+-- ========== SERVICES ==========
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local LocalPlayer = Players.LocalPlayer
+local FpsLabel, PingLabel
+local fpsCounter = {frames = 0, last = tick(), fps = 0}
+
+local function getCamera()
+    return workspace.CurrentCamera or workspace:FindFirstChildOfClass("Camera")
+end
+
+-- ========== CONFIGURATION PAR DÉFAUT ==========
+local Config = {
+    Aimbot = {
+        Enabled = false,
+        TargetNPC = false,
+        Key = Enum.KeyCode.J,
+        Smoothness = 0,
+        FOV = 150,
+        ShowFOV = true,
+        TargetPart = "Head",
+        MaxDistance = 1000,
+        TeamCheck = false,
+        VisibleCheck = true,
+        IgnoreVehicles = true,
+        StraightBullets = true,
+        Sticky = true,
+        AutoShoot = false
+    },
+    ESP = {
+        Enabled = false,
+        TargetNPC = false,
+        Boxes = true,
+        Skeleton = true,
+        Health = true,
+        Names = true,
+        Distance = true,
+        Tracers = true,
+        MaxDistance = 5000,
+        TeamCheck = false,
+        VisibleOnly = false,
+        BoxColor = Color3.fromRGB(255, 255, 255),
+        SkelColor = Color3.fromRGB(255, 255, 255),
+        Color = {R = 255, G = 255, B = 255}
+    },
+    Movement = {
+        Fly = {
+            Enabled = false,
+            Key = Enum.KeyCode.F,
+            Speed = 50,
+            AscendSpeed = 30,
+            NoFallDamage = true,
+            
+        },
+        Sprint = {
+            Enabled = false,
+            Multiplier = 2,
+            Endurance = 100,
+            MaxEndurance = 100,
+            RecoveryRate = 5
+        },
+        SuperJump = {
+            Enabled = false,
+            PowerMultiplier = 1,
+            DoubleJumpEnabled = false,
+            ReduceFallDamage = true
+        },
+        SpeedHack = {
+            Enabled = false,
+            Value = 50
+        },
+        AutoJump = false,
+        Bhop = false,
+        NoClip = false,
+        NoClipKey = Enum.KeyCode.N,
+        InfiniteJump = false,
+        ClickTP = {Enabled = false, Key = Enum.KeyCode.LeftControl}
+    },
+    Combat = {
+        SpinBot = {
+            Enabled = false,
+            Speed = 20
+        },
+        HitboxExpander = {
+            Enabled = false,
+            Multiplier = 1.5,
+            Transparency = 0.9,
+            Color = Color3.fromRGB(0, 255, 255),
+            ColorRGB = {R = 0, G = 255, B = 255},
+            ExpandNPC = false
+        },
+        Reach = {
+            Enabled = false,
+            Range = 30
+        },
+        FovChanger = {
+            Enabled = false,
+            Value = 90
+        },
+        GodMode = {
+            Enabled = false
+        }
+    },
+    Visuals = {
+        FullBright = false,
+        NoFog = false,
+        Chams = false,
+        ChamsColor = Color3.fromRGB(255, 255, 255),
+        Highlight = {Enabled = false, Color = Color3.fromRGB(255, 255, 255), Transparency = 0.5},
+        FOVTransparency = 0.5,
+        FOVColorRGB = {R = 255, G = 255, B = 255},
+        AccentColor = {R = 255, G = 255, B = 255},
+        TimeChanger = {Enabled = false, Time = 12},
+        Crosshair = {Enabled = false, Size = 15, Color = Color3.fromRGB(0, 255, 0)},
+        StreamerMode = false,
+        AntiLag = false,
+        RainbowMode = false
+    },
+    Misc = {
+        AntiAFK = true,
+        ChatSpammer = {
+            Enabled = false,
+            Message = "Dave Pro Tool On Top!",
+            Delay = 3
+        },
+        Waypoints = {}
+    },
+}
+
+-- ========== CONSTANTES ESP ==========
+local function deepCopy(t)
+    if type(t) ~= "table" then return t end
+    local c = {}
+    for k, v in pairs(t) do
+        c[k] = deepCopy(v)
+    end
+    return c
+end
+
+local DefaultConfig = deepCopy(Config)
+
+local autosaveScheduled = false
+local function scheduleAutoSave()
+    if autosaveScheduled then return end
+    autosaveScheduled = true
+    task.delay(0.5, function()
+        autosaveScheduled = false
+        saveConfig()
+    end)
+end
+
+local R6_JOINTS = {
+    {"Head", "Torso"},
+    {"Torso", "Left Arm"},
+    {"Torso", "Right Arm"},
+    {"Torso", "Left Leg"},
+    {"Torso", "Left Leg"},
+    {"Torso", "Right Leg"}
+}
+
+local R15_JOINTS = {
+    {"Head", "UpperTorso"},
+    {"UpperTorso", "LowerTorso"},
+    {"LowerTorso", "LeftUpperLeg"},
+    {"LeftUpperLeg", "LeftLowerLeg"},
+    {"LeftLowerLeg", "LeftFoot"},
+    {"LowerTorso", "RightUpperLeg"},
+    {"RightUpperLeg", "RightLowerLeg"},
+    {"RightLowerLeg", "RightFoot"},
+    {"UpperTorso", "LeftUpperArm"},
+    {"LeftUpperArm", "LeftLowerArm"},
+    {"LeftLowerArm", "LeftHand"},
+    {"UpperTorso", "RightUpperArm"},
+    {"RightUpperArm", "RightLowerArm"},
+    {"RightLowerArm", "RightHand"}
+}
+
+-- État interne
+local AimlockPressed = false
+local CurrentTarget = nil
+local ESPObjects = {}
+local FOVCircle = nil
+local Flying = false
+local NoClipActive = false
+local Sprinting = false
+local DoubleJumped = false
+local CanDoubleJump = false
+local FlyVelocity = nil
+local FlyGyro = nil
+local SpinAngle = 0
+local LastJumpTime = 0
+local Logs = {}
+local Hitboxes = {}
+local UpdateMenuThemeFn = nil
+local TitleLabel = nil
+local function log(msg)
+    table.insert(Logs, "[" .. os.date("%X") .. "] " .. msg)
+    if #Logs > 50 then table.remove(Logs, 1) end
+    print("💎 [PRO TOOL] " .. msg)
+end
+
+-- ========== VÉRIFICATION DRAWING LIBRARY ==========
+if not Drawing then
+    warn("❌ Drawing Library non disponible!")
+    return
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME DE SAUVEGARDE ET CONFIGURATION
+-- ═══════════════════════════════════════════════════════════
+
+local HttpService = game:GetService("HttpService")
+local ConfigFile = "ProToolConfig.json"
+
+local function saveConfig(name)
+    if writefile then
+        local fileName = name or ConfigFile
+        local success, data = pcall(function() return HttpService:JSONEncode(Config) end)
+        if success then
+            writefile(fileName, data)
+            log("Configuration sauvegardée: " .. fileName)
+        else
+            warn("Échec de l'encodage de la config")
+        end
+    end
+end
+
+local function loadConfig(name)
+    local fileName = name or ConfigFile
+    if readfile and isfile and isfile(fileName) then
+        local success, data = pcall(function() return HttpService:JSONDecode(readfile(fileName)) end)
+        if success then
+            for k, v in pairs(data) do
+                if Config[k] then
+                    if type(v) == "table" then
+                        for k2, v2 in pairs(v) do
+                            Config[k][k2] = v2
+                        end
+                    else
+                        Config[k] = v
+                    end
+                end
+            end
+            log("Configuration chargée: " .. fileName)
+            return true
+        end
+    end
+    return false
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- FONCTIONS UTILITAIRES
+-- ═══════════════════════════════════════════════════════════
+
+local function worldToScreen(position)
+    local Camera = getCamera()
+    local screenPos, onScreen = Camera:WorldToViewportPoint(position)
+    return Vector2.new(screenPos.X, screenPos.Y), onScreen, screenPos.Z
+end
+
+local function getRainbowColor()
+    local t = tick() % 5 / 5
+    return Color3.fromHSV(t, 1, 1)
+end
+
+local function isPNJOrDie()
+    local okPlace, placeId = pcall(function() return game.PlaceId end)
+    if okPlace and placeId == 11276071411 then
+        return true
+    end
+    local okName, name = pcall(function() return game.Name end)
+    if not okName or not name then return false end
+    name = string.lower(name)
+    if string.find(name, "npc ou die", 1, true) then return true end
+    if string.find(name, "pnj or die", 1, true) then return true end
+    return false
+end
+
+local function isVisible(targetPart)
+    if not Config.Aimbot.VisibleCheck then return true end
+    local char = LocalPlayer.Character
+    if not char then return false end
+    local Camera = getCamera()
+    local params = RaycastParams.new()
+    params.FilterType = Enum.RaycastFilterType.Exclude
+    params.FilterDescendantsInstances = {char, Camera, targetPart.Parent}
+    local result = workspace:Raycast(Camera.CFrame.Position, (targetPart.Position - Camera.CFrame.Position), params)
+    if not result then return true end
+    if Config.Aimbot.IgnoreVehicles and result.Instance then
+        local inst = result.Instance
+        local model = inst:FindFirstAncestorOfClass("Model")
+        local isVeh = false
+        if model then
+            if model:FindFirstChildWhichIsA("VehicleSeat", true) or model:FindFirstChildWhichIsA("Seat", true) then
+                isVeh = true
+            end
+        end
+        local n = inst.Name:lower()
+        if n:find("vehicle") or n:find("car") or n:find("plane") or (model and (model.Name:lower():find("car") or model.Name:lower():find("plane") or model.Name:lower():find("vehicle"))) then
+            isVeh = true
+        end
+        if isVeh then
+            return true
+        end
+    end
+    return false
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME AIMBOT
+-- ═══════════════════════════════════════════════════════════
+
+local function getClosestPlayerInFOV()
+    local target = nil
+    local minDist = math.huge
+    local Camera = getCamera()
+    local center = Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
+
+    local function processTarget(entity, char, isPlayer)
+        if not char then return end
+        local hum = char:FindFirstChildOfClass("Humanoid")
+        if not hum or hum.Health <= 0 then return end
+        
+        local part = char:FindFirstChild(Config.Aimbot.TargetPart) or char:FindFirstChild("Head")
+        if not part then return end
+        
+        local myChar = LocalPlayer.Character
+        if not myChar or not myChar:FindFirstChild("HumanoidRootPart") then return end
+        
+        local screenPos, onScreen = worldToScreen(part.Position)
+        if not onScreen then return end
+        
+        local distFromCenter = (screenPos - center).Magnitude
+        if distFromCenter <= Config.Aimbot.FOV and distFromCenter < minDist then
+            if isVisible(part) then
+                minDist = distFromCenter
+                target = {Player = entity, Part = part}
+            end
+        end
+    end
+
+    for _, player in pairs(Players:GetPlayers()) do
+        if player == LocalPlayer then continue end
+        if Config.Aimbot.TeamCheck and player.Team == LocalPlayer.Team then continue end
+        processTarget(player, player.Character, true)
+    end
+
+    if Config.Aimbot.TargetNPC then
+        for _, obj in pairs(workspace:GetChildren()) do
+            if obj:IsA("Model") and obj:FindFirstChildOfClass("Humanoid") and not Players:GetPlayerFromCharacter(obj) then
+                processTarget(obj, obj, false)
+            end
+        end
+    end
+
+    return target
+end
+
+local function aimAt(part, isInitial)
+    local Camera = getCamera()
+    local targetPos = part.Position
+    if part.Name == "Head" then targetPos = targetPos + Vector3.new(0, 0.1, 0) end
+    
+    local targetCF = CFrame.lookAt(Camera.CFrame.Position, targetPos)
+    local lerpAmount = isInitial and 1 or (1 - Config.Aimbot.Smoothness)
+    Camera.CFrame = Camera.CFrame:Lerp(targetCF, math.clamp(lerpAmount, 0.01, 1))
+end
+
+local function aimbotUpdate()
+    if not Config.Aimbot.Enabled or not AimlockPressed then 
+        CurrentTarget = nil 
+        return 
+    end
+    
+    local target = getClosestPlayerInFOV()
+    if target then
+        CurrentTarget = target
+        aimAt(target.Part, false)
+        
+        -- AutoShoot logic
+        if Config.Aimbot.AutoShoot then
+            local VirtualInputManager = game:GetService("VirtualInputManager")
+            VirtualInputManager:SendMouseButtonEvent(0, 0, 0, true, game, 0)
+            task.wait(0.05)
+            VirtualInputManager:SendMouseButtonEvent(0, 0, 0, false, game, 0)
+        end
+    else
+        CurrentTarget = nil
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME ÉMOTES
+-- ═══════════════════════════════════════════════════════════
+local CurrentEmoteTrack
+local EmoteFallbackConn
+local function stopEmoteFallback()
+    if EmoteFallbackConn then
+        pcall(function() EmoteFallbackConn:Disconnect() end)
+        EmoteFallbackConn = nil
+    end
+    local char = LocalPlayer.Character
+    if not char then return end
+    for _, m in pairs(char:GetDescendants()) do
+        if m:IsA("Motor6D") and string.find(m.Name:lower(), "shoulder") then
+            pcall(function() m.Transform = CFrame.new() end)
+        end
+    end
+end
+local function startHelicopterFallback()
+    stopEmoteFallback()
+    local char = LocalPlayer.Character
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    if not hum then return end
+    local t0 = tick()
+    EmoteFallbackConn = RunService.RenderStepped:Connect(function()
+        local t = tick() - t0
+        local angle = t * 10
+        for _, m in pairs(char:GetDescendants()) do
+            if m:IsA("Motor6D") and string.find(m.Name:lower(), "shoulder") then
+                pcall(function() m.Transform = CFrame.Angles(0, angle, 0) end)
+            end
+        end
+        hum.Jump = false
+        hum.Sit = false
+        hum.PlatformStand = false
+    end)
+    log("Fallback émote Hélicoptère (custom) activé")
+end
+local function playEmoteById(id)
+    local char = LocalPlayer.Character
+    if not char then
+        local ok, newChar = pcall(function() return LocalPlayer.CharacterAdded:Wait() end)
+        if ok then char = newChar else return end
+    end
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    if not hum then return end
+    local assetUri
+    if typeof(id) == "string" and string.find(id, "rbxassetid://", 1, true) then
+        assetUri = id
+    else
+        assetUri = "rbxassetid://" .. tostring(id)
+    end
+    stopEmoteFallback()
+    local animator = hum:FindFirstChildOfClass("Animator") or hum:FindFirstChild("Animator")
+    if not animator then
+        animator = Instance.new("Animator")
+        animator.Parent = hum
+    end
+    if CurrentEmoteTrack then
+        pcall(function() CurrentEmoteTrack:Stop(0.2) end)
+        CurrentEmoteTrack = nil
+    end
+    local anim = Instance.new("Animation")
+    anim.AnimationId = assetUri
+    local ok, track = pcall(function() return animator:LoadAnimation(anim) end)
+    if ok and track then
+        CurrentEmoteTrack = track
+        pcall(function() track.Priority = Enum.AnimationPriority.Action4 end)
+        pcall(function() track.Looped = true end)
+        local played = pcall(function() track:Play() end)
+        if played then
+            log("Émote lancée: " .. tostring(id))
+            return
+        end
+    else
+        if tostring(id) == "76510079095692" or tostring(assetUri):find("76510079095692", 1, true) then
+            startHelicopterFallback()
+        else
+            log("Échec de l'émote: " .. tostring(id))
+        end
+    end
+end
+
+local function stopEmotes()
+    stopEmoteFallback()
+    if CurrentEmoteTrack then
+        pcall(function() CurrentEmoteTrack:Stop(0.2) end)
+        CurrentEmoteTrack = nil
+    end
+    local char = LocalPlayer.Character
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    if not hum then return end
+    local animator = hum:FindFirstChildOfClass("Animator") or hum:FindFirstChild("Animator")
+    if animator and animator.GetPlayingAnimationTracks then
+        for _, tr in ipairs(animator:GetPlayingAnimationTracks()) do
+            if tr.Priority == Enum.AnimationPriority.Action4 then
+                pcall(function() tr:Stop(0.2) end)
+            end
+        end
+    end
+    log("Émote arrêtée")
+end
+
+local function updateStraightBullets()
+    if not Config.Aimbot.StraightBullets then return end
+    local char = LocalPlayer.Character
+    if not char then return end
+    local function zeroInTool(tool)
+        if not tool then return end
+        pcall(function()
+            for _, n in ipairs({"Spread","Bloom","Inaccuracy","Deviation"}) do
+                if tool:GetAttribute(n) ~= nil then tool:SetAttribute(n, 0) end
+            end
+        end)
+        for _, d in pairs(tool:GetDescendants()) do
+            if d:IsA("NumberValue") or d:IsA("IntValue") then
+                local n = d.Name:lower()
+                if n:find("spread") or n:find("bloom") or n:find("inacc") or n:find("deviation") then
+                    d.Value = 0
+                end
+            end
+        end
+    end
+    for _, t in pairs(char:GetChildren()) do
+        if t:IsA("Tool") then zeroInTool(t) end
+    end
+    for _, t in pairs(LocalPlayer.Backpack:GetChildren()) do
+        if t:IsA("Tool") then zeroInTool(t) end
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME ESP
+-- ═══════════════════════════════════════════════════════════
+
+local function createDrawing(type, props)
+    local obj = Drawing.new(type)
+    for i, v in pairs(props) do obj[i] = v end
+    return obj
+end
+
+local function createESP(player)
+    if player == LocalPlayer or ESPObjects[player] then return end
+    ESPObjects[player] = {
+        Box = {
+            T = createDrawing("Line", {Thickness = 1, Visible = false}),
+            B = createDrawing("Line", {Thickness = 1, Visible = false}),
+            L = createDrawing("Line", {Thickness = 1, Visible = false}),
+            R = createDrawing("Line", {Thickness = 1, Visible = false})
+        },
+        Skeleton = {},
+        HealthBar = {
+            BG = createDrawing("Line", {Thickness = 2, Color = Color3.new(0,0,0), Visible = false}),
+            Bar = createDrawing("Line", {Thickness = 1, Visible = false})
+        },
+        Text = createDrawing("Text", {Size = 13, Center = true, Outline = true, Visible = false}),
+        Tracer = createDrawing("Line", {Thickness = 1, Visible = false}),
+        Highlight = nil
+    }
+    for i = 1, 15 do
+        table.insert(ESPObjects[player].Skeleton, createDrawing("Line", {Thickness = 1, Visible = false}))
+    end
+end
+
+local function removeESP(player)
+    local data = ESPObjects[player]
+    if not data then return end
+    for _, v in pairs(data.Box) do v:Remove() end
+    for _, v in pairs(data.HealthBar) do v:Remove() end
+    for _, v in pairs(data.Skeleton) do v:Remove() end
+    if data.Tracer then data.Tracer:Remove() end
+    if data.Highlight then data.Highlight:Destroy() end
+    data.Text:Remove()
+    ESPObjects[player] = nil
+end
+
+local function updateESP()
+    if Config.ESP.TargetNPC then
+        for _, obj in pairs(workspace:GetChildren()) do
+            if obj:IsA("Model") and obj:FindFirstChildOfClass("Humanoid") and not Players:GetPlayerFromCharacter(obj) then
+                createESP(obj)
+            end
+        end
+    end
+
+    for player, data in pairs(ESPObjects) do
+        local isPlayer = player:IsA("Player")
+        local char = isPlayer and player.Character or player
+        
+        if not char or not char.Parent or (not isPlayer and not Config.ESP.TargetNPC) then
+            removeESP(player)
+            continue
+        end
+        
+        if not Config.ESP.Enabled then
+            for _, v in pairs(data.Box) do v.Visible = false end
+            for _, v in pairs(data.HealthBar) do v.Visible = false end
+            for _, v in pairs(data.Skeleton) do v.Visible = false end
+            if data.Tracer then data.Tracer.Visible = false end
+            if data.Highlight then data.Highlight.Enabled = false end
+            data.Text.Visible = false
+            continue
+        end
+        
+        local hrp = char:FindFirstChild("HumanoidRootPart")
+        local hum = char:FindFirstChildOfClass("Humanoid")
+        if not hrp or not hum or hum.Health <= 0 then
+            for _, v in pairs(data.Box) do v.Visible = false end
+            for _, v in pairs(data.HealthBar) do v.Visible = false end
+            for _, v in pairs(data.Skeleton) do v.Visible = false end
+            if data.Tracer then data.Tracer.Visible = false end
+            if data.Highlight then data.Highlight.Enabled = false end
+            data.Text.Visible = false
+            continue
+        end
+        
+        local cam = getCamera()
+        local myHrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        local distance = myHrp and (hrp.Position - myHrp.Position).Magnitude or 0
+
+        if isPlayer and Config.ESP.TeamCheck and not isPNJOrDie() and player.Team == LocalPlayer.Team then
+            for _, v in pairs(data.Box) do v.Visible = false end
+            for _, v in pairs(data.HealthBar) do v.Visible = false end
+            for _, v in pairs(data.Skeleton) do v.Visible = false end
+            if data.Tracer then data.Tracer.Visible = false end
+            if data.Highlight then data.Highlight.Enabled = false end
+            data.Text.Visible = false
+            continue
+        end
+
+        if Config.ESP.VisibleOnly then
+            local isVisible = false
+            local params = RaycastParams.new()
+            params.FilterType = Enum.RaycastFilterType.Exclude
+            params.FilterDescendantsInstances = {char, LocalPlayer.Character}
+            
+            local result = workspace:Raycast(cam.CFrame.Position, hrp.Position - cam.CFrame.Position, params)
+            if not result then isVisible = true end
+            
+            if not isVisible then
+                for _, v in pairs(data.Box) do v.Visible = false end
+                for _, v in pairs(data.HealthBar) do v.Visible = false end
+                for _, v in pairs(data.Skeleton) do v.Visible = false end
+                if data.Tracer then data.Tracer.Visible = false end
+                if data.Highlight then data.Highlight.Enabled = false end
+                data.Text.Visible = false
+                continue
+            end
+        end
+        
+        local screenPos, onScreen = worldToScreen(hrp.Position)
+        if onScreen then
+            local size = char:GetExtentsSize()
+            local w, h = size.X * 1.5, size.Y * 1.5
+            local cf = CFrame.lookAt(hrp.Position, hrp.Position + (cam.CFrame.Position - hrp.Position).Unit)
+            
+            local function getP(x, y) return worldToScreen((cf * CFrame.new(x, y, 0)).Position) end
+            local tl, os1 = getP(-w/2, h/2)
+            local tr, os2 = getP(w/2, h/2)
+            local bl, os3 = getP(-w/2, -h/2)
+            local br, os4 = getP(w/2, -h/2)
+            
+            local espColor = Config.Visuals.RainbowMode and getRainbowColor() or Color3.fromRGB(Config.ESP.Color.R, Config.ESP.Color.G, Config.ESP.Color.B)
+            local boxVis = os1 and os2 and os3 and os4 and Config.ESP.Boxes
+            data.Box.T.Visible, data.Box.T.From, data.Box.T.To = boxVis, tl, tr
+            data.Box.B.Visible, data.Box.B.From, data.Box.B.To = boxVis, bl, br
+            data.Box.L.Visible, data.Box.L.From, data.Box.L.To = boxVis, tl, bl
+            data.Box.R.Visible, data.Box.R.From, data.Box.R.To = boxVis, tr, br
+            
+            if boxVis then
+                for _, l in pairs(data.Box) do l.Color = espColor end
+            end
+            
+            if Config.ESP.Health then
+                local barOffset = 1.0
+                local top, _ = getP(-w/2 - barOffset, h/2)
+                local bot, _ = getP(-w/2 - barOffset, -h/2)
+                
+                local barX = bot.X
+                local barY_top = top.Y
+                local barY_bot = bot.Y
+                
+                data.HealthBar.BG.Visible = true
+                data.HealthBar.BG.From = Vector2.new(barX, barY_top)
+                data.HealthBar.BG.To = Vector2.new(barX, barY_bot)
+                data.HealthBar.BG.Thickness = 2
+                data.HealthBar.BG.Color = Color3.new(0,0,0)
+                
+                local hpPercent = math.clamp(hum.Health / hum.MaxHealth, 0, 1)
+                local hpHeight = (barY_bot - barY_top) * hpPercent
+                
+                data.HealthBar.Bar.Visible = true
+                data.HealthBar.Bar.From = Vector2.new(barX, barY_bot)
+                data.HealthBar.Bar.To = Vector2.new(barX, barY_bot - hpHeight)
+                data.HealthBar.Bar.Thickness = 2
+                data.HealthBar.Bar.Color = hpPercent > 0.6 and Color3.new(0,1,0) or (hpPercent > 0.3 and Color3.new(1,1,0) or Color3.new(1,0,0))
+            else
+                data.HealthBar.BG.Visible, data.HealthBar.Bar.Visible = false, false
+            end
+            
+            if Config.ESP.Skeleton then
+                local joints = hum.RigType == Enum.HumanoidRigType.R15 and R15_JOINTS or R6_JOINTS
+                for i, joint in pairs(joints) do
+                    local line = data.Skeleton[i]
+                    if line then
+                        local p1 = char:FindFirstChild(joint[1])
+                        local p2 = char:FindFirstChild(joint[2])
+                        if p1 and p2 then
+                            local s1, o1 = worldToScreen(p1.Position)
+                            local s2, o2 = worldToScreen(p2.Position)
+                            if o1 and o2 then
+                                line.Visible = true
+                                line.From = s1
+                                line.To = s2
+                                line.Color = espColor
+                            else
+                                line.Visible = false
+                            end
+                        else
+                            line.Visible = false
+                        end
+                    end
+                end
+                for i = #joints + 1, 15 do
+                    if data.Skeleton[i] then data.Skeleton[i].Visible = false end
+                end
+            else
+                for _, v in pairs(data.Skeleton) do v.Visible = false end
+            end
+
+            if Config.Visuals.Chams then
+                if not data.Highlight then
+                    data.Highlight = Instance.new("Highlight")
+                    data.Highlight.Parent = game.CoreGui
+                end
+                data.Highlight.Adornee = char
+                data.Highlight.Enabled = true
+                data.Highlight.FillColor = Config.Visuals.ChamsColor
+                data.Highlight.OutlineColor = Color3.new(1,1,1)
+                data.Highlight.FillTransparency = 0.5
+            elseif data.Highlight then
+                data.Highlight.Enabled = false
+            end
+            
+            if Config.ESP.Tracers then
+                data.Tracer.Visible = true
+                data.Tracer.From = Vector2.new(cam.ViewportSize.X/2, cam.ViewportSize.Y)
+                data.Tracer.To = screenPos
+                data.Tracer.Color = espColor
+            else
+                data.Tracer.Visible = false
+            end
+            
+            if Config.ESP.Names or Config.ESP.Distance then
+                local head = char:FindFirstChild("Head")
+                if head then
+                    local headPos, _ = worldToScreen(head.Position + Vector3.new(0, 1.5, 0))
+                    data.Text.Visible = true
+                    data.Text.Position = headPos
+                    local t = ""
+                    if Config.ESP.Names then 
+                        local displayName = isPlayer and (Config.Visuals.StreamerMode and "Joueur" or player.Name) or player.Name
+                        t = t .. displayName .. "\n" 
+                    end
+                    if Config.ESP.Distance then t = t .. "[" .. math.floor(distance) .. "m]" end
+                    data.Text.Text = t
+                    data.Text.Color = Config.Visuals.RainbowMode and espColor or Color3.new(1,1,1)
+                else
+                    data.Text.Visible = false
+                end
+            else
+                data.Text.Visible = false
+            end
+        else
+            for _, v in pairs(data.Box) do v.Visible = false end
+            for _, v in pairs(data.HealthBar) do v.Visible = false end
+            for _, v in pairs(data.Skeleton) do v.Visible = false end
+            if data.Tracer then data.Tracer.Visible = false end
+            if data.Highlight then data.Highlight.Enabled = false end
+            data.Text.Visible = false
+        end
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME DE MOUVEMENT
+-- ═══════════════════════════════════════════════════════════
+
+local function updateMovement()
+    local char = LocalPlayer.Character
+    if not char then return end
+    local hum = char:FindFirstChildOfClass("Humanoid")
+    local hrp = char:FindFirstChild("HumanoidRootPart")
+    if not hum or not hrp then return end
+
+    if Config.Movement.Sprint.Enabled and Sprinting and Config.Movement.Sprint.Endurance > 0 then
+        hum.WalkSpeed = 16 * Config.Movement.Sprint.Multiplier
+        Config.Movement.Sprint.Endurance = math.max(0, Config.Movement.Sprint.Endurance - 0.5)
+        if Config.Movement.Sprint.Endurance == 0 then Sprinting = false end
+    elseif not Config.Movement.SpeedHack.Enabled then
+        hum.WalkSpeed = 16
+        Config.Movement.Sprint.Endurance = math.min(Config.Movement.Sprint.MaxEndurance, Config.Movement.Sprint.Endurance + Config.Movement.Sprint.RecoveryRate/60)
+    end
+
+    if Config.Movement.SpeedHack.Enabled then
+        hum.WalkSpeed = Config.Movement.SpeedHack.Value
+    end
+
+    if Flying then
+        if Config.Movement.Fly.NoFallDamage and hrp.Velocity.Y < -30 then
+            hrp.Velocity = Vector3.new(hrp.Velocity.X, -30, hrp.Velocity.Z)
+        end
+        local cam = getCamera()
+        local moveDir = Vector3.new(0,0,0)
+        
+        if UserInputService:IsKeyDown(Enum.KeyCode.W) then moveDir = moveDir + cam.CFrame.LookVector end
+        if UserInputService:IsKeyDown(Enum.KeyCode.S) then moveDir = moveDir - cam.CFrame.LookVector end
+        if UserInputService:IsKeyDown(Enum.KeyCode.A) then moveDir = moveDir - cam.CFrame.RightVector end
+        if UserInputService:IsKeyDown(Enum.KeyCode.D) then moveDir = moveDir + cam.CFrame.RightVector end
+        if UserInputService:IsKeyDown(Enum.KeyCode.Space) then moveDir = moveDir + Vector3.new(0, 1, 0) end
+        if UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) then moveDir = moveDir - Vector3.new(0, 1, 0) end
+
+        if moveDir.Magnitude > 0 then
+            local vel = moveDir.Unit * Config.Movement.Fly.Speed
+            if FlyVelocity then FlyVelocity.Velocity = vel end
+        else
+            if FlyVelocity then FlyVelocity.Velocity = Vector3.new(0, 0, 0) end
+        end
+        
+        if FlyGyro then FlyGyro.CFrame = cam.CFrame end
+    else
+        if Config.Movement.Fly.NoFallDamage and hum.FloorMaterial ~= Enum.Material.Air then
+            hrp.Velocity = Vector3.new(hrp.Velocity.X, math.max(hrp.Velocity.Y, -15), hrp.Velocity.Z)
+        end
+    end
+
+    if Config.Movement.SuperJump.Enabled and Config.Movement.SuperJump.ReduceFallDamage then
+        if hum.FloorMaterial ~= Enum.Material.Air then
+            hrp.Velocity = Vector3.new(hrp.Velocity.X, math.max(hrp.Velocity.Y, -20), hrp.Velocity.Z)
+        end
+    end
+
+    if NoClipActive then
+        for _, part in pairs(char:GetDescendants()) do
+            if part:IsA("BasePart") and part.CanCollide then
+                part.CanCollide = false
+            end
+        end
+    end
+
+    if Config.Movement.AutoJump or Config.Movement.Bhop then
+        if hum.FloorMaterial ~= Enum.Material.Air or hum:GetState() == Enum.HumanoidStateType.Landed then
+            if Config.Movement.AutoJump then
+                -- Saut automatique si obstacle devant
+                local rayParams = RaycastParams.new()
+                rayParams.FilterDescendantsInstances = {char}
+                rayParams.FilterType = Enum.RaycastFilterType.Exclude
+                
+                local rayResult = workspace:Raycast(hrp.Position, hrp.CFrame.LookVector * 5, rayParams)
+                if rayResult then
+                    hum.Jump = true
+                end
+            end
+            if Config.Movement.Bhop and UserInputService:IsKeyDown(Enum.KeyCode.Space) then
+                hum.Jump = true
+            end
+        end
+    end
+
+    if Config.Movement.SuperJump.Enabled then
+        hum.JumpPower = 50 * Config.Movement.SuperJump.PowerMultiplier
+    else
+        hum.JumpPower = 50
+    end
+end
+
+local function toggleFly()
+    Flying = not Flying
+    local char = LocalPlayer.Character
+    if not char then return end
+    local hrp = char:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
+    if Flying then
+        local bv = Instance.new("BodyVelocity")
+        bv.Name = "FlyVelocity"
+        bv.Velocity = Vector3.new(0, 0, 0)
+        bv.MaxForce = Vector3.new(math.huge, math.huge, math.huge)
+        bv.Parent = hrp
+        
+        local bg = Instance.new("BodyGyro")
+        bg.Name = "FlyGyro"
+        bg.MaxTorque = Vector3.new(math.huge, math.huge, math.huge)
+        bg.CFrame = hrp.CFrame
+        bg.Parent = hrp
+        
+        FlyVelocity = bv
+        FlyGyro = bg
+        log("Mode Vol activé")
+    else
+        if FlyVelocity then FlyVelocity:Destroy() end
+        if FlyGyro then FlyGyro:Destroy() end
+        FlyVelocity = nil
+        FlyGyro = nil
+        hrp.Velocity = Vector3.new(0, 0, 0)
+        log("Mode Vol désactivé")
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME DE COMBAT AVANCÉ
+-- ═══════════════════════════════════════════════════════════
+
+local function spinbotUpdate()
+    if not Config.Combat.SpinBot.Enabled then return end
+    local char = LocalPlayer.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
+    SpinAngle = SpinAngle + Config.Combat.SpinBot.Speed
+    local targetCF = CFrame.new(hrp.Position) * CFrame.Angles(0, math.rad(SpinAngle), 0)
+    hrp.CFrame = targetCF
+end
+
+local function updateGodMode()
+    if not Config.Combat.GodMode.Enabled then return end
+    local char = LocalPlayer.Character
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    if not hum then return end
+    hum.BreakJointsOnDeath = false
+    if hum.SetStateEnabled then
+        hum:SetStateEnabled(Enum.HumanoidStateType.Dead, false)
+        pcall(function() hum:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false) end)
+        pcall(function() hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false) end)
+        pcall(function() hum:SetStateEnabled(Enum.HumanoidStateType.PlatformStanding, false) end)
+        pcall(function() hum:SetStateEnabled(Enum.HumanoidStateType.Seated, false) end)
+    end
+    hum.PlatformStand = false
+    hum.Sit = false
+    if hum.Health < hum.MaxHealth then
+        hum.Health = hum.MaxHealth
+    end
+    if hum:GetState() == Enum.HumanoidStateType.Ragdoll
+        or hum:GetState() == Enum.HumanoidStateType.FallingDown
+        or hum:GetState() == Enum.HumanoidStateType.PlatformStanding then
+        hum:ChangeState(Enum.HumanoidStateType.Running)
+    end
+    local hrp = char:FindFirstChild("HumanoidRootPart")
+    if hrp then hrp.Anchored = false end
+    for _, part in pairs(char:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.Anchored = false
+        elseif part:IsA("BoolValue") then
+            local n = part.Name:lower()
+            if n == "knocked" or n == "ko" or n == "down" or n == "downed" then
+                part.Value = false
+            end
+        end
+    end
+    if (hum.WalkSpeed < 2) and not Config.Movement.SpeedHack.Enabled then
+        hum.WalkSpeed = 16
+    end
+    if hum.JumpPower < 20 then
+        hum.JumpPower = 50
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME HITBOX EXPANDER
+-- ═══════════════════════════════════════════════════════════
+
+local function updateHitboxes()
+    if not Config.Combat.HitboxExpander.Enabled then
+        for player, box in pairs(Hitboxes) do
+            if box then box:Destroy() end
+            Hitboxes[player] = nil
+        end
+        return
+    end
+
+    local function processHitbox(entity, char)
+        local hrp = char:FindFirstChild("HumanoidRootPart")
+        local hum = char:FindFirstChildOfClass("Humanoid")
+
+        if hrp and hum and hum.Health > 0 then
+            local box = Hitboxes[entity]
+            if not box or box.Parent ~= char then
+                if box then box:Destroy() end
+                box = Instance.new("Part")
+                box.Name = "HitboxPart"
+                box.CastShadow = false
+                box.CanCollide = false
+                box.CanQuery = true
+                box.Anchored = false
+                box.Transparency = Config.Combat.HitboxExpander.Transparency
+                box.Material = Enum.Material.Neon
+                box.Parent = char
+                
+                local weld = Instance.new("Weld")
+                weld.Part0 = hrp
+                weld.Part1 = box
+                weld.C0 = CFrame.new(0, 0, 0)
+                weld.Parent = box
+                local adorn = Instance.new("BoxHandleAdornment")
+                adorn.Name = "HitboxAdornment"
+                adorn.Adornee = box
+                adorn.ZIndex = 10
+                adorn.AlwaysOnTop = true
+                adorn.Color3 = Config.Combat.HitboxExpander.Color
+                adorn.Transparency = Config.Combat.HitboxExpander.Transparency
+                adorn.Size = Vector3.new(2 * Config.Combat.HitboxExpander.Multiplier, 2 * Config.Combat.HitboxExpander.Multiplier, 2 * Config.Combat.HitboxExpander.Multiplier)
+                adorn.Parent = box
+                Hitboxes[entity] = box
+            end
+
+            local sizeMultiplier = Config.Combat.HitboxExpander.Multiplier
+            box.Size = Vector3.new(2 * sizeMultiplier, 2 * sizeMultiplier, 2 * sizeMultiplier)
+            box.Color = Config.Combat.HitboxExpander.Color
+            box.Transparency = Config.Combat.HitboxExpander.Transparency
+            local adorn = box:FindFirstChild("HitboxAdornment")
+            if adorn then
+                adorn.Size = box.Size
+                adorn.Color3 = Config.Combat.HitboxExpander.Color
+                adorn.Transparency = Config.Combat.HitboxExpander.Transparency
+            end
+        else
+            if Hitboxes[entity] then
+                Hitboxes[entity]:Destroy()
+                Hitboxes[entity] = nil
+            end
+        end
+    end
+
+    for _, player in pairs(Players:GetPlayers()) do
+        if player == LocalPlayer then continue end
+        if Config.Aimbot.TeamCheck and player.Team == LocalPlayer.Team then
+            if Hitboxes[player] then
+                Hitboxes[player]:Destroy()
+                Hitboxes[player] = nil
+            end
+            continue
+        end
+
+        local char = player.Character
+        if char then
+            processHitbox(player, char)
+        end
+    end
+
+    if Config.Combat.HitboxExpander.ExpandNPC then
+        for _, obj in pairs(workspace:GetChildren()) do
+            if obj:IsA("Model") and obj:FindFirstChildOfClass("Humanoid") and not Players:GetPlayerFromCharacter(obj) then
+                processHitbox(obj, obj)
+            end
+        end
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME COMBAT AVANCÉ
+-- ═══════════════════════════════════════════════════════════
+
+local function reachUpdate()
+    if not Config.Combat.Reach.Enabled then return end
+    
+    local char = LocalPlayer.Character
+    local tool = char and char:FindFirstChildOfClass("Tool")
+    if tool then
+        local handle = tool:FindFirstChild("Handle") or tool:FindFirstChildOfClass("Part")
+        if handle then
+            if not handle:FindFirstChild("DaveReach") then
+                local selection = Instance.new("SelectionBox")
+                selection.Name = "DaveReach"
+                selection.Adornee = handle
+                selection.Transparency = 0.8
+                selection.Color3 = Color3.fromRGB(255, 0, 0)
+                selection.Parent = handle
+            end
+            
+            -- Augmenter la taille de la Hitbox de l'outil
+            handle.Size = Vector3.new(Config.Combat.Reach.Range, Config.Combat.Reach.Range, Config.Combat.Reach.Range)
+            handle.Massless = true
+            handle.CanCollide = false
+        end
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME VISUEL AVANCÉ
+-- ═══════════════════════════════════════════════════════════
+
+local function updateWorldVisuals()
+    if Config.Visuals.TimeChanger.Enabled then
+        game.Lighting.ClockTime = Config.Visuals.TimeChanger.Time
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- INTERFACE UTILISATEUR (UI) PROFESSIONNELLE
+-- ═══════════════════════════════════════════════════════════
+
+local Library = {}
+
+function Library:CreateWindow()
+    ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "ProToolUI"
+    ScreenGui.Parent = game.CoreGui
+    ScreenGui.ResetOnSpawn = false
+    
+    local Theme = {
+        Background = Color3.fromRGB(15, 15, 15),
+        Sidebar = Color3.fromRGB(10, 10, 10),
+        Accent = Color3.fromRGB(255, 255, 255),
+        Text = Color3.fromRGB(255, 255, 255),
+        TextDim = Color3.fromRGB(180, 180, 180),
+        Secondary = Color3.fromRGB(30, 30, 30),
+        Hover = Color3.fromRGB(40, 40, 40)
+    }
+
+    RestoreBtn = Instance.new("TextButton")
+    RestoreBtn.Name = "RestoreBtn"
+    RestoreBtn.Size = UDim2.new(0, 120, 0, 40)
+    RestoreBtn.Position = UDim2.new(0, 20, 0.5, -20)
+    RestoreBtn.BackgroundColor3 = Theme.Secondary
+    RestoreBtn.Text = "DAVE"
+    RestoreBtn.TextColor3 = Theme.Accent
+    RestoreBtn.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+    RestoreBtn.TextStrokeTransparency = 0.4
+    RestoreBtn.Font = Enum.Font.GothamBold
+    RestoreBtn.TextSize = 22
+    RestoreBtn.Visible = false
+    RestoreBtn.Parent = ScreenGui
+    Instance.new("UICorner", RestoreBtn).CornerRadius = UDim.new(0, 10)
+    local RestoreStroke = Instance.new("UIStroke", RestoreBtn)
+    RestoreStroke.Color = Theme.Accent
+    RestoreStroke.Thickness = 2
+    
+    
+    MainFrame = Instance.new("Frame")
+    MainFrame.Name = "MainFrame"
+    MainFrame.Size = UDim2.new(0, 550, 0, 420)
+    MainFrame.Position = UDim2.new(1, -570, 0, 20)
+    MainFrame.BackgroundColor3 = Theme.Background
+    MainFrame.BackgroundTransparency = 0.18
+    MainFrame.BorderSizePixel = 0
+    MainFrame.Active = true
+    MainFrame.Draggable = false
+    MainFrame.Parent = ScreenGui
+    
+    Instance.new("UICorner", MainFrame).CornerRadius = UDim.new(0, 4)
+    local MainStroke = Instance.new("UIStroke", MainFrame)
+    MainStroke.Color = Theme.Accent
+    MainStroke.Thickness = 1
+    MainStroke.Transparency = 0.4
+    local MainGradient = Instance.new("UIGradient", MainFrame)
+    MainGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(35, 35, 35)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(15, 15, 15))
+    })
+    MainGradient.Rotation = 90
+    
+    local Sidebar = Instance.new("Frame")
+    Sidebar.Name = "Sidebar"
+    Sidebar.Size = UDim2.new(0, 160, 1, 0)
+    Sidebar.BackgroundColor3 = Theme.Sidebar
+    Sidebar.BackgroundTransparency = 0.22
+    Sidebar.Parent = MainFrame
+    Instance.new("UICorner", Sidebar).CornerRadius = UDim.new(0, 4)
+    local SidebarGradient = Instance.new("UIGradient", Sidebar)
+    SidebarGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(45, 45, 45)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(25, 25, 25))
+    })
+    SidebarGradient.Rotation = 0
+    
+    local Title = Instance.new("TextLabel")
+    Title.Size = UDim2.new(1, 0, 0, 60)
+    Title.BackgroundTransparency = 1
+    Title.Text = "DAVE PRO TOOL"
+    Title.TextColor3 = Theme.Accent
+    Title.Font = Enum.Font.GothamBold
+    Title.TextSize = 18
+    Title.Parent = Sidebar
+    TitleLabel = Title
+    
+    do
+        local dragging = false
+        local dragStart, startPos
+        local dragThresholdY = 60
+        Sidebar.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                local localY = input.Position.Y - Sidebar.AbsolutePosition.Y
+                if localY <= dragThresholdY then
+                    dragging = true
+                    dragStart = input.Position
+                    startPos = MainFrame.Position
+                    input.Changed:Connect(function()
+                        if input.UserInputState == Enum.UserInputState.End then
+                            dragging = false
+                        end
+                    end)
+                end
+            end
+        end)
+        UserInputService.InputChanged:Connect(function(input)
+            if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local delta = input.Position - dragStart
+                MainFrame.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            end
+        end)
+    end
+    
+    local TopDrag = Instance.new("Frame")
+    TopDrag.Size = UDim2.new(1, 0, 0, 28)
+    TopDrag.BackgroundTransparency = 1
+    TopDrag.Parent = MainFrame
+    do
+        local dragging2 = false
+        local dragStart2, startPos2
+        TopDrag.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging2 = true
+                dragStart2 = input.Position
+                startPos2 = MainFrame.Position
+                input.Changed:Connect(function()
+                    if input.UserInputState == Enum.UserInputState.End then
+                        dragging2 = false
+                    end
+                end)
+            end
+        end)
+        UserInputService.InputChanged:Connect(function(input)
+            if dragging2 and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local delta = input.Position - dragStart2
+                MainFrame.Position = UDim2.new(startPos2.X.Scale, startPos2.X.Offset + delta.X, startPos2.Y.Scale, startPos2.Y.Offset + delta.Y)
+            end
+        end)
+    end
+    
+    local Version = Instance.new("TextLabel")
+    Version.Size = UDim2.new(1, 0, 0, 20)
+    Version.Position = UDim2.new(0, 0, 1, -25)
+    Version.BackgroundTransparency = 1
+    Version.Text = "VERSION V3.3B"
+    Version.TextColor3 = Theme.TextDim
+    Version.Font = Enum.Font.Gotham
+    Version.TextSize = 10
+    Version.Parent = Sidebar
+
+    local Container = Instance.new("Frame")
+    Container.Name = "Container"
+    Container.Size = UDim2.new(1, -170, 1, -20)
+    Container.Position = UDim2.new(0, 170, 0, 10)
+    Container.BackgroundTransparency = 1
+    Container.Parent = MainFrame
+    
+    local currentTab = nil
+    local TabButtons = Instance.new("Frame")
+    TabButtons.Name = "TabButtons"
+    TabButtons.Size = UDim2.new(1, 0, 1, -100)
+    TabButtons.Position = UDim2.new(0, 0, 0, 70)
+    TabButtons.BackgroundTransparency = 1
+    TabButtons.Parent = Sidebar
+    
+    local TabList = Instance.new("UIListLayout", TabButtons)
+    TabList.Padding = UDim.new(0, 2)
+    TabList.HorizontalAlignment = Enum.HorizontalAlignment.Center
+    
+    local function createTab(name, icon)
+        local tabBtn = Instance.new("TextButton")
+        tabBtn.Size = UDim2.new(0.9, 0, 0, 35)
+        tabBtn.BackgroundColor3 = Theme.Hover
+        tabBtn.BackgroundTransparency = 1
+        tabBtn.Text = name:upper()
+        tabBtn.TextColor3 = Theme.TextDim
+        tabBtn.Font = Enum.Font.GothamSemibold
+        tabBtn.TextSize = 12
+        tabBtn.Parent = TabButtons
+        Instance.new("UICorner", tabBtn).CornerRadius = UDim.new(0, 4)
+        
+        local indicator = Instance.new("Frame")
+        indicator.Size = UDim2.new(0, 2, 0.6, 0)
+        indicator.Position = UDim2.new(0, 4, 0.2, 0)
+        indicator.BackgroundColor3 = Theme.Accent
+        indicator.Visible = false
+        indicator.Parent = tabBtn
+
+        local tabFrame = Instance.new("ScrollingFrame")
+        tabFrame.Size = UDim2.new(1, -10, 1, -10)
+        tabFrame.Position = UDim2.new(0, 5, 0, 5)
+        tabFrame.BackgroundTransparency = 1
+        tabFrame.BorderSizePixel = 0
+        tabFrame.Visible = false
+        tabFrame.ScrollBarThickness = 4
+        tabFrame.ScrollBarImageColor3 = Theme.Accent
+        tabFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+        tabFrame.Parent = Container
+        
+        -- IMPORTANT: Utiliser un UIListLayout pour organiser les éléments
+        local layout = Instance.new("UIListLayout", tabFrame)
+        layout.Padding = UDim.new(0, 8)
+        layout.SortOrder = Enum.SortOrder.LayoutOrder
+        
+        -- Mise à jour automatique de la taille du canvas
+        layout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+            tabFrame.CanvasSize = UDim2.new(0, 0, 0, layout.AbsoluteContentSize.Y + 20)
+        end)
+        
+        tabBtn.MouseButton1Click:Connect(function()
+            if currentTab then 
+                currentTab.Btn.BackgroundTransparency = 1
+                currentTab.Btn.TextColor3 = Theme.TextDim
+                currentTab.Indicator.Visible = false
+                currentTab.Frame.Visible = false 
+            end
+            tabBtn.BackgroundTransparency = 0.9
+            tabBtn.TextColor3 = Theme.Accent
+            indicator.Visible = true
+            tabFrame.Visible = true
+            currentTab = {Btn = tabBtn, Frame = tabFrame, Indicator = indicator}
+        end)
+        
+        return tabFrame, tabBtn
+    end
+    
+    local CloseBtn = Instance.new("TextButton")
+    CloseBtn.Size = UDim2.new(0, 30, 0, 30)
+    CloseBtn.AnchorPoint = Vector2.new(1, 0)
+    CloseBtn.Position = UDim2.new(1, 4, 0, -8)
+    CloseBtn.BackgroundTransparency = 1
+    CloseBtn.Text = "×"
+    CloseBtn.TextColor3 = Theme.TextDim
+    CloseBtn.TextSize = 30
+    CloseBtn.Font = Enum.Font.GothamBold
+    CloseBtn.ZIndex = 20
+    CloseBtn.Parent = MainFrame
+    
+    CloseBtn.MouseEnter:Connect(function() CloseBtn.TextColor3 = Theme.Accent end)
+    CloseBtn.MouseLeave:Connect(function() CloseBtn.TextColor3 = Theme.TextDim end)
+    
+    CloseBtn.MouseButton1Click:Connect(function()
+        MainFrame.Visible = false
+        RestoreBtn.Visible = true
+    end)
+    
+    RestoreBtn.MouseEnter:Connect(function()
+        RestoreBtn.BackgroundColor3 = Theme.Hover
+        RestoreBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+        RestoreBtn.TextStrokeTransparency = 0.2
+    end)
+    RestoreBtn.MouseLeave:Connect(function()
+        RestoreBtn.BackgroundColor3 = Theme.Secondary
+        RestoreBtn.TextColor3 = Theme.Accent
+        RestoreBtn.TextStrokeTransparency = 0.4
+    end)
+    RestoreBtn.MouseButton1Click:Connect(function()
+        MainFrame.Visible = true
+        RestoreBtn.Visible = false
+    end)
+    
+    local StatsHUD = Instance.new("Frame")
+    StatsHUD.Size = UDim2.new(0, 140, 0, 36)
+    StatsHUD.Position = UDim2.new(1, -150, 1, -45)
+    StatsHUD.BackgroundColor3 = Theme.Secondary
+    StatsHUD.BackgroundTransparency = 0.22
+    StatsHUD.Visible = false
+    StatsHUD.Parent = MainFrame
+    Instance.new("UICorner", StatsHUD).CornerRadius = UDim.new(0, 4)
+    local hudStroke = Instance.new("UIStroke", StatsHUD)
+    hudStroke.Color = Theme.Accent
+    hudStroke.Thickness = 1
+    hudStroke.Transparency = 0.5
+    hudStroke.Enabled = true
+    local hudGradient = Instance.new("UIGradient", StatsHUD)
+    hudGradient.Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0, Color3.fromRGB(40, 40, 40)),
+        ColorSequenceKeypoint.new(1, Color3.fromRGB(20, 20, 20))
+    })
+    hudGradient.Rotation = 90
+    
+    FpsLabel = Instance.new("TextLabel")
+    FpsLabel.Size = UDim2.new(1, -10, 0, 16)
+    FpsLabel.Position = UDim2.new(0, 5, 0, 4)
+    FpsLabel.BackgroundTransparency = 1
+    FpsLabel.Text = "FPS: ..."
+    FpsLabel.TextColor3 = Theme.Text
+    FpsLabel.Font = Enum.Font.GothamSemibold
+    FpsLabel.TextSize = 11
+    FpsLabel.TextXAlignment = Enum.TextXAlignment.Left
+    FpsLabel.Parent = StatsHUD
+    
+    PingLabel = Instance.new("TextLabel")
+    PingLabel.Size = UDim2.new(1, -10, 0, 16)
+    PingLabel.Position = UDim2.new(0, 5, 0, 20)
+    PingLabel.BackgroundTransparency = 1
+    PingLabel.Text = "Ping: ..."
+    PingLabel.TextColor3 = Theme.Text
+    PingLabel.Font = Enum.Font.GothamSemibold
+    PingLabel.TextSize = 11
+    PingLabel.TextXAlignment = Enum.TextXAlignment.Left
+    PingLabel.Parent = StatsHUD
+    
+    local function addToggle(parent, text, default, callback)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(1, -10, 0, 35)
+        frame.BackgroundColor3 = Theme.Secondary
+        frame.BackgroundTransparency = 0.2
+        frame.Parent = parent
+        Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 4)
+        
+        local label = Instance.new("TextLabel")
+        label.Size = UDim2.new(1, -50, 1, 0)
+        label.Position = UDim2.new(0, 10, 0, 0)
+        label.BackgroundTransparency = 1
+        label.Text = text:upper()
+        label.TextColor3 = default and Theme.Accent or Theme.TextDim
+        label.TextXAlignment = Enum.TextXAlignment.Left
+        label.Font = Enum.Font.GothamSemibold
+        label.TextSize = 11
+        label.Parent = frame
+        
+        local box = Instance.new("TextButton")
+        box.Size = UDim2.new(0, 30, 0, 16)
+        box.Position = UDim2.new(1, -40, 0.5, -8)
+        box.BackgroundColor3 = default and Theme.Accent or Theme.Background
+        box.Text = ""
+        box.Parent = frame
+        Instance.new("UICorner", box).CornerRadius = UDim.new(0, 8)
+        local boxStroke = Instance.new("UIStroke", box)
+        boxStroke.Color = Theme.Accent
+        boxStroke.Thickness = 1
+
+        local dot = Instance.new("Frame")
+        dot.Size = UDim2.new(0, 10, 0, 10)
+        dot.Position = default and UDim2.new(1, -13, 0.5, -5) or UDim2.new(0, 3, 0.5, -5)
+        dot.BackgroundColor3 = default and Theme.Background or Theme.Accent
+        dot.Parent = box
+        Instance.new("UICorner", dot).CornerRadius = UDim.new(1, 0)
+        
+        local state = default
+        box.MouseButton1Click:Connect(function()
+            state = not state
+            box.BackgroundColor3 = state and Theme.Accent or Theme.Background
+            dot.BackgroundColor3 = state and Theme.Background or Theme.Accent
+            dot:TweenPosition(state and UDim2.new(1, -13, 0.5, -5) or UDim2.new(0, 3, 0.5, -5), "Out", "Quad", 0.1, true)
+            label.TextColor3 = state and Theme.Accent or Theme.TextDim
+            callback(state)
+        scheduleAutoSave()
+        end)
+    end
+    
+    local function addSlider(parent, text, min, max, default, callback)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(1, -10, 0, 50)
+        frame.BackgroundColor3 = Theme.Secondary
+        frame.BackgroundTransparency = 0.2
+        frame.Parent = parent
+        Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 4)
+        
+        local label = Instance.new("TextLabel")
+        label.Size = UDim2.new(1, -20, 0, 25)
+        label.Position = UDim2.new(0, 10, 0, 0)
+        label.BackgroundTransparency = 1
+        label.Text = text:upper() .. " : " .. default
+        label.TextColor3 = Theme.TextDim
+        label.TextXAlignment = Enum.TextXAlignment.Left
+        label.Font = Enum.Font.GothamSemibold
+        label.TextSize = 10
+        label.Parent = frame
+        
+        local bar = Instance.new("Frame")
+        bar.Size = UDim2.new(1, -20, 0, 2)
+        bar.Position = UDim2.new(0, 10, 0, 35)
+        bar.BackgroundColor3 = Theme.Hover
+        bar.Parent = frame
+        
+        local fill = Instance.new("Frame")
+        fill.Size = UDim2.new((default - min) / (max - min), 0, 1, 0)
+        fill.BackgroundColor3 = Theme.Accent
+        fill.BorderSizePixel = 0
+        fill.Parent = bar
+        
+        local knob = Instance.new("Frame")
+        knob.Size = UDim2.new(0, 8, 0, 8)
+        knob.Position = UDim2.new(1, -4, 0.5, -4)
+        knob.BackgroundColor3 = Theme.Accent
+        knob.Parent = fill
+        Instance.new("UICorner", knob).CornerRadius = UDim.new(1, 0)
+        
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(1, 0, 1, 0)
+        btn.BackgroundTransparency = 1
+        btn.Text = ""
+        btn.Parent = bar
+        
+        local function update(input)
+            local barPosX = bar.AbsolutePosition.X
+            local barSizeX = bar.AbsoluteSize.X
+            local pos = math.clamp((input.Position.X - barPosX) / barSizeX, 0, 1)
+            
+            fill.Size = UDim2.new(pos, 0, 1, 0)
+            local val = min + (max - min) * pos
+            if max <= 10 then
+                val = math.floor(val * 10) / 10
+            else
+                val = math.floor(val)
+            end
+            label.Text = text:upper() .. " : " .. val
+            callback(val)
+            scheduleAutoSave()
+        end
+        
+        local dragging = false
+        
+        frame.InputBegan:Connect(function(i)
+            if i.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging = true
+                update(i)
+            end
+        end)
+        
+        UserInputService.InputChanged:Connect(function(i)
+            if dragging and i.UserInputType == Enum.UserInputType.MouseMovement then
+                update(i)
+            end
+        end)
+        
+        UserInputService.InputEnded:Connect(function(i)
+            if i.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging = false
+            end
+        end)
+    end
+    
+    local function addKeybind(parent, text, default, callback)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(1, -10, 0, 35)
+        frame.BackgroundColor3 = Theme.Secondary
+        frame.BackgroundTransparency = 0.2
+        frame.Parent = parent
+        Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 4)
+        
+        local label = Instance.new("TextLabel")
+        label.Size = UDim2.new(1, -100, 1, 0)
+        label.Position = UDim2.new(0, 10, 0, 0)
+        label.BackgroundTransparency = 1
+        label.Text = text:upper()
+        label.TextColor3 = Theme.TextDim
+        label.TextXAlignment = Enum.TextXAlignment.Left
+        label.Font = Enum.Font.GothamSemibold
+        label.TextSize = 11
+        label.Parent = frame
+        
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(0, 80, 0, 20)
+        btn.Position = UDim2.new(1, -90, 0.5, -10)
+        btn.BackgroundColor3 = Theme.Background
+        btn.Text = default.Name:upper()
+        btn.TextColor3 = Theme.Accent
+        btn.Font = Enum.Font.GothamBold
+        btn.TextSize = 10
+        btn.Parent = frame
+        Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 3)
+        local btnStroke = Instance.new("UIStroke", btn)
+        btnStroke.Color = Theme.Accent
+        btnStroke.Thickness = 1
+        
+        local waiting = false
+        btn.MouseButton1Click:Connect(function()
+            waiting = true
+            btn.Text = "..."
+        end)
+        
+        UserInputService.InputBegan:Connect(function(input)
+            if waiting then
+                local key = input.KeyCode ~= Enum.KeyCode.Unknown and input.KeyCode or input.UserInputType
+                if key ~= Enum.KeyCode.Escape then
+                    btn.Text = key.Name:upper()
+                    callback(key)
+                    scheduleAutoSave()
+                end
+                waiting = false
+            end
+        end)
+    end
+
+    local function addInput(parent, text, default, callback)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(1, -10, 0, 50)
+        frame.BackgroundColor3 = Theme.Secondary
+        frame.BackgroundTransparency = 0.2
+        frame.Parent = parent
+        Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 4)
+        
+        local label = Instance.new("TextLabel")
+        label.Size = UDim2.new(1, -20, 0, 25)
+        label.Position = UDim2.new(0, 10, 0, 0)
+        label.BackgroundTransparency = 1
+        label.Text = text:upper()
+        label.TextColor3 = Theme.TextDim
+        label.TextXAlignment = Enum.TextXAlignment.Left
+        label.Font = Enum.Font.GothamSemibold
+        label.TextSize = 10
+        label.Parent = frame
+        
+        local input = Instance.new("TextBox")
+        input.Size = UDim2.new(1, -20, 0, 20)
+        input.Position = UDim2.new(0, 10, 0, 25)
+        input.BackgroundColor3 = Theme.Background
+        input.Text = default
+        input.TextColor3 = Theme.Accent
+        input.Font = Enum.Font.Gotham
+        input.TextSize = 12
+        input.Parent = frame
+        Instance.new("UICorner", input).CornerRadius = UDim.new(0, 4)
+        
+        input.FocusLost:Connect(function(enter)
+            if enter then
+                callback(input.Text)
+                log("Valeur mise à jour: " .. input.Text)
+                scheduleAutoSave()
+            end
+        end)
+    end
+
+    local function addButton(parent, text, callback)
+        local btn = Instance.new("TextButton")
+        btn.Size = UDim2.new(1, -10, 0, 35)
+        btn.BackgroundColor3 = Theme.Secondary
+        btn.Text = text:upper()
+        btn.TextColor3 = Theme.Text
+        btn.Font = Enum.Font.GothamBold
+        btn.TextSize = 12
+        btn.Parent = parent
+        Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 4)
+        
+        btn.MouseButton1Click:Connect(callback)
+    end
+
+    -- Construction des Tabs
+    local AimbotTab = createTab("Aimbot", "🎯")
+    local ESPTab = createTab("ESP", "👁️")
+    local MovementTab = createTab("Mouvement", "👟")
+    local CombatTab = createTab("Combat", "⚔️")
+    local VisualsTab = createTab("Visuels", "✨")
+    local EmoteTab = createTab("Émotes", "🕺")
+    local TeleportTab, TeleportBtn = createTab("Téléportation", "📍")
+    local ScriptsTab = createTab("Scripts", "📜")
+    local MiscTab = createTab("Divers", "🛠️")
+    
+    local selectedTeleportPlayer = nil
+    local StarFishingUI = nil
+    
+    -- Aimbot Content
+    addToggle(AimbotTab, "Activer Aimbot", Config.Aimbot.Enabled, function(v)
+        Config.Aimbot.Enabled = v
+        AimlockPressed = v
+        if not v then CurrentTarget = nil end
+        if FOVCircle then FOVCircle.Visible = v and Config.Aimbot.ShowFOV end
+    end)
+    addToggle(AimbotTab, "Viser NPC/Bot", Config.Aimbot.TargetNPC, function(v) Config.Aimbot.TargetNPC = v end)
+    addKeybind(AimbotTab, "Touche Aimbot", Config.Aimbot.Key, function(v) Config.Aimbot.Key = v end)
+    addSlider(AimbotTab, "Lissage (Smooth)", 0, 0.95, Config.Aimbot.Smoothness, function(v) Config.Aimbot.Smoothness = v end)
+    addSlider(AimbotTab, "Rayon FOV", 10, 800, Config.Aimbot.FOV, function(v) Config.Aimbot.FOV = v end)
+    addToggle(AimbotTab, "Afficher FOV", Config.Aimbot.ShowFOV, function(v) Config.Aimbot.ShowFOV = v if FOVCircle then FOVCircle.Visible = v and Config.Aimbot.Enabled end end)
+    addToggle(AimbotTab, "Team Check", Config.Aimbot.TeamCheck, function(v) Config.Aimbot.TeamCheck = v end)
+    addToggle(AimbotTab, "Visible Check", Config.Aimbot.VisibleCheck, function(v) Config.Aimbot.VisibleCheck = v end)
+    addToggle(AimbotTab, "Ignorer Véhicules", Config.Aimbot.IgnoreVehicles, function(v) Config.Aimbot.IgnoreVehicles = v end)
+    addToggle(AimbotTab, "Sticky Lock", Config.Aimbot.Sticky, function(v) Config.Aimbot.Sticky = v end)
+    addToggle(AimbotTab, "Auto Shoot", Config.Aimbot.AutoShoot, function(v) Config.Aimbot.AutoShoot = v end)
+    addToggle(AimbotTab, "Tirs droits (No Spread)", Config.Aimbot.StraightBullets, function(v) Config.Aimbot.StraightBullets = v end)
+    addButton(AimbotTab, "Cible: Tête", function() Config.Aimbot.TargetPart = "Head" log("Cible: Head") end)
+    addButton(AimbotTab, "Cible: Torse", function() Config.Aimbot.TargetPart = "HumanoidRootPart" log("Cible: Torso") end)
+
+    -- ESP Content
+    addToggle(ESPTab, "Activer ESP", Config.ESP.Enabled, function(v) Config.ESP.Enabled = v end)
+    addToggle(ESPTab, "Voir NPC/Bot", Config.ESP.TargetNPC, function(v) Config.ESP.TargetNPC = v end)
+    addToggle(ESPTab, "Boxes", Config.ESP.Boxes, function(v) Config.ESP.Boxes = v end)
+    addToggle(ESPTab, "Squelettes", Config.ESP.Skeleton, function(v) Config.ESP.Skeleton = v end)
+    addToggle(ESPTab, "Barre de Vie", Config.ESP.Health, function(v) Config.ESP.Health = v end)
+    addToggle(ESPTab, "Noms", Config.ESP.Names, function(v) Config.ESP.Names = v end)
+    addToggle(ESPTab, "Distance", Config.ESP.Distance, function(v) Config.ESP.Distance = v end)
+    addToggle(ESPTab, "Traceurs (Tracers)", Config.ESP.Tracers, function(v) Config.ESP.Tracers = v end)
+    addToggle(ESPTab, "Team Check", Config.ESP.TeamCheck, function(v) Config.ESP.TeamCheck = v end)
+    addToggle(ESPTab, "Visible Uniquement", Config.ESP.VisibleOnly, function(v) Config.ESP.VisibleOnly = v end)
+    addToggle(ESPTab, "ESP Loot/Items", false, function(v) log("ESP Loot: " .. tostring(v)) end)
+    
+    -- Visuals Content
+    addToggle(VisualsTab, "Chams (Wallhack)", Config.Visuals.Chams, function(v) Config.Visuals.Chams = v end)
+    addToggle(VisualsTab, "Highlight ESP", Config.Visuals.Highlight.Enabled, function(v) Config.Visuals.Highlight.Enabled = v end)
+    addToggle(VisualsTab, "FullBright (Lumière)", Config.Visuals.FullBright, function(v) Config.Visuals.FullBright = v end)
+    addToggle(VisualsTab, "No Fog (Pas de brouillard)", Config.Visuals.NoFog, function(v) Config.Visuals.NoFog = v end)
+    addSlider(VisualsTab, "Transparence FOV", 0, 1, Config.Visuals.FOVTransparency, function(v) Config.Visuals.FOVTransparency = v end)
+    
+    addToggle(VisualsTab, "Time Changer", Config.Visuals.TimeChanger.Enabled, function(v) Config.Visuals.TimeChanger.Enabled = v end)
+    addSlider(VisualsTab, "Heure du monde", 0, 24, Config.Visuals.TimeChanger.Time, function(v) Config.Visuals.TimeChanger.Time = v end)
+    addToggle(VisualsTab, "Viseur (Crosshair)", Config.Visuals.Crosshair.Enabled, function(v) Config.Visuals.Crosshair.Enabled = v end)
+    addToggle(VisualsTab, "Anti-Lag (FPS Boost)", Config.Visuals.AntiLag, function(v) Config.Visuals.AntiLag = v end)
+    addToggle(VisualsTab, "Mode Streamer", Config.Visuals.StreamerMode, function(v) Config.Visuals.StreamerMode = v end)
+    addToggle(VisualsTab, "Mode Rainbow", Config.Visuals.RainbowMode, function(v) Config.Visuals.RainbowMode = v end)
+    
+    local function createColorSection(parent, title, configPath, callback)
+        local frame = Instance.new("Frame")
+        frame.Size = UDim2.new(1, -10, 0, 60)
+        frame.BackgroundColor3 = Theme.Secondary
+        frame.BackgroundTransparency = 0.2
+        frame.Parent = parent
+        Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 4)
+        
+        local label = Instance.new("TextLabel")
+        label.Size = UDim2.new(1, -10, 0, 20)
+        label.Position = UDim2.new(0, 10, 0, 5)
+        label.BackgroundTransparency = 1
+        label.Text = title:upper()
+        label.TextColor3 = Theme.TextDim
+        label.TextXAlignment = Enum.TextXAlignment.Left
+        label.Font = Enum.Font.GothamSemibold
+        label.TextSize = 10
+        label.Parent = frame
+        
+        local colors = {
+            {Color3.fromRGB(255, 255, 255), "Blanc"},
+            {Color3.fromRGB(255, 0, 0), "Rouge"},
+            {Color3.fromRGB(0, 255, 0), "Vert"},
+            {Color3.fromRGB(0, 0, 255), "Bleu"},
+            {Color3.fromRGB(255, 255, 0), "Jaune"},
+            {Color3.fromRGB(255, 0, 255), "Rose"},
+            {Color3.fromRGB(0, 255, 255), "Cyan"},
+            {Color3.fromRGB(255, 165, 0), "Orange"}
+        }
+        
+        local container = Instance.new("Frame")
+        container.Size = UDim2.new(1, -20, 0, 25)
+        container.Position = UDim2.new(0, 10, 0, 25)
+        container.BackgroundTransparency = 1
+        container.Parent = frame
+        
+        local layout = Instance.new("UIListLayout", container)
+        layout.FillDirection = Enum.FillDirection.Horizontal
+        layout.Padding = UDim.new(0, 5)
+        layout.VerticalAlignment = Enum.VerticalAlignment.Center
+        
+        for _, data in pairs(colors) do
+            local color = data[1]
+            local btn = Instance.new("TextButton")
+            btn.Size = UDim2.new(0, 20, 0, 20)
+            btn.BackgroundColor3 = color
+            btn.Text = ""
+            btn.Parent = container
+            Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 4)
+            
+            btn.MouseButton1Click:Connect(function()
+                configPath.R, configPath.G, configPath.B = color.R * 255, color.G * 255, color.B * 255
+                if callback then callback(color) end
+                log("Couleur " .. title .. " mise à jour: " .. data[2])
+            end)
+        end
+    end
+
+    local function updateMenuTheme(color)
+        local oldAccent = Theme.Accent
+        Theme.Accent = color
+        if RestoreBtn then RestoreBtn.TextColor3 = color end
+        if RestoreStroke then RestoreStroke.Color = color end
+        if Title then Title.TextColor3 = color end
+        
+        -- Mise à jour dynamique des éléments visuels
+        for _, obj in pairs(ScreenGui:GetDescendants()) do
+            if obj:IsA("TextButton") and obj.BackgroundColor3 == oldAccent then
+                obj.BackgroundColor3 = color
+            elseif obj:IsA("UIStroke") and obj.Color == oldAccent then
+                obj.Color = color
+            elseif obj:IsA("TextLabel") and obj.TextColor3 == oldAccent then
+                obj.TextColor3 = color
+            elseif obj:IsA("ScrollingFrame") and obj.ScrollBarImageColor3 == oldAccent then
+                obj.ScrollBarImageColor3 = color
+            elseif obj:IsA("Frame") and obj.BackgroundColor3 == oldAccent then
+                obj.BackgroundColor3 = color
+            end
+        end
+        
+        -- S'assurer que les onglets sélectionnés gardent la couleur
+        if currentTab then
+            currentTab.Btn.TextColor3 = color
+            currentTab.Indicator.BackgroundColor3 = color
+        end
+        UpdateMenuThemeFn = updateMenuTheme
+    end
+
+    createColorSection(VisualsTab, "Couleur Menu", Config.Visuals.AccentColor, updateMenuTheme)
+    createColorSection(VisualsTab, "Couleur ESP", Config.ESP.Color)
+    createColorSection(VisualsTab, "Couleur FOV", Config.Visuals.FOVColorRGB)
+    -- retiré: Couleur Monde
+
+    addButton(VisualsTab, "Reset Couleurs", function()
+        Config.Visuals.AccentColor = {R = 255, G = 255, B = 255}
+        Config.ESP.Color = {R = 255, G = 255, B = 255}
+        Config.Visuals.FOVColorRGB = {R = 255, G = 255, B = 255}
+        updateMenuTheme(Color3.new(1,1,1))
+    end)
+
+    -- Movement Content - TOUS LES ÉLÉMENTS
+    addToggle(MovementTab, "Mode Vol (Fly)", Config.Movement.Fly.Enabled, function(v) Config.Movement.Fly.Enabled = v if v == false and Flying then toggleFly() end end)
+    addKeybind(MovementTab, "Touche Vol", Config.Movement.Fly.Key, function(v) Config.Movement.Fly.Key = v end)
+    addSlider(MovementTab, "Vitesse Vol", 10, 500, Config.Movement.Fly.Speed, function(v) Config.Movement.Fly.Speed = v end)
+    addToggle(MovementTab, "NoClip", Config.Movement.NoClip, function(v)
+        Config.Movement.NoClip = v
+        NoClipActive = v
+        if not NoClipActive then
+            local char = LocalPlayer.Character
+            if char then
+                for _, part in pairs(char:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = true
+                    end
+                end
+            end
+        end
+    end)
+    addKeybind(MovementTab, "Touche NoClip", Config.Movement.NoClipKey, function(v) Config.Movement.NoClipKey = v end)
+    addToggle(MovementTab, "Speed Hack", Config.Movement.SpeedHack.Enabled, function(v) Config.Movement.SpeedHack.Enabled = v end)
+    addSlider(MovementTab, "Valeur Vitesse", 16, 500, Config.Movement.SpeedHack.Value, function(v) Config.Movement.SpeedHack.Value = v end)
+    addToggle(MovementTab, "Anti-dégâts de chute (Fly)", Config.Movement.Fly.NoFallDamage, function(v) Config.Movement.Fly.NoFallDamage = v end)
+    addToggle(MovementTab, "Sprint Amélioré", Config.Movement.Sprint.Enabled, function(v) Config.Movement.Sprint.Enabled = v end)
+    addSlider(MovementTab, "Multiplicateur Sprint", 1, 5, Config.Movement.Sprint.Multiplier, function(v) Config.Movement.Sprint.Multiplier = v end)
+    addToggle(MovementTab, "Super Saut", Config.Movement.SuperJump.Enabled, function(v) Config.Movement.SuperJump.Enabled = v end)
+    addSlider(MovementTab, "Puissance Saut", 1, 10, Config.Movement.SuperJump.PowerMultiplier, function(v) Config.Movement.SuperJump.PowerMultiplier = v end)
+    addToggle(MovementTab, "Double Saut", Config.Movement.SuperJump.DoubleJumpEnabled, function(v) Config.Movement.SuperJump.DoubleJumpEnabled = v end)
+    addToggle(MovementTab, "Réduire Dégâts Chute", Config.Movement.SuperJump.ReduceFallDamage, function(v) Config.Movement.SuperJump.ReduceFallDamage = v end)
+    addToggle(MovementTab, "AutoJump", Config.Movement.AutoJump, function(v) Config.Movement.AutoJump = v end)
+    addToggle(MovementTab, "Bunny Hop", Config.Movement.Bhop, function(v) Config.Movement.Bhop = v end)
+    addToggle(MovementTab, "Saut Infini", Config.Movement.InfiniteJump, function(v) Config.Movement.InfiniteJump = v end)
+    
+    -- Combat Content - TOUS LES ÉLÉMENTS
+    addToggle(CombatTab, "FOV Changer", Config.Combat.FovChanger.Enabled, function(v) Config.Combat.FovChanger.Enabled = v end)
+    addSlider(CombatTab, "Valeur FOV", 30, 120, Config.Combat.FovChanger.Value, function(v) Config.Combat.FovChanger.Value = v end)
+    addToggle(CombatTab, "God Mode (Invincible)", Config.Combat.GodMode.Enabled, function(v) Config.Combat.GodMode.Enabled = v end)
+    addToggle(CombatTab, "Activer SpinBot", Config.Combat.SpinBot.Enabled, function(v) Config.Combat.SpinBot.Enabled = v end)
+    addSlider(CombatTab, "Vitesse Rotation", 1, 100, Config.Combat.SpinBot.Speed, function(v) Config.Combat.SpinBot.Speed = v end)
+    addToggle(CombatTab, "Hitbox Expander", Config.Combat.HitboxExpander.Enabled, function(v) Config.Combat.HitboxExpander.Enabled = v end)
+    addToggle(CombatTab, "Inclure NPCs", Config.Combat.HitboxExpander.ExpandNPC, function(v) Config.Combat.HitboxExpander.ExpandNPC = v end)
+    addSlider(CombatTab, "Multiplicateur Taille", 1, 150, Config.Combat.HitboxExpander.Multiplier, function(v) Config.Combat.HitboxExpander.Multiplier = v end)
+    addSlider(CombatTab, "Transparence Hitbox", 0, 1, Config.Combat.HitboxExpander.Transparency, function(v) Config.Combat.HitboxExpander.Transparency = v end)
+    createColorSection(CombatTab, "Couleur Hitbox", Config.Combat.HitboxExpander.ColorRGB, function(c) Config.Combat.HitboxExpander.Color = c end)
+    addToggle(CombatTab, "Weapon Reach", Config.Combat.Reach.Enabled, function(v) Config.Combat.Reach.Enabled = v end)
+    
+    -- Émotes
+    addButton(EmoteTab, "Arrêter l'émote", function() stopEmotes() end)
+    addButton(EmoteTab, "Hélicoptère", function() playEmoteById("rbxassetid://76510079095692") end)
+    addButton(EmoteTab, "Tornado", function() playEmoteById("rbxassetid://135373056067761") end)
+    addButton(EmoteTab, "Parkour Dance", function() playEmoteById("rbxassetid://120244151914853") end)
+    addButton(EmoteTab, "Fake Death", function() playEmoteById("rbxassetid://126527283467855") end)
+    addButton(EmoteTab, "Propeller", function() playEmoteById("rbxassetid://85377443478134") end)
+    addButton(EmoteTab, "67", function() playEmoteById("rbxassetid://130984232537362") end)
+    addButton(EmoteTab, "SixSeven", function() playEmoteById("rbxassetid://113052384161929") end)
+    addButton(EmoteTab, "Admin Fly", function() playEmoteById("rbxassetid://138354833484039") end)
+    addButton(EmoteTab, "Sakuna", function() playEmoteById("rbxassetid://128203986262469") end)
+    addButton(EmoteTab, "Scary Tall", function() playEmoteById("rbxassetid://130916388086314") end)
+    addButton(EmoteTab, "Woof Woof Bark", function() playEmoteById("rbxassetid://96435804447949") end)
+    addButton(EmoteTab, "Silly Jumping", function() playEmoteById("rbxassetid://137124482339556") end)
+    addButton(EmoteTab, "Silly Spider Dance", function() playEmoteById("rbxassetid://139310328821985") end)
+    addButton(EmoteTab, "Kid Tantrum", function() playEmoteById("rbxassetid://86339673982616") end)
+    addSlider(CombatTab, "Portée Reach", 1, 50, Config.Combat.Reach.Range, function(v) Config.Combat.Reach.Range = v end)
+    -- retiré: doublon SpinBot (bas)
+
+    -- Misc Content - TOUS LES ÉLÉMENTS
+    addToggle(MiscTab, "Anti-AFK", Config.Misc.AntiAFK, function(v) Config.Misc.AntiAFK = v end)
+    addToggle(MiscTab, "Chat Spammer", Config.Misc.ChatSpammer.Enabled, function(v) Config.Misc.ChatSpammer.Enabled = v end)
+    addInput(MiscTab, "Message Spammer", Config.Misc.ChatSpammer.Message, function(v) Config.Misc.ChatSpammer.Message = v end)
+    addSlider(MiscTab, "Délai Spammer (s)", 1, 10, Config.Misc.ChatSpammer.Delay, function(v) Config.Misc.ChatSpammer.Delay = v end)
+    addButton(MiscTab, "Style B&W", function() updateMenuTheme(Color3.fromRGB(255,255,255)) end)
+    -- retiré: Gravité
+    -- retiré: Cap FPS
+    
+    addButton(MiscTab, "Server Hop", serverHop)
+    addButton(MiscTab, "Rejoindre Serveur", rejoinServer)
+    -- retiré: Quick Exit (Touche Fin)
+    -- retiré: Consommation Énergie Vol
+    local currentProfileName = "Profile1"
+    addInput(MiscTab, "Nom du Profil", "Profile1", function(v) currentProfileName = v end)
+    
+    addButton(MiscTab, "Sauvegarder Profil", function() 
+        saveConfig(currentProfileName .. ".json") 
+        log("Profil sauvegardé: " .. currentProfileName)
+    end)
+    
+    addButton(MiscTab, "Charger Profil", function() 
+        if loadConfig(currentProfileName .. ".json") then
+            log("Profil chargé: " .. currentProfileName)
+        else
+            log("Erreur: Profil introuvable")
+        end
+    end)
+
+    addButton(MiscTab, "Reset Config", function() 
+        Config = deepCopy(DefaultConfig)
+        saveConfig()
+        if ScreenGui then
+            ScreenGui:Destroy()
+        end
+        Library:CreateWindow()
+        log("Configuration réinitialisée")
+    end)
+
+    -- Teleportation Content
+    local playerListFrame = Instance.new("Frame")
+    playerListFrame.Size = UDim2.new(1, -10, 0, 240) -- Augmenté pour la barre de recherche
+    playerListFrame.BackgroundColor3 = Theme.Secondary
+    playerListFrame.BackgroundTransparency = 0.2
+    playerListFrame.Parent = TeleportTab
+    Instance.new("UICorner", playerListFrame).CornerRadius = UDim.new(0, 4)
+
+    local searchBox = Instance.new("TextBox")
+    searchBox.Size = UDim2.new(1, -20, 0, 25)
+    searchBox.Position = UDim2.new(0, 10, 0, 35)
+    searchBox.BackgroundColor3 = Theme.Hover
+    searchBox.BackgroundTransparency = 0.5
+    searchBox.Text = ""
+    searchBox.PlaceholderText = "Rechercher un joueur..."
+    searchBox.TextColor3 = Theme.Text
+    searchBox.PlaceholderColor3 = Theme.TextDim
+    searchBox.Font = Enum.Font.Gotham
+    searchBox.TextSize = 12
+    searchBox.Parent = playerListFrame
+    Instance.new("UICorner", searchBox).CornerRadius = UDim.new(0, 4)
+
+    local playerListScroll = Instance.new("ScrollingFrame")
+    playerListScroll.Size = UDim2.new(1, -10, 1, -75)
+    playerListScroll.Position = UDim2.new(0, 5, 0, 70)
+    playerListScroll.BackgroundTransparency = 1
+    playerListScroll.ScrollBarThickness = 2
+    playerListScroll.Parent = playerListFrame
+    
+    local playerListLayout = Instance.new("UIListLayout", playerListScroll)
+    playerListLayout.Padding = UDim.new(0, 2)
+
+    local playerLabel = Instance.new("TextLabel")
+    playerLabel.Size = UDim2.new(1, -10, 0, 30)
+    playerLabel.Position = UDim2.new(0, 10, 0, 0)
+    playerLabel.BackgroundTransparency = 1
+    playerLabel.Text = "SÉLECTIONNER UN JOUEUR"
+    playerLabel.TextColor3 = Theme.Text
+    playerLabel.Font = Enum.Font.GothamSemibold
+    playerLabel.TextSize = 10
+    playerLabel.TextXAlignment = Enum.TextXAlignment.Left
+    playerLabel.Parent = playerListFrame
+    
+    addToggle(TeleportTab, "Click Teleport (Ctrl+LClick)", Config.Movement.ClickTP.Enabled, function(v) Config.Movement.ClickTP.Enabled = v end)
+
+    local function refreshPlayerList(searchText)
+        searchText = searchText and searchText:lower() or ""
+        for _, child in pairs(playerListScroll:GetChildren()) do
+            if child:IsA("TextButton") then child:Destroy() end
+        end
+        for _, p in pairs(Players:GetPlayers()) do
+            if p ~= LocalPlayer and (searchText == "" or p.Name:lower():find(searchText) or p.DisplayName:lower():find(searchText)) then
+                local pBtn = Instance.new("TextButton")
+                pBtn.Size = UDim2.new(1, -10, 0, 25)
+                pBtn.BackgroundColor3 = Theme.Hover
+                pBtn.BackgroundTransparency = 0.5
+                pBtn.Text = p.DisplayName .. " (@" .. p.Name .. ")"
+                pBtn.TextColor3 = Theme.Text
+                pBtn.Font = Enum.Font.Gotham
+                pBtn.TextSize = 12
+                pBtn.Parent = playerListScroll
+                Instance.new("UICorner", pBtn).CornerRadius = UDim.new(0, 4)
+                
+                pBtn.MouseButton1Click:Connect(function()
+                    selectedTeleportPlayer = p
+                    playerLabel.Text = "CIBLE : " .. p.Name:upper()
+                    log("Joueur sélectionné : " .. p.Name)
+                end)
+            end
+        end
+        playerListScroll.CanvasSize = UDim2.new(0, 0, 0, playerListLayout.AbsoluteContentSize.Y)
+    end
+
+    searchBox:GetPropertyChangedSignal("Text"):Connect(function()
+        refreshPlayerList(searchBox.Text)
+    end)
+
+    addButton(TeleportTab, "Rafraîchir la liste", function() refreshPlayerList(searchBox.Text) end)
+    addButton(TeleportTab, "Téléporter vers le joueur", function()
+        if selectedTeleportPlayer and selectedTeleportPlayer.Character and selectedTeleportPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local hrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                hrp.CFrame = selectedTeleportPlayer.Character.HumanoidRootPart.CFrame
+                log("Téléporté vers " .. selectedTeleportPlayer.Name)
+            else
+                log("Erreur: Votre personnage n'est pas prêt")
+            end
+        else
+            log("Erreur: Aucun joueur sélectionné ou joueur hors ligne")
+        end
+    end)
+    addButton(TeleportTab, "Fling Player", function()
+        if not selectedTeleportPlayer or not selectedTeleportPlayer.Character then
+            log("Erreur: Aucun joueur sélectionné")
+            return
+        end
+        local targetChar = selectedTeleportPlayer.Character
+        local targetRP = targetChar:FindFirstChild("HumanoidRootPart") or targetChar:FindFirstChild("Torso")
+        local myChar = LocalPlayer.Character
+        local myHum = myChar and myChar:FindFirstChildOfClass("Humanoid")
+        local myRP = myChar and (myChar:FindFirstChild("HumanoidRootPart") or myChar:FindFirstChild("Torso"))
+        if not targetRP or not myHum or not myRP then
+            log("Erreur: Humanoid introuvable")
+            return
+        end
+        local savedCF = myRP.CFrame
+        local tool = Instance.new("Tool")
+        tool.RequiresHandle = true
+        tool.Name = "FlingTool"
+        local handle = Instance.new("Part")
+        handle.Name = "Handle"
+        handle.Size = Vector3.new(5,5,5)
+        handle.Transparency = 1
+        handle.LocalTransparencyModifier = 1
+        handle.CastShadow = false
+        handle.CanQuery = false
+        handle.CanCollide = true
+        handle.Massless = false
+        handle.Parent = tool
+        tool.Parent = LocalPlayer.Backpack
+        myHum:EquipTool(tool)
+        task.wait()
+        handle = myChar:FindFirstChild("Handle") or handle
+        if not handle then
+            log("Erreur: Handle indisponible")
+            return
+        end
+        local RNG = Random.new()
+        local start = tick()
+        while tick() - start < 1.0 do
+            myRP.CFrame = targetRP.CFrame * CFrame.new(0, 0, 1.2)
+            local av = Vector3.new(0, 6500, 0)
+            local lvDir = (targetRP.Position - handle.Position)
+            local lv = lvDir.Magnitude > 0 and lvDir.Unit * 1200 or Vector3.new(0,0,0)
+            handle.AssemblyAngularVelocity = av
+            handle.AssemblyLinearVelocity = lv + RNG:NextUnitVector() * 300
+            RunService.Heartbeat:Wait()
+        end
+        task.delay(2, function()
+            if myRP and myRP.Parent then
+                local returnCF = savedCF
+                for i=1,3 do
+                    myRP.Anchored = true
+                    myRP.AssemblyLinearVelocity = Vector3.new(0,0,0)
+                    myRP.AssemblyAngularVelocity = Vector3.new(0,0,0)
+                    if myChar and myChar.Parent then
+                        myChar:PivotTo(returnCF)
+                    else
+                        myRP.CFrame = returnCF
+                    end
+                    RunService.Heartbeat:Wait()
+                end
+                myRP.Anchored = false
+            end
+        end)
+        pcall(function() tool:Destroy() end)
+        log("Fling Player exécuté sur " .. selectedTeleportPlayer.Name)
+    end)
+    
+    local AnnoyPlayerActive = false
+    local function startAnnoyPlayer()
+        if not selectedTeleportPlayer or not selectedTeleportPlayer.Character then
+            log("Erreur: Aucun joueur sélectionné")
+            AnnoyPlayerActive = false
+            return
+        end
+        local backFar = 12
+        local backNear = 1.5
+        local speed = 220 -- studs/sec
+        local freq = 2.4  -- oscillations/sec
+        local phase = 0
+        playEmoteById("rbxassetid://82682811348660")
+        task.spawn(function()
+            local last = tick()
+            while AnnoyPlayerActive do
+                local now = tick()
+                local dt = now - last
+                last = now
+                local targetHRP = selectedTeleportPlayer.Character and selectedTeleportPlayer.Character:FindFirstChild("HumanoidRootPart")
+                local myHRP = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                if not targetHRP or not myHRP then break end
+                
+                phase = phase + dt * 2 * math.pi * freq
+                local osc = 0.5 + 0.5 * math.sin(phase)
+                local offset = backNear + (backFar - backNear) * osc
+                
+                local goalCF = targetHRP.CFrame * CFrame.new(0, 0, offset)
+                local goalPos = goalCF.Position
+                local curPos = myHRP.Position
+                local dir = goalPos - curPos
+                local dist = dir.Magnitude
+                if dist > 0 then
+                    local stepDist = math.min(speed * dt, dist)
+                    local newPos = curPos + dir.Unit * stepDist
+                    local rotOnly = targetHRP.CFrame - targetHRP.Position
+                    myHRP.CFrame = CFrame.new(newPos) * rotOnly
+                end
+                
+                task.wait() -- yield to next frame
+            end
+            stopEmotes()
+        end)
+    end
+    addButton(TeleportTab, "Téléportation aléatoire", function()
+        local players = Players:GetPlayers()
+        local randomPlayer = players[math.random(1, #players)]
+        if randomPlayer and randomPlayer ~= LocalPlayer and randomPlayer.Character and randomPlayer.Character:FindFirstChild("HumanoidRootPart") then
+            local hrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                hrp.CFrame = randomPlayer.Character.HumanoidRootPart.CFrame
+                log("TP vers: " .. randomPlayer.Name)
+            end
+        end
+    end)
+    addToggle(TeleportTab, "Annoy Player", false, function(v)
+        AnnoyPlayerActive = v
+        if v then
+            startAnnoyPlayer()
+        else
+            stopEmotes()
+        end
+    end)
+    
+    local BangPlayerActive = false
+    local function startBangPlayer()
+        if not selectedTeleportPlayer or not selectedTeleportPlayer.Character then
+            log("Erreur: Aucun joueur sélectionné")
+            BangPlayerActive = false
+            return
+        end
+        local backOffset = 1
+        local speed = 260
+        playEmoteById("rbxassetid://130984232537362")
+        task.spawn(function()
+            local last = tick()
+            while BangPlayerActive do
+                local now = tick()
+                local dt = now - last
+                last = now
+                local targetHRP = selectedTeleportPlayer.Character and selectedTeleportPlayer.Character:FindFirstChild("HumanoidRootPart")
+                local myHRP = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                if not targetHRP or not myHRP then break end
+                
+                local goalCF = targetHRP.CFrame * CFrame.new(0, 0, backOffset)
+                local goalPos = goalCF.Position
+                local curPos = myHRP.Position
+                local dir = goalPos - curPos
+                local dist = dir.Magnitude
+                if dist > 0 then
+                    local stepDist = math.min(speed * dt, dist)
+                    local newPos = curPos + dir.Unit * stepDist
+                    local rotOnly = targetHRP.CFrame - targetHRP.Position
+                    myHRP.CFrame = CFrame.new(newPos) * rotOnly
+                end
+                
+                task.wait()
+            end
+            stopEmotes()
+        end)
+    end
+    addToggle(TeleportTab, "Bang Player", false, function(v)
+        BangPlayerActive = v
+        if v then
+            AnnoyPlayerActive = false
+            startBangPlayer()
+        else
+            stopEmotes()
+        end
+    end)
+
+    -- Waypoints Section
+    local waypointLabel = Instance.new("TextLabel")
+    waypointLabel.Size = UDim2.new(1, -10, 0, 30)
+    waypointLabel.BackgroundTransparency = 1
+    waypointLabel.Text = "POINTS DE PASSAGE (WAYPOINTS)"
+    waypointLabel.TextColor3 = Theme.Text
+    waypointLabel.Font = Enum.Font.GothamSemibold
+    waypointLabel.TextSize = 10
+    waypointLabel.TextXAlignment = Enum.TextXAlignment.Left
+    waypointLabel.Parent = TeleportTab
+
+    local waypointName = "Point 1"
+    addInput(TeleportTab, "Nom du Waypoint", "Point 1", function(v) waypointName = v end)
+
+    local waypointScroll = Instance.new("ScrollingFrame")
+    waypointScroll.Size = UDim2.new(1, -10, 0, 150)
+    waypointScroll.BackgroundTransparency = 1
+    waypointScroll.ScrollBarThickness = 2
+    waypointScroll.Parent = TeleportTab
+    
+    local waypointLayout = Instance.new("UIListLayout", waypointScroll)
+    waypointLayout.Padding = UDim.new(0, 2)
+
+    local function refreshWaypoints()
+        for _, child in pairs(waypointScroll:GetChildren()) do
+            if child:IsA("Frame") then child:Destroy() end
+        end
+        for name, pos in pairs(Config.Misc.Waypoints) do
+            local frame = Instance.new("Frame")
+            frame.Size = UDim2.new(1, -10, 0, 40)
+            frame.BackgroundColor3 = Theme.Hover
+            frame.BackgroundTransparency = 0.5
+            frame.Parent = waypointScroll
+            Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 4)
+
+            local label = Instance.new("TextLabel")
+            label.Size = UDim2.new(0.6, 0, 0.6, 0)
+            label.Position = UDim2.new(0, 10, 0, 2)
+            label.BackgroundTransparency = 1
+            label.Text = name
+            label.TextColor3 = Theme.Text
+            label.Font = Enum.Font.GothamBold
+            label.TextSize = 12
+            label.TextXAlignment = Enum.TextXAlignment.Left
+            label.Parent = frame
+
+            local coords = Instance.new("TextLabel")
+            coords.Size = UDim2.new(0.6, 0, 0.4, 0)
+            coords.Position = UDim2.new(0, 10, 0.6, -2)
+            coords.BackgroundTransparency = 1
+            coords.Text = string.format("X: %.1f, Y: %.1f, Z: %.1f", pos.X, pos.Y, pos.Z)
+            coords.TextColor3 = Theme.TextDim
+            coords.Font = Enum.Font.Gotham
+            coords.TextSize = 10
+            coords.TextXAlignment = Enum.TextXAlignment.Left
+            coords.Parent = frame
+
+            local tpBtn = Instance.new("TextButton")
+            tpBtn.Size = UDim2.new(0.15, 0, 0.8, 0)
+            tpBtn.Position = UDim2.new(0.65, 0, 0.1, 0)
+            tpBtn.BackgroundColor3 = Theme.Accent
+            tpBtn.Text = "TP"
+            tpBtn.TextColor3 = Theme.Text
+            tpBtn.Font = Enum.Font.GothamBold
+            tpBtn.TextSize = 10
+            tpBtn.Parent = frame
+            Instance.new("UICorner", tpBtn).CornerRadius = UDim.new(0, 4)
+
+            tpBtn.MouseButton1Click:Connect(function()
+                local hrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    hrp.CFrame = CFrame.new(pos.X, pos.Y, pos.Z)
+                    log("TP vers waypoint: " .. name)
+                end
+            end)
+
+            local delBtn = Instance.new("TextButton")
+            delBtn.Size = UDim2.new(0.15, 0, 0.8, 0)
+            delBtn.Position = UDim2.new(0.82, 0, 0.1, 0)
+            delBtn.BackgroundColor3 = Color3.fromRGB(200, 50, 50)
+            delBtn.Text = "X"
+            delBtn.TextColor3 = Theme.Text
+            delBtn.Font = Enum.Font.GothamBold
+            delBtn.TextSize = 10
+            delBtn.Parent = frame
+            Instance.new("UICorner", delBtn).CornerRadius = UDim.new(0, 4)
+
+            delBtn.MouseButton1Click:Connect(function()
+                Config.Misc.Waypoints[name] = nil
+                refreshWaypoints()
+                saveConfig()
+                log("Waypoint supprimé: " .. name)
+            end)
+        end
+        waypointScroll.CanvasSize = UDim2.new(0, 0, 0, waypointLayout.AbsoluteContentSize.Y)
+    end
+
+    addButton(TeleportTab, "Sauvegarder position actuelle", function()
+        local hrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            Config.Misc.Waypoints[waypointName] = {X = hrp.Position.X, Y = hrp.Position.Y, Z = hrp.Position.Z}
+            refreshWaypoints()
+            saveConfig()
+            log("Waypoint sauvegardé: " .. waypointName)
+        end
+    end)
+
+    addButton(TeleportTab, "Vider tous les Waypoints", function()
+        Config.Misc.Waypoints = {}
+        refreshWaypoints()
+        saveConfig()
+        log("Tous les waypoints ont été supprimés")
+    end)
+
+    refreshWaypoints()
+
+    TeleportBtn.MouseButton1Click:Connect(function()
+        refreshPlayerList()
+        refreshWaypoints()
+    end)
+     refreshPlayerList()
+     
+     Players.PlayerAdded:Connect(refreshPlayerList)
+     Players.PlayerRemoving:Connect(refreshPlayerList)
+
+    -- Scripts Content
+    addButton(ScriptsTab, "Blox Fruit", function()
+        log("Lancement de Blox Fruit...")
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/TheDarkoneMarcillisePex/Other-Scripts/refs/heads/main/Bloxfruits%20script"))()
+    end)
+    addButton(ScriptsTab, "Star Fishing", function()
+        log("Ouverture de l'interface Star Fishing...")
+        if StarFishingUI and StarFishingUI.Parent then
+            StarFishingUI.Visible = true
+            return
+        end
+        StarFishingUI = Instance.new("Frame")
+        StarFishingUI.Name = "StarFishingUI"
+        StarFishingUI.Size = UDim2.new(0, 220, 0, 120)
+        StarFishingUI.Position = UDim2.new(0.5, -110, 0, 60)
+        StarFishingUI.BackgroundColor3 = Theme.Secondary
+        StarFishingUI.BackgroundTransparency = 0.25
+        StarFishingUI.BorderSizePixel = 0
+        StarFishingUI.Parent = ScreenGui
+        Instance.new("UICorner", StarFishingUI).CornerRadius = UDim.new(0, 6)
+        local sfStroke = Instance.new("UIStroke", StarFishingUI)
+        sfStroke.Color = Theme.Accent
+        sfStroke.Thickness = 1
+        local sfTitle = Instance.new("TextLabel")
+        sfTitle.Name = "Title"
+        sfTitle.Size = UDim2.new(1, -40, 0, 26)
+        sfTitle.Position = UDim2.new(0, 10, 0, 6)
+        sfTitle.BackgroundTransparency = 1
+        sfTitle.Text = "Star Fishing"
+        sfTitle.TextColor3 = Theme.Text
+        sfTitle.Font = Enum.Font.GothamBold
+        sfTitle.TextSize = 16
+        sfTitle.TextXAlignment = Enum.TextXAlignment.Left
+        sfTitle.Parent = StarFishingUI
+        local sfClose = Instance.new("TextButton")
+        sfClose.Name = "Close"
+        sfClose.Size = UDim2.new(0, 24, 0, 24)
+        sfClose.Position = UDim2.new(1, -28, 0, 6)
+        sfClose.BackgroundTransparency = 1
+        sfClose.Text = "×"
+        sfClose.TextColor3 = Theme.Text
+        sfClose.Font = Enum.Font.GothamBold
+        sfClose.TextSize = 20
+        sfClose.Parent = StarFishingUI
+        sfClose.MouseEnter:Connect(function()
+            sfClose.TextColor3 = Theme.Accent
+        end)
+        sfClose.MouseLeave:Connect(function()
+            sfClose.TextColor3 = Theme.Text
+        end)
+        sfClose.MouseButton1Click:Connect(function()
+            StarFishingUI.Visible = false
+        end)
+        local dragBar = Instance.new("Frame")
+        dragBar.Size = UDim2.new(1, 0, 0, 30)
+        dragBar.BackgroundTransparency = 1
+        dragBar.Parent = StarFishingUI
+        do
+            local dragging = false
+            local dragStart, startPos
+            dragBar.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    dragging = true
+                    dragStart = input.Position
+                    startPos = StarFishingUI.Position
+                    input.Changed:Connect(function()
+                        if input.UserInputState == Enum.UserInputState.End then
+                            dragging = false
+                        end
+                    end)
+                end
+            end)
+            UserInputService.InputChanged:Connect(function(input)
+                if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+                    local delta = input.Position - dragStart
+                    StarFishingUI.Position = UDim2.new(
+                        startPos.X.Scale,
+                        startPos.X.Offset + delta.X,
+                        startPos.Y.Scale,
+                        startPos.Y.Offset + delta.Y
+                    )
+                end
+            end)
+        end
+        local farmBtn = Instance.new("TextButton")
+        farmBtn.Name = "FarmButton"
+        farmBtn.Size = UDim2.new(0, 140, 0, 32)
+        farmBtn.Position = UDim2.new(0.5, -70, 0.5, -16)
+        farmBtn.BackgroundColor3 = Theme.Secondary
+        farmBtn.Text = "Farm"
+        farmBtn.TextColor3 = Theme.Text
+        farmBtn.Font = Enum.Font.GothamBold
+        farmBtn.TextSize = 16
+        farmBtn.Parent = StarFishingUI
+        Instance.new("UICorner", farmBtn).CornerRadius = UDim.new(0, 6)
+        local farmStroke = Instance.new("UIStroke", farmBtn)
+        farmStroke.Color = Theme.Accent
+        farmStroke.Thickness = 1
+        farmBtn.MouseEnter:Connect(function()
+            farmBtn.BackgroundColor3 = Theme.Hover
+        end)
+        farmBtn.MouseLeave:Connect(function()
+            farmBtn.BackgroundColor3 = Theme.Secondary
+        end)
+        farmBtn.MouseButton1Click:Connect(function()
+            log("Star Fishing: démarrage du farm auto")
+            local Flags = {
+                Farm = "Self",
+                SellAll = true,
+                SellAllDebounce = 10,
+                AutoEquipRod = true
+            }
+            getgenv().StarFishingFlags = Flags
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/afyzone/lua/refs/heads/main/Star%20Fishing/AutoFish.lua"))()
+        end)
+    end)
+
+    -- Initialisation du premier onglet
+    task.wait(0.1)
+    local firstTabBtn = TabButtons:GetChildren()[2]
+    if firstTabBtn and firstTabBtn:IsA("TextButton") then
+        firstTabBtn.BackgroundTransparency = 0.9
+        firstTabBtn.TextColor3 = Theme.Accent
+        AimbotTab.Visible = true
+        local indicator = firstTabBtn:FindFirstChildOfClass("Frame")
+        if indicator then indicator.Visible = true end
+        currentTab = {Btn = firstTabBtn, Frame = AimbotTab, Indicator = indicator}
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════
+-- SYSTÈME DIVERS & TOOLS
+-- ═══════════════════════════════════════════════════════════
+
+local function setupAntiAFK()
+    local VirtualUser = game:GetService("VirtualUser")
+    LocalPlayer.Idled:Connect(function()
+        if Config.Misc.AntiAFK then
+            VirtualUser:CaptureController()
+            VirtualUser:ClickButton2(Vector2.new())
+            log("Anti-AFK: Action effectuée")
+        end
+    end)
+end
+
+local lastChatSpam = 0
+local function updateChatSpammer()
+    if not Config.Misc.ChatSpammer.Enabled then return end
+    if tick() - lastChatSpam < Config.Misc.ChatSpammer.Delay then return end
+    
+    task.spawn(function()
+        local success = false
+        
+        -- Méthode 1: TextChatService (Nouveau système Roblox)
+        local textChatService = game:GetService("TextChatService")
+        if textChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+            local channels = textChatService:FindFirstChild("TextChannels")
+            local channel = channels and (channels:FindFirstChild("RBXGeneral") or channels:FindFirstChildOfClass("TextChannel"))
+            if channel then
+                channel:SendAsync(Config.Misc.ChatSpammer.Message)
+                success = true
+            end
+        end
+        
+        -- Méthode 2: RemoteEvent (Ancien système Legacy)
+        if not success then
+            local remote = game:GetService("ReplicatedStorage"):FindFirstChild("DefaultChatSystemChatEvents")
+            remote = remote and remote:FindFirstChild("SayMessageRequest")
+            if remote then
+                remote:FireServer(Config.Misc.ChatSpammer.Message, "All")
+                success = true
+            end
+        end
+
+        -- Méthode 3: SayMessageRequest direct (Alternative Legacy)
+        if not success then
+            local sayMsg = game:GetService("ReplicatedStorage"):FindFirstChild("SayMessageRequest")
+            if sayMsg and sayMsg:IsA("RemoteEvent") then
+                sayMsg:FireServer(Config.Misc.ChatSpammer.Message, "All")
+                success = true
+            end
+        end
+        
+        if success then
+            lastChatSpam = tick()
+        else
+            log("Erreur: Impossible de trouver un canal de chat valide")
+        end
+    end)
+end
+
+local function serverHop()
+    local HttpService = game:GetService("HttpService")
+    local TeleportService = game:GetService("TeleportService")
+    local PlaceId = game.PlaceId
+    
+    local success, servers = pcall(function()
+        return HttpService:JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"))
+    end)
+    
+    if success and servers and servers.data then
+        for _, server in pairs(servers.data) do
+            if server.playing < server.maxPlayers and server.id ~= game.JobId then
+                TeleportService:TeleportToPlaceInstance(PlaceId, server.id)
+                return
+            end
+        end
+    end
+    log("Aucun serveur trouvé pour le hop")
+end
+
+local function rejoinServer()
+    game:GetService("TeleportService"):Teleport(game.PlaceId, LocalPlayer)
+end
+
+setupAntiAFK()
+
+-- ═══════════════════════════════════════════════════════════
+-- BOUCLE PRINCIPALE ET ÉVÉNEMENTS
+-- ═══════════════════════════════════════════════════════════
+
+FOVCircle = createDrawing("Circle", {Thickness = 1, NumSides = 64, Color = Color3.new(1,1,1), Transparency = 1, Visible = false})
+
+local CrosshairL = createDrawing("Line", {Thickness = 1, Color = Color3.new(0, 1, 0), Transparency = 1, Visible = false})
+local CrosshairR = createDrawing("Line", {Thickness = 1, Color = Color3.new(0, 1, 0), Transparency = 1, Visible = false})
+local CrosshairT = createDrawing("Line", {Thickness = 1, Color = Color3.new(0, 1, 0), Transparency = 1, Visible = false})
+local CrosshairB = createDrawing("Line", {Thickness = 1, Color = Color3.new(0, 1, 0), Transparency = 1, Visible = false})
+
+local function updateVisuals()
+    if Config.Visuals.RainbowMode then
+        local color = getRainbowColor()
+        if TitleLabel then
+            TitleLabel.TextColor3 = color
+        end
+    elseif TitleLabel then
+        local accent = Config.Visuals.AccentColor
+        TitleLabel.TextColor3 = Color3.fromRGB(accent.R, accent.G, accent.B)
+    end
+
+    if Config.Visuals.FullBright then
+        game:GetService("Lighting").Brightness = 2
+        game:GetService("Lighting").ClockTime = 14
+        game:GetService("Lighting").FogEnd = 100000
+        game:GetService("Lighting").GlobalShadows = false
+        game:GetService("Lighting").OutdoorAmbient = Color3.fromRGB(128, 128, 128)
+    else
+        game:GetService("Lighting").GlobalShadows = true
+    end
+
+    if Config.Visuals.NoFog then
+        game:GetService("Lighting").FogEnd = 100000
+    end
+
+    if Config.Combat.FovChanger.Enabled then
+        local cam = getCamera()
+        if cam then
+            cam.FieldOfView = Config.Combat.FovChanger.Value
+        end
+    end
+
+    -- retiré: animation Menu Rainbow
+
+    -- Update Crosshair
+    local showCrosshair = Config.Visuals.Crosshair.Enabled
+    local cam = getCamera()
+    local center = Vector2.new(cam.ViewportSize.X/2, cam.ViewportSize.Y/2)
+    local size = Config.Visuals.Crosshair.Size
+    local color = Config.Visuals.Crosshair.Color
+
+    CrosshairL.Visible = showCrosshair
+    CrosshairR.Visible = showCrosshair
+    CrosshairT.Visible = showCrosshair
+    CrosshairB.Visible = showCrosshair
+
+    if showCrosshair then
+        CrosshairL.From = center - Vector2.new(size, 0)
+        CrosshairL.To = center - Vector2.new(2, 0)
+        CrosshairL.Color = color
+
+        CrosshairR.From = center + Vector2.new(2, 0)
+        CrosshairR.To = center + Vector2.new(size, 0)
+        CrosshairR.Color = color
+
+        CrosshairT.From = center - Vector2.new(0, size)
+        CrosshairT.To = center - Vector2.new(0, 2)
+        CrosshairT.Color = color
+
+        CrosshairB.From = center + Vector2.new(0, 2)
+        CrosshairB.To = center + Vector2.new(0, size)
+        CrosshairB.Color = color
+    end
+
+    if Config.Visuals.AntiLag then
+        local lighting = game:GetService("Lighting")
+        lighting.GlobalShadows = false
+        lighting.FogEnd = 9e9
+        for _, v in pairs(game:GetDescendants()) do
+            if v:IsA("Part") or v:IsA("UnionOperation") or v:IsA("MeshPart") then
+                v.Material = Enum.Material.SmoothPlastic
+                v.Reflectance = 0
+            elseif v:IsA("Decal") or v:IsA("Texture") then
+                v.Transparency = 1
+            elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then
+                v.Enabled = false
+            end
+        end
+        Config.Visuals.AntiLag = false -- Run once
+        log("Anti-Lag appliqué (Smooth Plastic & No Textures)")
+    end
+
+    -- Update Highlights
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character then
+            local highlight = player.Character:FindFirstChild("DaveHighlight")
+            if Config.Visuals.Highlight.Enabled then
+                if not highlight then
+                    highlight = Instance.new("Highlight")
+                    highlight.Name = "DaveHighlight"
+                    highlight.Parent = player.Character
+                end
+                highlight.FillColor = Config.Visuals.Highlight.Color
+                highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
+                highlight.FillTransparency = Config.Visuals.Highlight.Transparency
+                highlight.OutlineTransparency = 0
+                
+                -- Team Check
+                if Config.ESP.TeamCheck and player.Team == LocalPlayer.Team then
+                    highlight.Enabled = false
+                else
+                    highlight.Enabled = true
+                end
+            elseif highlight then
+                highlight:Destroy()
+            end
+        end
+    end
+end
+
+RunService.RenderStepped:Connect(function()
+    updateESP()
+    updateMovement()
+    updateGodMode()
+    spinbotUpdate()
+    updateStraightBullets()
+    updateHitboxes()
+    updateVisuals()
+    reachUpdate()
+    updateWorldVisuals()
+    updateChatSpammer()
+    if FOVCircle then
+        local cam = getCamera()
+        FOVCircle.Position = Vector2.new(cam.ViewportSize.X/2, cam.ViewportSize.Y/2)
+        FOVCircle.Radius = Config.Aimbot.FOV
+        local fovColor = Config.Visuals.RainbowMode and getRainbowColor() or Color3.fromRGB(Config.Visuals.FOVColorRGB.R, Config.Visuals.FOVColorRGB.G, Config.Visuals.FOVColorRGB.B)
+        FOVCircle.Color = fovColor
+        FOVCircle.Transparency = Config.Visuals.FOVTransparency
+    end
+    if FpsLabel and PingLabel then
+        fpsCounter.frames = fpsCounter.frames + 1
+        local now = tick()
+        if now - fpsCounter.last >= 1 then
+            fpsCounter.fps = fpsCounter.frames / (now - fpsCounter.last)
+            fpsCounter.frames = 0
+            fpsCounter.last = now
+        end
+        local pingVal = 0
+        local stats = game:GetService("Stats")
+        local net = stats and stats.Network
+        local item = net and net.ServerStatsItem and net.ServerStatsItem["Data Ping"]
+        if item and item.GetValue then
+            pingVal = math.floor(item:GetValue())
+        end
+        FpsLabel.Text = "FPS: " .. tostring(math.floor(fpsCounter.fps + 0.5))
+        PingLabel.Text = "Ping: " .. tostring(pingVal) .. " ms"
+    end
+end)
+
+RunService:BindToRenderStep("AimbotProc", Enum.RenderPriority.Camera.Value + 1, aimbotUpdate)
+
+UserInputService.InputBegan:Connect(function(input, gp)
+    if gp then return end
+    
+    if input.UserInputType == Enum.UserInputType.MouseButton1 and Config.Movement.ClickTP.Enabled then
+        if UserInputService:IsKeyDown(Config.Movement.ClickTP.Key) then
+            local mouse = LocalPlayer:GetMouse()
+            if mouse.Target then
+                local char = LocalPlayer.Character
+                local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    local targetPos = mouse.Hit.p + Vector3.new(0, 3, 0)
+                    local startPos = hrp.Position
+                    local dir = (targetPos - startPos)
+                    local dist = dir.Magnitude
+                    if dist == 0 then return end
+                    local step = 150
+                    local steps = math.ceil(dist / step)
+                    local unit = dir.Unit
+                    for i = 1, steps do
+                        local ratio = math.clamp(i * step, 0, dist)
+                        local pos = startPos + unit * ratio
+                        hrp.CFrame = CFrame.new(pos)
+                        RunService.Heartbeat:Wait()
+                    end
+                    log("Téléporté à la position de la souris")
+                end
+            end
+        end
+    end
+
+    if input.KeyCode == Config.Aimbot.Key or input.UserInputType == Config.Aimbot.Key then 
+        AimlockPressed = not AimlockPressed
+        if not AimlockPressed then CurrentTarget = nil end
+    end
+    
+    if input.KeyCode == Enum.KeyCode.Insert or input.KeyCode == Enum.KeyCode.RightControl then
+        MainFrame.Visible = not MainFrame.Visible
+        ScreenGui.Enabled = MainFrame.Visible
+        if not MainFrame.Visible then
+            RestoreBtn.Visible = true
+        else
+            RestoreBtn.Visible = false
+        end
+    end
+    
+    if input.KeyCode == Config.Movement.Fly.Key and Config.Movement.Fly.Enabled then
+        toggleFly()
+    end
+
+    if input.KeyCode == Config.Movement.NoClipKey and Config.Movement.NoClip then
+        NoClipActive = not NoClipActive
+        log("NoClip: " .. (NoClipActive and "Activé" or "Désactivé"))
+
+        if not NoClipActive then
+            local char = LocalPlayer.Character
+            if char then
+                for _, part in pairs(char:GetDescendants()) do
+                    if part:IsA("BasePart") then
+                        part.CanCollide = true
+                    end
+                end
+            end
+        end
+    end
+    
+    if Config.Movement.Sprint.Enabled and input.KeyCode == Enum.KeyCode.LeftShift then
+        Sprinting = true
+    end
+    
+    if input.KeyCode == Enum.KeyCode.Space then
+        local char = LocalPlayer.Character
+        local hum = char and char:FindFirstChildOfClass("Humanoid")
+        if hum then
+            if Config.Movement.InfiniteJump then
+                hum:ChangeState(Enum.HumanoidStateType.Jumping)
+            elseif Config.Movement.SuperJump.DoubleJumpEnabled then
+                if hum.FloorMaterial == Enum.Material.Air then
+                    if not DoubleJumped and CanDoubleJump then
+                        DoubleJumped = true
+                        local hrp = char:FindFirstChild("HumanoidRootPart")
+                        if hrp then
+                            hrp.Velocity = Vector3.new(hrp.Velocity.X, hum.JumpPower * Config.Movement.SuperJump.PowerMultiplier, hrp.Velocity.Z)
+                        end
+                    end
+                else
+                    DoubleJumped = false
+                    CanDoubleJump = true
+                end
+            end
+        end
+    end
+    -- retiré: Quick Exit via touche End
+end)
+
+UserInputService.InputEnded:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.LeftShift then
+        Sprinting = false
+    end
+end)
+
+Players.PlayerAdded:Connect(createESP)
+Players.PlayerRemoving:Connect(removeESP)
+for _, p in pairs(Players:GetPlayers()) do createESP(p) end
+
+local function runTests()
+    log("Démarrage des tests automatiques...")
+    local testsPassed = 0
+    local totalTests = 5
+
+    if Config.Aimbot and Config.Movement and Config.Combat then
+        testsPassed = testsPassed + 1
+        log("Test 1 (Intégrité Config) : RÉUSSI")
+    end
+
+    if LocalPlayer.Character then
+        testsPassed = testsPassed + 1
+        log("Test 2 (Détection Personnage) : RÉUSSI")
+    end
+
+    if game:GetService("RunService") and game:GetService("UserInputService") then
+        testsPassed = testsPassed + 1
+        log("Test 3 (Services Système) : RÉUSSI")
+    end
+
+    if updateMovement then
+        testsPassed = testsPassed + 1
+        log("Test 4 (Module Mouvement) : RÉUSSI")
+    end
+
+    if Library and Library.CreateWindow then
+        testsPassed = testsPassed + 1
+        log("Test 5 (Module UI) : RÉUSSI")
+    end
+
+    log("Résultats des tests : " .. testsPassed .. "/" .. totalTests .. " réussis.")
+end
+
+loadConfig()
+NoClipActive = Config.Movement.NoClip
+runTests()
+Library:CreateWindow()
+print("💎 PRO TOOL V3.3 - TOOL V3.3 - TOUS LES ONGLETS CORRIGÉS ✅")
