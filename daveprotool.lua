@@ -77,8 +77,6 @@ local Config = {
             Enabled = false,
             Value = 50
         },
-        AutoJump = false,
-        Bhop = false,
         NoClip = false,
         NoClipKey = "N",
         InfiniteJump = false,
@@ -2095,8 +2093,7 @@ function Library:CreateWindow()
     addSlider(MovementTab, "Puissance Saut", 1, 10, Config.Movement.SuperJump.PowerMultiplier, function(v) Config.Movement.SuperJump.PowerMultiplier = v end)
     addToggle(MovementTab, "Double Saut", Config.Movement.SuperJump.DoubleJumpEnabled, function(v) Config.Movement.SuperJump.DoubleJumpEnabled = v end)
     addToggle(MovementTab, "Réduire Dégâts Chute", Config.Movement.SuperJump.ReduceFallDamage, function(v) Config.Movement.SuperJump.ReduceFallDamage = v end)
-    addToggle(MovementTab, "AutoJump", Config.Movement.AutoJump, function(v) Config.Movement.AutoJump = v end)
-    addToggle(MovementTab, "Bunny Hop", Config.Movement.Bhop, function(v) Config.Movement.Bhop = v end)
+
     addToggle(MovementTab, "Saut Infini", Config.Movement.InfiniteJump, function(v) Config.Movement.InfiniteJump = v end)
     
     -- Combat Content - TOUS LES ÉLÉMENTS
@@ -2136,12 +2133,12 @@ function Library:CreateWindow()
     addToggle(MiscTab, "Chat Spammer", Config.Misc.ChatSpammer.Enabled, function(v) Config.Misc.ChatSpammer.Enabled = v end)
     addInput(MiscTab, "Message Spammer", Config.Misc.ChatSpammer.Message, function(v) Config.Misc.ChatSpammer.Message = v end)
     addSlider(MiscTab, "Délai Spammer (s)", 1, 10, Config.Misc.ChatSpammer.Delay, function(v) Config.Misc.ChatSpammer.Delay = v end)
-    addButton(MiscTab, "Style B&W", function() updateMenuTheme(Color3.fromRGB(255,255,255)) end)
+
     -- retiré: Gravité
     -- retiré: Cap FPS
     
     addButton(MiscTab, "Server Hop", serverHop)
-    addButton(MiscTab, "Rejoindre Serveur", rejoinServer)
+
     -- retiré: Quick Exit (Touche Fin)
     -- retiré: Consommation Énergie Vol
     local currentProfileName = "Preset1"
