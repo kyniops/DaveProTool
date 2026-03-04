@@ -22,7 +22,7 @@ local Config = {
     Aimbot = {
         Enabled = false,
         TargetNPC = false,
-        Key = Enum.KeyCode.J,
+        Key = "J",
         Smoothness = 0,
         FOV = 150,
         ShowFOV = true,
@@ -47,14 +47,14 @@ local Config = {
         MaxDistance = 5000,
         TeamCheck = false,
         VisibleOnly = false,
-        BoxColor = Color3.fromRGB(255, 255, 255),
-        SkelColor = Color3.fromRGB(255, 255, 255),
+        BoxColor = {R = 255, G = 255, B = 255},
+        SkelColor = {R = 255, G = 255, B = 255},
         Color = {R = 255, G = 255, B = 255}
     },
     Movement = {
         Fly = {
             Enabled = false,
-            Key = Enum.KeyCode.F,
+            Key = "F",
             Speed = 50,
             AscendSpeed = 30,
             NoFallDamage = true,
@@ -80,9 +80,9 @@ local Config = {
         AutoJump = false,
         Bhop = false,
         NoClip = false,
-        NoClipKey = Enum.KeyCode.N,
+        NoClipKey = "N",
         InfiniteJump = false,
-        ClickTP = {Enabled = false, Key = Enum.KeyCode.LeftControl}
+        ClickTP = {Enabled = false, Key = "LeftControl"}
     },
     Combat = {
         SpinBot = {
@@ -93,7 +93,7 @@ local Config = {
             Enabled = false,
             Multiplier = 1.5,
             Transparency = 0.9,
-            Color = Color3.fromRGB(0, 255, 255),
+            Color = {R = 0, G = 255, B = 255},
             ColorRGB = {R = 0, G = 255, B = 255},
             ExpandNPC = false
         },
@@ -113,13 +113,13 @@ local Config = {
         FullBright = false,
         NoFog = false,
         Chams = false,
-        ChamsColor = Color3.fromRGB(255, 255, 255),
-        Highlight = {Enabled = false, Color = Color3.fromRGB(255, 255, 255), Transparency = 0.5},
+        ChamsColor = {R = 255, G = 255, B = 255},
+        Highlight = {Enabled = false, Color = {R = 255, G = 255, B = 255}, Transparency = 0.5},
         FOVTransparency = 0.5,
         FOVColorRGB = {R = 255, G = 255, B = 255},
         AccentColor = {R = 255, G = 255, B = 255},
         TimeChanger = {Enabled = false, Time = 12},
-        Crosshair = {Enabled = false, Size = 15, Color = Color3.fromRGB(0, 255, 0)},
+        Crosshair = {Enabled = false, Size = 15, Color = {R = 0, G = 255, B = 0}},
         StreamerMode = false,
         AntiLag = false,
         RainbowMode = false
@@ -134,6 +134,24 @@ local Config = {
         Waypoints = {}
     },
 }
+
+-- ========== UTILS POUR CONFIG ==========
+local function toColor3(t)
+    if typeof(t) == "Color3" then return t end
+    if type(t) == "table" and t.R and t.G and t.B then
+        return Color3.fromRGB(t.R, t.G, t.B)
+    end
+    return Color3.new(1, 1, 1)
+end
+
+local function toEnum(val, enumType)
+    if typeof(val) == "EnumItem" then return val end
+    if type(val) == "string" then
+        local success, res = pcall(function() return Enum[enumType][val] end)
+        if success then return res end
+    end
+    return nil
+end
 
 -- ========== CONSTANTES ESP ==========
 local function deepCopy(t)
@@ -219,36 +237,62 @@ end
 
 local HttpService = game:GetService("HttpService")
 local ConfigFile = "ProToolConfig.json"
+local PresetsFolder = "ProToolPresets/"
+
+if makefolder and not isfolder(PresetsFolder) then
+    makefolder(PresetsFolder)
+end
 
 local function saveConfig(name)
     if writefile then
+        if makefolder and not isfolder(PresetsFolder) then
+            makefolder(PresetsFolder)
+        end
+        
         local fileName = name or ConfigFile
+        if name and not name:find("/") then
+            fileName = PresetsFolder .. name
+        end
+        -- S'assurer que l'extension est présente
+        if name and not fileName:find("%.json$") then
+            fileName = fileName .. ".json"
+        end
         local success, data = pcall(function() return HttpService:JSONEncode(Config) end)
         if success then
             writefile(fileName, data)
             log("Configuration sauvegardée: " .. fileName)
+            return true
         else
             warn("Échec de l'encodage de la config")
         end
     end
+    return false
 end
 
 local function loadConfig(name)
     local fileName = name or ConfigFile
+    if name and not name:find("/") then
+        fileName = PresetsFolder .. name
+    end
+    -- S'assurer que l'extension est présente pour la recherche de fichier
+    if name and not fileName:find("%.json$") then
+        fileName = fileName .. ".json"
+    end
+    
     if readfile and isfile and isfile(fileName) then
         local success, data = pcall(function() return HttpService:JSONDecode(readfile(fileName)) end)
-        if success then
-            for k, v in pairs(data) do
-                if Config[k] then
-                    if type(v) == "table" then
-                        for k2, v2 in pairs(v) do
-                            Config[k][k2] = v2
-                        end
+        if success and type(data) == "table" then
+            local function merge(target, source)
+                for k, v in pairs(source) do
+                    if type(v) == "table" and target[k] and type(target[k]) == "table" then
+                        merge(target[k], v)
                     else
-                        Config[k] = v
+                        target[k] = v
                     end
                 end
             end
+            
+            pcall(function() merge(Config, data) end)
             log("Configuration chargée: " .. fileName)
             return true
         end
@@ -659,7 +703,7 @@ local function updateESP()
             local bl, os3 = getP(-w/2, -h/2)
             local br, os4 = getP(w/2, -h/2)
             
-            local espColor = Config.Visuals.RainbowMode and getRainbowColor() or Color3.fromRGB(Config.ESP.Color.R, Config.ESP.Color.G, Config.ESP.Color.B)
+            local espColor = Config.Visuals.RainbowMode and getRainbowColor() or toColor3(Config.ESP.Color)
             local boxVis = os1 and os2 and os3 and os4 and Config.ESP.Boxes
             data.Box.T.Visible, data.Box.T.From, data.Box.T.To = boxVis, tl, tr
             data.Box.B.Visible, data.Box.B.From, data.Box.B.To = boxVis, bl, br
@@ -734,7 +778,7 @@ local function updateESP()
                 end
                 data.Highlight.Adornee = char
                 data.Highlight.Enabled = true
-                data.Highlight.FillColor = Config.Visuals.ChamsColor
+                data.Highlight.FillColor = toColor3(Config.Visuals.ChamsColor)
                 data.Highlight.OutlineColor = Color3.new(1,1,1)
                 data.Highlight.FillTransparency = 0.5
             elseif data.Highlight then
@@ -792,17 +836,17 @@ local function updateMovement()
     local hrp = char:FindFirstChild("HumanoidRootPart")
     if not hum or not hrp then return end
 
-    if Config.Movement.Sprint.Enabled and Sprinting and Config.Movement.Sprint.Endurance > 0 then
-        hum.WalkSpeed = 16 * Config.Movement.Sprint.Multiplier
-        Config.Movement.Sprint.Endurance = math.max(0, Config.Movement.Sprint.Endurance - 0.5)
-        if Config.Movement.Sprint.Endurance == 0 then Sprinting = false end
-    elseif not Config.Movement.SpeedHack.Enabled then
-        hum.WalkSpeed = 16
-        Config.Movement.Sprint.Endurance = math.min(Config.Movement.Sprint.MaxEndurance, Config.Movement.Sprint.Endurance + Config.Movement.Sprint.RecoveryRate/60)
-    end
-
     if Config.Movement.SpeedHack.Enabled then
         hum.WalkSpeed = Config.Movement.SpeedHack.Value
+    elseif Config.Movement.Sprint.Enabled then
+        if Sprinting and Config.Movement.Sprint.Endurance > 0 then
+            hum.WalkSpeed = 16 * Config.Movement.Sprint.Multiplier
+            Config.Movement.Sprint.Endurance = math.max(0, Config.Movement.Sprint.Endurance - 0.5)
+            if Config.Movement.Sprint.Endurance == 0 then Sprinting = false end
+        else
+            hum.WalkSpeed = 16
+            Config.Movement.Sprint.Endurance = math.min(Config.Movement.Sprint.MaxEndurance, Config.Movement.Sprint.Endurance + Config.Movement.Sprint.RecoveryRate/60)
+        end
     end
 
     if Flying then
@@ -1005,7 +1049,7 @@ local function updateHitboxes()
                 adorn.Adornee = box
                 adorn.ZIndex = 10
                 adorn.AlwaysOnTop = true
-                adorn.Color3 = Config.Combat.HitboxExpander.Color
+                adorn.Color3 = toColor3(Config.Combat.HitboxExpander.Color)
                 adorn.Transparency = Config.Combat.HitboxExpander.Transparency
                 adorn.Size = Vector3.new(2 * Config.Combat.HitboxExpander.Multiplier, 2 * Config.Combat.HitboxExpander.Multiplier, 2 * Config.Combat.HitboxExpander.Multiplier)
                 adorn.Parent = box
@@ -1014,12 +1058,12 @@ local function updateHitboxes()
 
             local sizeMultiplier = Config.Combat.HitboxExpander.Multiplier
             box.Size = Vector3.new(2 * sizeMultiplier, 2 * sizeMultiplier, 2 * sizeMultiplier)
-            box.Color = Config.Combat.HitboxExpander.Color
+            box.Color = toColor3(Config.Combat.HitboxExpander.Color)
             box.Transparency = Config.Combat.HitboxExpander.Transparency
             local adorn = box:FindFirstChild("HitboxAdornment")
             if adorn then
                 adorn.Size = box.Size
-                adorn.Color3 = Config.Combat.HitboxExpander.Color
+                adorn.Color3 = toColor3(Config.Combat.HitboxExpander.Color)
                 adorn.Transparency = Config.Combat.HitboxExpander.Transparency
             end
         else
@@ -1554,7 +1598,7 @@ function Library:CreateWindow()
         btn.Size = UDim2.new(0, 80, 0, 20)
         btn.Position = UDim2.new(1, -90, 0.5, -10)
         btn.BackgroundColor3 = Theme.Background
-        btn.Text = default.Name:upper()
+        btn.Text = typeof(default) == "EnumItem" and default.Name:upper() or tostring(default):upper()
         btn.TextColor3 = Theme.Accent
         btn.Font = Enum.Font.GothamBold
         btn.TextSize = 10
@@ -1575,7 +1619,7 @@ function Library:CreateWindow()
                 local key = input.KeyCode ~= Enum.KeyCode.Unknown and input.KeyCode or input.UserInputType
                 if key ~= Enum.KeyCode.Escape then
                     btn.Text = key.Name:upper()
-                    callback(key)
+                    callback(key.Name)
                     scheduleAutoSave()
                 end
                 waiting = false
@@ -1649,7 +1693,232 @@ function Library:CreateWindow()
     
     local selectedTeleportPlayer = nil
     local StarFishingUI = nil
+    local PresetsModal = nil
     
+    local function refreshPresets(parentFrame)
+        if not parentFrame then return end
+        for _, child in pairs(parentFrame:GetChildren()) do
+            if not child:IsA("UIListLayout") then
+                child:Destroy()
+            end
+        end
+        
+        local function createPresetButton(name)
+            local btn = Instance.new("TextButton")
+            btn.Size = UDim2.new(1, 0, 0, 35)
+            btn.BackgroundColor3 = Theme.Secondary
+            btn.Text = name:upper()
+            btn.TextColor3 = Theme.Text
+            btn.Font = Enum.Font.GothamBold
+            btn.TextSize = 12
+            btn.Parent = parentFrame
+            btn.ZIndex = 105 -- S'assurer qu'il est au-dessus du modal
+            Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 4)
+            
+            btn.MouseButton1Click:Connect(function()
+                if loadConfig(name .. ".json") then
+                    log("Preset chargé: " .. name)
+                    if ScreenGui then ScreenGui:Destroy() end
+                    Library:CreateWindow()
+                else
+                    log("Erreur lors du chargement du preset")
+                end
+            end)
+        end
+
+        if listfiles then
+            local found = false
+            local processedNames = {}
+            
+            local function processFiles(fileList)
+                if not fileList or type(fileList) ~= "table" then return end
+                for _, file in pairs(fileList) do
+                    if typeof(file) == "string" and file:lower():find("%.json") then
+                        -- Extraire le nom sans le chemin et sans l'extension
+                        local name = file:match("([^/\\]+)%.json$") or file:match("([^/\\]+)$") or file
+                        name = name:gsub("%.json", "")
+                        
+                        if name ~= "ProToolConfig" and not processedNames[name] then
+                            createPresetButton(name)
+                            processedNames[name] = true
+                            found = true
+                        end
+                    end
+                end
+            end
+
+            -- Tester plusieurs chemins pour listfiles (selon l'exécuteur)
+            local pathsToTest = {
+                PresetsFolder,
+                PresetsFolder:gsub("/$", ""),
+                ".",
+                "./",
+                ""
+            }
+
+            for _, path in ipairs(pathsToTest) do
+                local success, files = pcall(function() return listfiles(path) end)
+                if success and files then
+                    processFiles(files)
+                end
+            end
+            
+            if not found then
+                local noFiles = Instance.new("TextLabel")
+                noFiles.Size = UDim2.new(1, 0, 0, 30)
+                noFiles.BackgroundTransparency = 1
+                noFiles.Text = "AUCUN PRESET TROUVÉ"
+                noFiles.TextColor3 = Theme.TextDim
+                noFiles.Font = Enum.Font.Gotham
+                noFiles.TextSize = 10
+                noFiles.Parent = parentFrame
+                noFiles.ZIndex = 105
+            end
+        else
+            local noFunc = Instance.new("TextLabel")
+            noFunc.Size = UDim2.new(1, 0, 0, 30)
+            noFunc.BackgroundTransparency = 1
+            noFunc.Text = "LISTFILES NON DISPONIBLE"
+            noFunc.TextColor3 = Theme.TextDim
+            noFunc.Font = Enum.Font.Gotham
+            noFunc.TextSize = 10
+            noFunc.Parent = parentFrame
+            noFunc.ZIndex = 105
+        end
+    end
+
+    local function showPresetsModal()
+        if PresetsModal then PresetsModal:Destroy() end
+        
+        PresetsModal = Instance.new("Frame")
+        PresetsModal.Name = "PresetsModal"
+        PresetsModal.Size = UDim2.new(0, 300, 0, 350)
+        PresetsModal.Position = UDim2.new(0.5, -150, 0.5, -175)
+        PresetsModal.BackgroundColor3 = Theme.Background
+        PresetsModal.BorderSizePixel = 0
+        PresetsModal.Parent = ScreenGui
+        PresetsModal.ZIndex = 100
+        Instance.new("UICorner", PresetsModal).CornerRadius = UDim.new(0, 6)
+        local modalStroke = Instance.new("UIStroke", PresetsModal)
+        modalStroke.Color = Theme.Accent
+        modalStroke.Thickness = 1
+
+        local modalTitle = Instance.new("TextLabel")
+        modalTitle.Size = UDim2.new(1, 0, 0, 40)
+        modalTitle.BackgroundTransparency = 1
+        modalTitle.Text = "CHARGER UN PRESET"
+        modalTitle.TextColor3 = Theme.Accent
+        modalTitle.Font = Enum.Font.GothamBold
+        modalTitle.TextSize = 16
+        modalTitle.Parent = PresetsModal
+        modalTitle.ZIndex = 101
+
+        local manualInput = Instance.new("TextBox")
+        manualInput.Size = UDim2.new(1, -130, 0, 25)
+        manualInput.Position = UDim2.new(0, 10, 0, 40)
+        manualInput.BackgroundColor3 = Theme.Secondary
+        manualInput.PlaceholderText = "Nom du preset..."
+        manualInput.Text = ""
+        manualInput.TextColor3 = Theme.Text
+        manualInput.Font = Enum.Font.Gotham
+        manualInput.TextSize = 10
+        manualInput.Parent = PresetsModal
+        manualInput.ZIndex = 101
+        Instance.new("UICorner", manualInput).CornerRadius = UDim.new(0, 4)
+
+        local manualLoad = Instance.new("TextButton")
+        manualLoad.Size = UDim2.new(0, 50, 0, 25)
+        manualLoad.Position = UDim2.new(1, -115, 0, 40)
+        manualLoad.BackgroundColor3 = Theme.Accent
+        manualLoad.Text = "LOAD"
+        manualLoad.TextColor3 = Theme.Background
+        manualLoad.Font = Enum.Font.GothamBold
+        manualLoad.TextSize = 10
+        manualLoad.Parent = PresetsModal
+        manualLoad.ZIndex = 101
+        Instance.new("UICorner", manualLoad).CornerRadius = UDim.new(0, 4)
+
+        manualLoad.MouseButton1Click:Connect(function()
+            if manualInput.Text ~= "" then
+                if loadConfig(manualInput.Text .. ".json") then
+                    log("Preset chargé manuellement: " .. manualInput.Text)
+                    if ScreenGui then ScreenGui:Destroy() end
+                    Library:CreateWindow()
+                else
+                    log("Erreur: Preset introuvable")
+                end
+            end
+        end)
+
+        local refreshBtn = Instance.new("TextButton")
+        refreshBtn.Size = UDim2.new(0, 50, 0, 25)
+        refreshBtn.Position = UDim2.new(1, -60, 0, 40)
+        refreshBtn.BackgroundColor3 = Theme.Secondary
+        refreshBtn.Text = "REFRESH"
+        refreshBtn.TextColor3 = Theme.Accent
+        refreshBtn.Font = Enum.Font.GothamBold
+        refreshBtn.TextSize = 10
+        refreshBtn.Parent = PresetsModal
+        refreshBtn.ZIndex = 101
+        Instance.new("UICorner", refreshBtn).CornerRadius = UDim.new(0, 4)
+
+        local closeBtn = Instance.new("TextButton")
+        closeBtn.Size = UDim2.new(0, 30, 0, 30)
+        closeBtn.Position = UDim2.new(1, -35, 0, 5)
+        closeBtn.BackgroundTransparency = 1
+        closeBtn.Text = "×"
+        closeBtn.TextColor3 = Theme.TextDim
+        closeBtn.TextSize = 25
+        closeBtn.Font = Enum.Font.GothamBold
+        closeBtn.Parent = PresetsModal
+        closeBtn.ZIndex = 101
+        closeBtn.MouseButton1Click:Connect(function() PresetsModal:Destroy() end)
+
+        local scroll = Instance.new("ScrollingFrame")
+        scroll.Size = UDim2.new(1, -20, 1, -85)
+        scroll.Position = UDim2.new(0, 10, 0, 75)
+        scroll.BackgroundTransparency = 1
+        scroll.BorderSizePixel = 0
+        scroll.ScrollBarThickness = 2
+        scroll.ScrollBarImageColor3 = Theme.Accent
+        scroll.Parent = PresetsModal
+        scroll.ZIndex = 101
+
+        local scrollLayout = Instance.new("UIListLayout", scroll)
+        scrollLayout.Padding = UDim.new(0, 5)
+        scrollLayout.SortOrder = Enum.SortOrder.LayoutOrder
+        
+        scrollLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(function()
+            scroll.CanvasSize = UDim2.new(0, 0, 0, scrollLayout.AbsoluteContentSize.Y + 10)
+        end)
+
+        refreshBtn.MouseButton1Click:Connect(function()
+            refreshPresets(scroll)
+        end)
+
+        refreshPresets(scroll)
+        
+        -- Dragging logic for modal
+        local dragging = false
+        local dragStart, startPos
+        PresetsModal.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                dragging = true
+                dragStart = input.Position
+                startPos = PresetsModal.Position
+            end
+        end)
+        UserInputService.InputChanged:Connect(function(input)
+            if dragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+                local delta = input.Position - dragStart
+                PresetsModal.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+            end
+        end)
+        UserInputService.InputEnded:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 then dragging = false end
+        end)
+    end
+
     -- Aimbot Content
     addToggle(AimbotTab, "Activer Aimbot", Config.Aimbot.Enabled, function(v)
         Config.Aimbot.Enabled = v
@@ -1875,20 +2144,21 @@ function Library:CreateWindow()
     addButton(MiscTab, "Rejoindre Serveur", rejoinServer)
     -- retiré: Quick Exit (Touche Fin)
     -- retiré: Consommation Énergie Vol
-    local currentProfileName = "Profile1"
-    addInput(MiscTab, "Nom du Profil", "Profile1", function(v) currentProfileName = v end)
+    local currentProfileName = "Preset1"
+    addInput(MiscTab, "Nom du Preset", "Preset1", function(v) currentProfileName = v end)
     
-    addButton(MiscTab, "Sauvegarder Profil", function() 
-        saveConfig(currentProfileName .. ".json") 
-        log("Profil sauvegardé: " .. currentProfileName)
+    addButton(MiscTab, "Sauvegarder Preset", function() 
+        if saveConfig(currentProfileName) then
+            log("Preset sauvegardé: " .. currentProfileName)
+            if PresetsModal and PresetsModal.Parent then
+                local scroll = PresetsModal:FindFirstChildOfClass("ScrollingFrame")
+                if scroll then refreshPresets(scroll) end
+            end
+        end
     end)
     
-    addButton(MiscTab, "Charger Profil", function() 
-        if loadConfig(currentProfileName .. ".json") then
-            log("Profil chargé: " .. currentProfileName)
-        else
-            log("Erreur: Profil introuvable")
-        end
+    addButton(MiscTab, "Charger Preset", function() 
+        showPresetsModal()
     end)
 
     addButton(MiscTab, "Reset Config", function() 
@@ -2531,8 +2801,8 @@ local function updateVisuals()
             TitleLabel.TextColor3 = color
         end
     elseif TitleLabel then
-        local accent = Config.Visuals.AccentColor
-        TitleLabel.TextColor3 = Color3.fromRGB(accent.R, accent.G, accent.B)
+        local accent = toColor3(Config.Visuals.AccentColor)
+        TitleLabel.TextColor3 = accent
     end
 
     if Config.Visuals.FullBright then
@@ -2563,7 +2833,7 @@ local function updateVisuals()
     local cam = getCamera()
     local center = Vector2.new(cam.ViewportSize.X/2, cam.ViewportSize.Y/2)
     local size = Config.Visuals.Crosshair.Size
-    local color = Config.Visuals.Crosshair.Color
+    local color = toColor3(Config.Visuals.Crosshair.Color)
 
     CrosshairL.Visible = showCrosshair
     CrosshairR.Visible = showCrosshair
@@ -2616,7 +2886,7 @@ local function updateVisuals()
                     highlight.Name = "DaveHighlight"
                     highlight.Parent = player.Character
                 end
-                highlight.FillColor = Config.Visuals.Highlight.Color
+                highlight.FillColor = toColor3(Config.Visuals.Highlight.Color)
                 highlight.OutlineColor = Color3.fromRGB(255, 255, 255)
                 highlight.FillTransparency = Config.Visuals.Highlight.Transparency
                 highlight.OutlineTransparency = 0
@@ -2649,7 +2919,7 @@ RunService.RenderStepped:Connect(function()
         local cam = getCamera()
         FOVCircle.Position = Vector2.new(cam.ViewportSize.X/2, cam.ViewportSize.Y/2)
         FOVCircle.Radius = Config.Aimbot.FOV
-        local fovColor = Config.Visuals.RainbowMode and getRainbowColor() or Color3.fromRGB(Config.Visuals.FOVColorRGB.R, Config.Visuals.FOVColorRGB.G, Config.Visuals.FOVColorRGB.B)
+        local fovColor = Config.Visuals.RainbowMode and getRainbowColor() or toColor3(Config.Visuals.FOVColorRGB)
         FOVCircle.Color = fovColor
         FOVCircle.Transparency = Config.Visuals.FOVTransparency
     end
@@ -2679,7 +2949,7 @@ UserInputService.InputBegan:Connect(function(input, gp)
     if gp then return end
     
     if input.UserInputType == Enum.UserInputType.MouseButton1 and Config.Movement.ClickTP.Enabled then
-        if UserInputService:IsKeyDown(Config.Movement.ClickTP.Key) then
+        if UserInputService:IsKeyDown(toEnum(Config.Movement.ClickTP.Key, "KeyCode") or Enum.KeyCode.LeftControl) then
             local mouse = LocalPlayer:GetMouse()
             if mouse.Target then
                 local char = LocalPlayer.Character
@@ -2705,7 +2975,7 @@ UserInputService.InputBegan:Connect(function(input, gp)
         end
     end
 
-    if input.KeyCode == Config.Aimbot.Key or input.UserInputType == Config.Aimbot.Key then 
+    if input.KeyCode == toEnum(Config.Aimbot.Key, "KeyCode") or input.UserInputType == toEnum(Config.Aimbot.Key, "UserInputType") then 
         AimlockPressed = not AimlockPressed
         if not AimlockPressed then CurrentTarget = nil end
     end
@@ -2720,11 +2990,11 @@ UserInputService.InputBegan:Connect(function(input, gp)
         end
     end
     
-    if input.KeyCode == Config.Movement.Fly.Key and Config.Movement.Fly.Enabled then
+    if input.KeyCode == toEnum(Config.Movement.Fly.Key, "KeyCode") and Config.Movement.Fly.Enabled then
         toggleFly()
     end
 
-    if input.KeyCode == Config.Movement.NoClipKey and Config.Movement.NoClip then
+    if input.KeyCode == toEnum(Config.Movement.NoClipKey, "KeyCode") and Config.Movement.NoClip then
         NoClipActive = not NoClipActive
         log("NoClip: " .. (NoClipActive and "Activé" or "Désactivé"))
 
