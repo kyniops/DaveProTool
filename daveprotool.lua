@@ -2259,7 +2259,7 @@ function Library:CreateWindow()
             log("Erreur: Aucun joueur sélectionné ou joueur hors ligne")
         end
     end)
-    addButton(TeleportTab, "Fling Player", function()
+    addButton(TeleportTab, "Ultimate Fling Player", function()
         if not selectedTeleportPlayer or not selectedTeleportPlayer.Character then
             log("Erreur: Aucun joueur sélectionné")
             return
@@ -2269,62 +2269,55 @@ function Library:CreateWindow()
         local myChar = LocalPlayer.Character
         local myHum = myChar and myChar:FindFirstChildOfClass("Humanoid")
         local myRP = myChar and (myChar:FindFirstChild("HumanoidRootPart") or myChar:FindFirstChild("Torso"))
+        
         if not targetRP or not myHum or not myRP then
-            log("Erreur: Humanoid introuvable")
+            log("Erreur: Personnage ou Cible introuvable")
             return
         end
+
         local savedCF = myRP.CFrame
-        local tool = Instance.new("Tool")
-        tool.RequiresHandle = true
-        tool.Name = "FlingTool"
-        local handle = Instance.new("Part")
-        handle.Name = "Handle"
-        handle.Size = Vector3.new(5,5,5)
-        handle.Transparency = 1
-        handle.LocalTransparencyModifier = 1
-        handle.CastShadow = false
-        handle.CanQuery = false
-        handle.CanCollide = true
-        handle.Massless = false
-        handle.Parent = tool
-        tool.Parent = LocalPlayer.Backpack
-        myHum:EquipTool(tool)
-        task.wait()
-        handle = myChar:FindFirstChild("Handle") or handle
-        if not handle then
-            log("Erreur: Handle indisponible")
-            return
-        end
-        local RNG = Random.new()
-        local start = tick()
-        while tick() - start < 1.0 do
-            myRP.CFrame = targetRP.CFrame * CFrame.new(0, 0, 1.2)
-            local av = Vector3.new(0, 6500, 0)
-            local lvDir = (targetRP.Position - handle.Position)
-            local lv = lvDir.Magnitude > 0 and lvDir.Unit * 1200 or Vector3.new(0,0,0)
-            handle.AssemblyAngularVelocity = av
-            handle.AssemblyLinearVelocity = lv + RNG:NextUnitVector() * 300
-            RunService.Heartbeat:Wait()
-        end
-        task.delay(2, function()
-            if myRP and myRP.Parent then
-                local returnCF = savedCF
-                for i=1,3 do
-                    myRP.Anchored = true
-                    myRP.AssemblyLinearVelocity = Vector3.new(0,0,0)
-                    myRP.AssemblyAngularVelocity = Vector3.new(0,0,0)
-                    if myChar and myChar.Parent then
-                        myChar:PivotTo(returnCF)
-                    else
-                        myRP.CFrame = returnCF
-                    end
-                    RunService.Heartbeat:Wait()
-                end
-                myRP.Anchored = false
+        log("🚀 ULTIMATE FLING activé sur " .. selectedTeleportPlayer.Name)
+        
+        -- Préparation du personnage pour le fling
+        local function disableCollisions()
+            for _, v in pairs(myChar:GetDescendants()) do
+                if v:IsA("BasePart") then v.CanCollide = false end
             end
+        end
+
+        -- Sauvegarde de l'état
+        local start = tick()
+        local connection
+        myHum:ChangeState(Enum.HumanoidStateType.Physics)
+        
+        connection = RunService.Heartbeat:Connect(function()
+            local now = tick()
+            if now - start > 2.5 or not targetRP.Parent or not myRP.Parent or not targetChar.Parent then
+                connection:Disconnect()
+                myRP.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                myRP.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                myRP.CFrame = savedCF
+                myHum:ChangeState(Enum.HumanoidStateType.Running)
+                log("Fling terminé")
+                return
+            end
+
+            -- Désactiver les collisions à chaque frame pour éviter de s'auto-propulser
+            disableCollisions()
+
+            -- VÉLOCITÉ MASSIVE POUR LE FLING
+            -- On alterne les vecteurs pour maximiser le glitch physique
+            myRP.AssemblyAngularVelocity = Vector3.new(0, 999999, 0)
+            myRP.AssemblyLinearVelocity = Vector3.new(999999, 999999, 999999)
+            
+            -- SUIVI ULTRA-AGRESSIF
+            local targetPos = targetRP.Position
+            local targetVel = targetRP.AssemblyLinearVelocity
+            local predictedPos = targetPos + (targetVel * 0.05)
+            
+            -- On se colle littéralement sur le joueur avec une rotation chaotique
+            myRP.CFrame = CFrame.new(predictedPos) * CFrame.Angles(math.rad(math.random(0,360)), math.rad(math.random(0,360)), math.rad(math.random(0,360)))
         end)
-        pcall(function() tool:Destroy() end)
-        log("Fling Player exécuté sur " .. selectedTeleportPlayer.Name)
     end)
     
     local AnnoyPlayerActive = false
