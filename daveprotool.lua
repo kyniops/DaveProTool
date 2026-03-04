@@ -2294,11 +2294,23 @@ function Library:CreateWindow()
             local now = tick()
             if now - start > 2.5 or not targetRP.Parent or not myRP.Parent or not targetChar.Parent then
                 connection:Disconnect()
+                
+                -- Sécurisation du retour
                 myRP.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
                 myRP.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                myRP.Anchored = true -- On ancre pour stopper l'inertie
                 myRP.CFrame = savedCF
+                
+                task.wait(0.1) -- Petit délai pour stabiliser
+                
+                if myRP and myRP.Parent then
+                    myRP.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                    myRP.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+                    myRP.Anchored = false
+                end
+                
                 myHum:ChangeState(Enum.HumanoidStateType.Running)
-                log("Fling terminé")
+                log("Fling terminé - Retour sécurisé")
                 return
             end
 
