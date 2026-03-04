@@ -2111,10 +2111,10 @@ function Library:CreateWindow()
     
     -- Émotes
     addButton(EmoteTab, "Arrêter l'émote", function() stopEmotes() end)
+    addButton(EmoteTab, "Invisible", function() playEmoteById("rbxassetid://98700803185886") end)
     addButton(EmoteTab, "Hélicoptère", function() playEmoteById("rbxassetid://76510079095692") end)
     addButton(EmoteTab, "Tornado", function() playEmoteById("rbxassetid://135373056067761") end)
     addButton(EmoteTab, "Parkour Dance", function() playEmoteById("rbxassetid://120244151914853") end)
-    addButton(EmoteTab, "Fake Death", function() playEmoteById("rbxassetid://126527283467855") end)
     addButton(EmoteTab, "Propeller", function() playEmoteById("rbxassetid://85377443478134") end)
     addButton(EmoteTab, "67", function() playEmoteById("rbxassetid://130984232537362") end)
     addButton(EmoteTab, "SixSeven", function() playEmoteById("rbxassetid://113052384161929") end)
