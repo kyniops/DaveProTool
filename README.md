@@ -1,13 +1,3 @@
-# 💎 DAVE PRO TOOL V3
-> **⚡ All-in-one Roblox Tool** > Aimbot • ESP • Movement • Combat • Visuals • Teleport • Emotes • Misc
-
----
-
-### 🚀 Quick Loader (Copy & Paste)
-
-> [!TIP]
-> **Comment copier ?** Survole le bloc de code ci-dessous et clique sur l'icône de copie 📋 en haut à droite.
-
-```lua
--- [[ DAVE PRO TOOL V3 LOADER ]] --
-loadstring(game:HttpGet("[https://raw.githubusercontent.com/kyniops/DavePro/refs/heads/main/daveprotool.lua](https://raw.githubusercontent.com/kyniops/DavePro/refs/heads/main/daveprotool.lua)"))()
+Voici un fichier README.md complet, stylisé et prêt à l'emploi pour ton projet. Il est conçu pour être à la fois professionnel et facile d'utilisation pour tes utilisateurs.💎 DAVE PRO TOOL V3L'outil Roblox ultime tout-en-un.Dominez chaque partie avec précision et fluidité.🚀 Quick Loader (Copier & Coller)Utilisez le script ci-dessous dans votre exécuteur favori (Synapse, Sentinel, JJSploit, etc.) pour lancer l'interface instantanément.[!TIP]Comment copier ? Survolez le bloc de code ci-dessous et cliquez sur l'icône de copie 📋 en haut à droite.Lua-- [[ DAVE PRO TOOL V3 LOADER ]] --
+loadstring(game:HttpGet("https://raw.githubusercontent.com/kyniops/DavePro/refs/heads/main/daveprotool.lua"))()
+✨ Caractéristiques PrincipalesLe Dave Pro Tool V3 regroupe des fonctionnalités avancées pour une expérience de jeu optimisée :CatégorieFonctionnalités🎯 CombatAimbot fluide, Silent Aim, Trigger Bot, Auto-Clicker👁️ VisuelsESP (Box, Tracers, Distance), Chams, Fullbright🏃 MouvementSpeed Hack, Infinite Jump, Fly, Noclip🌎 MondeTeleportation (Waypoints), Gravity Control, Destroy Trees🎭 DiversEmotes Unlocker, Chat Spammer, Custom UI Themes
