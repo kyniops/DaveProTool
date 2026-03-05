@@ -1,20 +1,15 @@
-💎 DAVE PRO TOOL V3
+# 💎 DAVE PRO TOOL V3
+### ⚡ All-in-one Roblox Tool
+**Aimbot • ESP • Movement • Combat • Visuals • Teleport • Emotes • Misc**
 
-⚡ All-in-one Roblox Tool
+---
 
+### 🚀 Quick Loader (Copy & Paste)
+> [!TIP]
+> **Clique sur l'icône de copie 📋 en haut à droite du bloc ci-dessous pour copier le script.**
 
-
-Aimbot • ESP • Movement • Combat • Visuals • Teleport • Emotes • Misc
-
-🚀 Quick Loader (Copy & Paste)
-
-🔽 Clique sur le bouton de copie dans le bloc ci-dessous
-
-
-
-loadstring(game:HttpGet("https://raw.githubusercontent.com/kyniops/DavePro/refs/heads/main/daveprotool.lua"))()
-
-✅ Compatible : Synapse, KRNL, Fluxus, etc.
+```lua
+loadstring(game:HttpGet("[https://raw.githubusercontent.com/kyniops/DavePro/refs/heads/main/daveprotool.lua](https://raw.githubusercontent.com/kyniops/DavePro/refs/heads/main/daveprotool.lua)"))()
 
 
 
