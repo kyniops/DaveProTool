@@ -1,4 +1,4 @@
-# 💎 DAVE PRO TOOL V3
+# 💎 DAVE PRO TOOL V3 💎
 
 <p align="center">
   <img src="https://img.shields.io/badge/Version-3.0.0-blueviolet?style=for-the-badge" alt="Version">
