@@ -19,4 +19,5 @@ Pour utiliser **Dave Pro Tool V3**, copiez le code ci-dessous et collez-le dans 
 
 ```lua
 -- [[ DAVE PRO TOOL V3 LOADER ]] --
-loadstring(game:HttpGet("https://raw.githubusercontent.com/kyniops/DavePro/refs/heads/main/daveprotool.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/kyniops/DaveProTool/refs/heads/main/daveprotool.lua"))()
+
